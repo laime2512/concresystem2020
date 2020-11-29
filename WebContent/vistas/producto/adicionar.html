@@ -31,14 +31,14 @@
     			</div>
     			<div class="col-md-6">
     				<div class="form-group">
-		                <label>Nombre Generico</label> <input id="generico" name="generico" type="text" placeholder="ingrese nombre generico" class="form-control input-sm text-uppercase" data-fv-notempty="true">
+		                <label>Nombre Corto</label> <input id="generico" name="generico" type="text" placeholder="ingrese nombre corto" class="form-control input-sm text-uppercase" data-fv-notempty="true">
 		            </div>
     			</div>
     		</div>
     		<div class="row">
     			<div class="col-md-6">
     				<div class="form-group">
-		                <label>Area</label>
+		                <label>Área de Producto</label>
 		                <select id="codare" name="codare" class="form-control input-sm" data-fv-notempty="true">
 							<option value="">Seleccionar</option>
 							#foreach($a in $areas)
@@ -49,7 +49,7 @@
     			</div>
     			<div class="col-md-6">
     				<div class="form-group">
-		                <label>Laboratorio</label>
+		                <label>Marca</label>
 		                <select id="codlab" name="codlab" class="form-control input-sm" data-fv-notempty="true">
 							<option value="">Seleccionar</option>
 							#foreach($l in $laboratorios)
@@ -81,7 +81,7 @@
     		<div class="row">
     			<div class="col-md-6">
     				<div class="form-group">
-		                <label>Concentracion</label>
+		                <label>Cantidad</label>
 		                <input id="concentracion" name="concentracion" type="text" placeholder="ingrese concentracion" class="form-control input-sm" data-fv-notempty="true">
 		            </div>
     			</div>
@@ -106,7 +106,7 @@
         		</div>
         		<div class="col-md-6">
     				<div class="form-group">
-						<label>Controlado</label>
+						<label>Controlado p/Venta</label>
 					<div>
 					<label class="container"> <input type="checkbox"
 						class="w3-check" id="controlado" name="controlado" value="true"> Si <b class="text-success">(Tickear con <kbd>tecla: SPACE</kbd>)</b>
@@ -177,7 +177,7 @@
 	                <input name="pcUnit" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
 	            </div>
 	            <div class="form-group">
-		                <label>Porcentaje</label>
+		                <label>Porcentaje Ganancia</label>
 		                <div class="input-group">
 		                	<input name="porcentajeUnidad" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
 		                	<span class="input-group-addon"> % </span>
@@ -185,7 +185,7 @@
 		            </div>
 		            <div class="form-group">
 		                <label>Precio p&uacute;blico</label>
-		                <input name="pvUnit" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		                <input name="pvUnit" type="text" class="form-control input-sm text-right" data-fv-notempty="true"   data-fv-numeric="true">
 		            </div>
 		            <div class="form-group">
 		                <label>Inventario m&iacute;nimo</label>
@@ -194,7 +194,7 @@
 		            <div class="form-group">
 						<label>Compra por unidades</label>
 						<div>
-							<label class="container"> <input type="radio" name="tipoCompra" value="1" data-fv-notempty="true" class="w3-radio"> Si
+							<label class="container"> <input type="radio" name="tipoCompra" value="1" data-fv-notempty="true" class="w3-radio"> Si <b class="text-success">(Tickear si se vende por unidad)</b>
 							</label>
 						</div>
 					</div>
@@ -255,7 +255,7 @@
 		            <div class="form-group">
 						<label>Compra por caja</label>
 						<div>
-							<label class="container"> <input type="radio" name="tipoCompra" value="2" class="w3-radio"  data-fv-notempty="true"> Si
+							<label class="container"> <input type="radio" name="tipoCompra" value="2" class="w3-radio"  data-fv-notempty="true"> Si<b class="text-success">(Tickear si se vende por caja)</b>
 							</label>
 						</div>
 					</div>
@@ -316,7 +316,7 @@
 		            <div class="form-group">
 						<label>Compra por paquete</label>
 						<div>
-							<label class="container"> <input type="radio" name="tipoCompra" value="3" class="w3-radio"  data-fv-notempty="true"> Si
+							<label class="container"> <input type="radio" name="tipoCompra" value="3" class="w3-radio"  data-fv-notempty="true"> Si<b class="text-success">(Tickear si se vende por paquetes)</b>
 							</label>
 						</div>
 					</div>

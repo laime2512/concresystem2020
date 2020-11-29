@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Adicionar Nuevo proveedor</h4>
+                    <h4 class="modal-title" id="myModalLabel">Adicionar Nueva Marca</h4>
                 </div>
                 <div class="modal-body">
                     <!-- Text input-->
@@ -29,7 +29,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modificar proveedor</h4>
+                    <h4 class="modal-title" id="myModalLabel">Modificar Marca</h4>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="codlab" id="codlab" />
@@ -52,7 +52,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Eliminar proveedor</h4>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Marca</h4>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="codlab3" name="codlab" />
@@ -79,7 +79,7 @@
                     <table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
                         <thead>
                             <tr>
-                                <th>Nombre del proveedor</th>
+                                <th>Nombre de Marca</th>
                                 <th width="200px">B</th>
                             </tr>
                         </thead>
@@ -123,7 +123,7 @@
                 }
             },
             "drawCallback": function(settings) {
-                $('#tableTitle').html('<h6><b>Gestion Proveedores</b></h6>');
+                $('#tableTitle').html('<h6><b>Gestion Marca de Productos</b></h6>');
                 $('#tableHeader').html('<button class="btn btn-sm btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | adicionar</button>');
                 $('#btnAdicionar').click(function() {
                     $('#formulario').data('formValidation').resetForm();
