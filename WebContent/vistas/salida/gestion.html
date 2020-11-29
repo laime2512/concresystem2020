@@ -1,0 +1,319 @@
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../salida/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar salida </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="codare3" name="codare" />
+                    <div class="row">
+                        <div class="col-md-9">
+                        	<div>
+                        	<table id="tableSalidaEliminar" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+				            <tr>
+				                <td colspan="3">
+				                    <b>Datos de la salida</b>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td>Codigo de salida</td>
+				                <td colspan="2" aria-label="codsal"></td>
+				            </tr>
+				            <tr>
+				                <td>Usuario de registro</td>
+				                <td colspan="2" aria-label="xusuario"></td>
+				            </tr>
+				            <tr>
+				                <td>Motivo</td>
+				                <td colspan="2" aria-label="xipo"></td>
+				            </tr>
+				            <tr>
+				                <td>Fecha de registro</td>
+				                <td colspan="2" aria-label="xfsalida"></td>
+				            </tr>
+				            <tr>
+				                <td>Descripci&oacute;n</td>
+				                <td colspan="2" aria-label="descripcion"></td>
+				            </tr>
+				            <tr>
+				                <td>Tipo de Solucion</td>
+				                <td colspan="2" aria-label="xsolucion"></td>
+				            </tr>
+				            <tr>
+				                <td>Conclusi&oacute;n</td>
+				                <td colspan="2" aria-label="conclusion"></td>
+				            </tr>
+				        </table>
+				        <table id="tableDetalleEliminar" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+				            <thead>
+				                <tr>
+				                    <td colspan="3"><b>Detalle de salida</b></td>
+				                </tr>
+				                <tr>
+				                    <td>Producto</td>
+				                    <td>Cantidad</td>
+				                    <td>F.Vencimiento</td>
+				                </tr>
+				            </thead>
+				            <tbody></tbody>
+				        </table>
+                        	</div>
+                        
+                            <h3>Desea eliminar a <b id="salidaLabel"></b></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                        <thead>
+                            <tr>
+                                <th>Cod.Sal</th>
+                                <th>Fecha</th>
+                                <th>Descripcion</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <td width="100px"></td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <table id="tableSalida" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+            <tr>
+                <td colspan="3">
+                    <b>Datos de la salida</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Codigo de salida</td>
+                <td colspan="2" aria-label="codsal"></td>
+            </tr>
+            <tr>
+                <td>Usuario de registro</td>
+                <td colspan="2" aria-label="xusuario"></td>
+            </tr>
+            <tr>
+                <td>Motivo</td>
+                <td colspan="2" aria-label="xipo"></td>
+            </tr>
+            <tr>
+                <td>Fecha de registro</td>
+                <td colspan="2" aria-label="xfsalida"></td>
+            </tr>
+            <tr>
+                <td>Descripci&oacute;n</td>
+                <td colspan="2" aria-label="descripcion"></td>
+            </tr>
+            <tr>
+                <td>Tipo de Solucion</td>
+                <td colspan="2" aria-label="xsolucion"></td>
+            </tr>
+            <tr>
+                <td>Conclusi&oacute;n</td>
+                <td colspan="2" aria-label="conclusion"></td>
+            </tr>
+        </table>
+        <table id="tableDetalle" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+            <thead>
+                <tr class="w3-blue">
+                    <td class="w3-center" colspan="3"><b>Detalle de salida</b></td>
+                </tr>
+                <tr>
+                    <td>Producto</td>
+                    <td>Cantidad</td>
+                    <td>F.Vencimiento</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var res = 1;
+    var vecTipo = ['', 'Mal estado', 'A otra farmacia', 'Vencido', 'Perdida', 'Uso farmacia', 'Disminucion usuario', 'Aumento usuario', 'Entrada de medicamento', "Salida de medicamento", "Ingreso de otra farmacia"];
+    var vecSolucion = ['', 'Cambio del producto', 'Con otro producto', 'Vencimiento', 'Credito', 'Sin devolucion', ''];
+    var jsonEstado = {'a': 'Aceptado','p': 'Pendiente','r': 'Rechazado'};
+    $(document).ready(function() {
+        var btnGroup = '';
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            if (title === 'Tipo') {
+                $(this).html('<select style="width:87%;"><option value="">Seleccionar</option><option value="1">mal estado</option><option value="2">Traspaso a farmacia</option><option value="3">Vencidos</option><option value="4">Perdida</option><option value="5">Uso en farmacia</option><option value="6">Disminucion</option><option value="7">Aumento</option><option value="8">Entrada</option><option value="9">Salida</option><option value="10">Ingreso de otra farmacia</option></select>');
+                $('select', this).on('change', function(e) {
+                    if ($('#example').DataTable().column(i).search() !== this.value) {
+                        $('#example').DataTable().column(i).search(this.value).draw();
+                    }
+                });
+            } else {
+                if (title === 'Estado') {
+                    $(this).html('<select style="width:87%;"><option value="">Seleccionar</option><option value="p">Pendiente</option><option value="a">Aceptado</option><option value="r">Rechazado</option></select>');
+                    $('select', this).on('change', function(e) {
+                        if ($('#example').DataTable().column(i).search() !== this.value) {
+                            $('#example').DataTable().column(i).search(this.value).draw();
+                        }
+                    });
+                } else {
+                    $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+                    $('input', this).on('keyup', function(e) {
+                        if (e.keyCode == 13 || this.value === '') {
+                            if ($('#example').DataTable().column(i).search() !== this.value) {
+                                $('#example').DataTable().column(i).search(this.value).draw();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        $('#example thead tr:eq(1) td').each(function(i) {
+            $(this).html('');
+        });
+        $('#example').DataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row w3-tiny'<'col-sm-2'<'#tableTitle'>><'col-sm-1'<'#labelSelect'>><'col-sm-3'<'#tableSelect'>><'col-sm-6'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": "../salida/lista",
+                "data": function(d) {
+                    d.tipo = $('#selectEvent option:selected').val() == null ? 0 : $('#selectEvent option:selected').val();
+                }
+            },
+            "columns": [
+            	{"data": "codsal","name": "codsal"}, 
+            	{"data": "xfsalida","name": "xfsalida"}, 
+            	{"data": "descripcion","name": "descripcion"}, 
+            	{"data": "tipo","name": "tipo"}, 
+            	{"data": "estado","name": "estado"}, 
+            	{"data": "codsal","name": "codsal"}
+            ],
+            "createdRow": function(row, data, index) {
+                $('td', row).eq(3).html(vecTipo[data.tipo]);
+                if (data.estado === 'a')
+                    $('td', row).eq(4).html('<span class="label label-primary">' + jsonEstado[data.estado] + '</span>');
+                if (data.estado === 'p')
+                    $('td', row).eq(4).html('<span class="label label-warning">' + jsonEstado[data.estado] + '</span>');
+                if (data.estado === 'r')
+                    $('td', row).eq(4).html('<span class="label label-danger">' + jsonEstado[data.estado] + '</span>');
+                if (data.estado) {
+                    btnGroup = '';
+                    if (data.estado === 'p')
+                        btnGroup += '<a class="btn btn-xs btn-primary revisar" href="#" data-toggle="tooltip" data-placement="top" data-id="' + data.codsal + '" title="Revisar salida"><i class="glyphicon glyphicon-search"></i> | revisar</a>';
+                    btnGroup += '<a class="btn btn-xs btn-success ver" href="#"  data-toggle="tooltip" data-placement="top" title="Ver"><i class="glyphicon glyphicon-search"></i> | ver</a>';
+                    btnGroup += '<a class="btn btn-xs btn-danger eliminar" href="#"  data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close"></i> | eliminar</a>';
+                    $('td', row).eq(5).html('<div class="btn-group">' + btnGroup + '</div>');
+                }
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Salidas y Entradas</b></h6>');
+                $('#tableHeader').html('<button class="btn btn-sm btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | Registrar salida o entrada</button>');
+                $('#labelSelect').html('<label>Seleccionar:</label>');
+                if (res == 1) {
+                    $('#tableSelect').html('<select id="selectEvent" class="form-control input-sm"><option value="0">Todos</option><option value="1" >Productos en mal estado</option><option value="2">Traspasos a otra farmacia</option><option value="3">Medicamentos vencidos</option><option value="4">Perdidas de medicamentos</option><option value="5">Usos en farmacia</option><option value="6">Disminucion de medicamentos por usuario</option><option value="7">Aumento de medicamentos por usuario</option><option value="10">Entrada de medicamentos</option></select>');
+                    res = 0;
+                }
+                $('#selectEvent').off('change');
+                $('#selectEvent').on('change', function() {
+                    $('#example').dataTable().fnDraw();
+                });
+                $('#btnAdicionar').click(function() {
+                    $.post('../salida/adicionar', function(resp) {
+                        $("#contenedor").html(resp);
+                    });
+                });
+                $('.revisar').click(function() {
+                    $.post('../salida/revisar?codsal=' + $(this).data('id'), function(resp) {
+                        $("#contenedor").html(resp);
+                    });
+                });
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+            }
+        });
+        
+        $('#example tbody').on('click', 'tr td a.ver', function() {
+            let obj = $('#example').DataTable().row($(this).closest('tr')).data();
+            $('#tableSalida').loadJSON(obj);
+            $('#tableDetalle > tbody').html('');
+            $.post('../salida/listarDetalle?codsal='+obj.codsal,function(resp){
+            	if(resp.status){
+            		if (resp.detalleSalidaList != null && resp.detalleSalidaList.length > 0) {
+            			resp.detalleSalidaList.forEach(element => {
+                            let row = $('<tr></tr>');
+                            $('<td>' + element.producto.nombre + '</td>').appendTo(row);
+                            $('<td>' + element.cantidad + '</td>').appendTo(row);
+                            $('<td>' + (element.xfvencimiento?element.xfvencimiento:'') + '</td>').appendTo(row);
+                            $('#tableDetalle > tbody:last').append(row);
+                        });
+                    } else {
+                        $('#tableDetalle > tbody').html('<tr><td colspan="3">Sin detalles</td></tr>');
+                    }
+            	}
+            });
+        });
+        $('#example tbody').on('click','tr td a.eliminar',function(){
+        	let obj = $('#example').DataTable().row($(this).closest('tr')).data();
+        	$('#tableSalidaEliminar').loadJSON(obj);
+        	$('#tableDetalleEliminar > tbody').html('');
+        	$.post('../salida/listarDetalle?codsal='+obj.codsal,function(resp){
+            	if(resp.status){
+            		if (resp.detalleSalidaList != null && resp.detalleSalidaList.length > 0) {
+            			resp.detalleSalidaList.forEach(element => {
+                            let row = $('<tr></tr>');
+                            $('<td>' + element.producto.nombre + '</td>').appendTo(row);
+                            $('<td>' + element.cantidad + '</td>').appendTo(row);
+                            $('<td>' + (element.fvencimiento?element.fvencimiento:'') + '</td>').appendTo(row);
+                            $('#tableDetalleEliminar > tbody:last').append(row);
+                        });
+                    } else {
+                        $('#tableDetalleEliminar > tbody').html('<tr><td colspan="3">Sin detalles</td></tr>');
+                    }
+            	}
+            });
+        	$('#modalEliminar').modal('show');
+            $('#formularioEliminar').loadJSON(obj);
+            $('#salidaLabel').html(obj.codsal);
+        });
+        $('#formularioEliminar').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    $('#formulario')[0].reset();
+                    $('#formularioEliminar')[0].reset();
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+    });
+</script>

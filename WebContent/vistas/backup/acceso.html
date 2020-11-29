@@ -1,0 +1,89 @@
+<div id="cajaFormulario" style="display: block;">
+    <form name="formulario" role="form" id="formulario" method="post" action="../usuario/generarBackup" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="container">
+            <div>
+                <h4>Realizar Backup</h4>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="alert alert-info" role="alert">
+                            <strong>Generacion de backup</strong> Cuando acepte generar el backup, en el directorio de equipo, especificacmente dentro de la carpeta del usuario sesionado.
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <button type="submit" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Generar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br/>
+<div id="msgForm" class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div id="msgFormSuccess" style="display: none;">
+            <h1 class="text-success" align="center"><span class="fa fa-check-circle"></span></h1>
+            <div class="alert alert-success" role="alert">
+                <strong>Transacci&oacute;n Exitosa</strong> Se realiz&oacute; la generaci&oacute; exitosamente.<br/>
+                <p id="msgResp"></p>
+            </div>
+            <div>
+                <table class="table table-bordered" id="tableBackup">
+                    <thead>
+                        <tr>
+                            <td>Codigo</td>
+                            <td>Usuario</td>
+                            <td>Archivo</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="msgFormFailed" style="display: none;">
+            <h1 class="text-danger" align="center"><span class="fa fa-times-circle"></span></h1>
+            <div class="alert alert-danger" role="alert">
+                <strong>Transacci&oacute;n fallida</strong> No se logr&oacute; realizar la generaci&oacute;n. Vuelva a intentarlo<br/>
+                <p id="msgResp"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#formulario').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                $('#cajaFormulario').hide();
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    $('#formulario')[0].reset();
+                    $('#msgFormSuccess').show(1000);
+                    var detailList = result.lista;
+                    if (detailList) {
+                        let row;
+                        $('#tableBackup > tbody').html('');
+                        detailList.forEach(val => {
+                            row = $('<tr></tr>');
+                            $('<td>' + val.cod + '</td>').appendTo(row);
+                            $('<td>' + val.descripcion + '</td>').appendTo(row);
+                            $('<td>' + val.xuser + '</td>').appendTo(row);
+                            $('#tableBackup > tbody:last').append(row);
+                        });
+                    } else {
+                        var row = $('<tr></tr>');
+                        $('<td colspan="3">Sin detalles</td>').appendTo(row);
+                        $('#tableBackup > tbody:last').append(row);
+                    }
+                } else {
+                    $('#msgFormFailed').show(1000);
+                }
+                $('#msgResp').html(result.msgResp);
+            }, 'json');
+        });
+    });
+</script>

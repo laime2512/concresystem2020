@@ -1,0 +1,224 @@
+<div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioModificar" role="form" id="formularioModificar" method="post" action="../salida/actualizarAlmacen" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 45%" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Datos del producto</label>
+                            <table id="tablaInfoModificar" class="w3-table-all w3-tiny w3-card-4">
+                                <tbody>
+                                    <tr>
+                                        <td>Cod: <b aria-label="codpro"></b></td>
+                                        <td>Categoria: <b aria-label="xcategoria"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre</td>
+                                        <td><b aria-label="nombre"></b></td>
+                                        <td>Generico: <b aria-label="generico"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Laboratorio</td>
+                                        <td><b aria-label="xlaboratorio"></b></td>
+                                        <td>Area: <b aria-label="xarea"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Concentracion</td>
+                                        <td><b aria-label="xconcentracion"></b></td>
+                                        <td>Codigo barra: <b id="codigobarra"></b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <label>Formulario de aumentar de cantidad</label>
+                            <div class="alert alert-warning">
+                            	<p><b>Atenci&oacute;n:</b> en caso de querer disminuir la cantidad debe ingresar a salidas y llenar la causa por la que quiere disminuir la cantidad del producto. Gracias.</p>
+                            </div>
+                            <div class="row">
+                            	<div class="col-md-8">
+                            <div class="form-group row">
+                            	<label class="col-md-4">Cantidad</label>
+                            	<div class="col-md-8 radio">
+                            		<input type="hidden" name="codpro" value="" />
+                            		<input type="hidden" name="inOut" value="true" />
+                            		<input type="text" class="form-control input-sm text-right" name="cantidad" data-fv-notempty="true" />
+                            	</div>
+                            </div>
+                            <div class="form-group row">
+                            	<label class="col-md-4">F.Ingreso</label>
+                            	<div class="col-md-8 radio">
+                            		<input type="text" class="form-control input-sm fecha" name="xfvencimiento" />
+                            	</div>
+                            </div>
+                            <div class="form-group row">
+                            	<label class="col-md-4">F.Vencimiento</label>
+                            	<div class="col-md-8 radio">
+                            		<input type="text" class="form-control input-sm fecha" name="xfingreso" />
+                            	</div>
+                            </div>
+                            	</div>
+                            	<div class="col-md-4">
+                            		<dl class="row">
+                            			<dt class="col-md-8">Cantidad Actual </dt>
+                            			<dd class="col-md-4" id="cantidadActual"></dd>
+                            			<dt class="col-md-8">Cantidad Nueva </dt>
+                            			<dd class="col-md-4" id="cantidadNueva"></dd>
+                            		</dl>
+                            	</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                    <button type="submit" id="btnGuardar" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                        <thead>
+                            <tr class="">
+                                <th>Cod.</th>
+                                <th>Nombre Comercial</th>
+                                <th>Cod. Barra</th>
+                                <th>Tipo</th>
+                                <th>Generico</th>
+                                <th>Unidades</th>
+                                <th>Cajas</th>
+                                <th>Paquetes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var productSelect = {};
+    $(document).ready(function() {
+    	$('.fecha').mask('00/00/00', {placeholder: "dd/MM/yy"});
+        
+        $('#example').dataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row w3-tiny'<'col-sm-8'<'#tableTitle'>><'col-sm-1'<'#tableHeader'>><'col-sm-3'<'#tableButton.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "../almacen/listaInventario"
+            },
+            "columns": [{
+                "data": "codpro","name": "codpro"
+            }, {
+                "data": "nombre","name": "nombre"
+            }, {
+                "data": "codigobarra","name": "codigobarra"
+            }, {
+                "data": "xtipo","name": "xtipo"
+            }, {
+                "data": "generico","name": "generico"
+            }, {
+                "data": "cantidad","name": "cantidad"
+            }, {
+                "data": "cantidadCaja","name": "cantidad"
+            }, {
+                "data": "cantidadPaquete","name": "cantidad"
+            }, {
+                "data": "codpro","name": "codpro"
+            }],
+            columnDefs:[
+            	{className:'dt-right',targets:[5,6,7]}
+            ],
+            "createdRow": function(row, data, index) {
+                var btnModificar = '<button class="btn btn-xs btn-primary modificar"  data-toggle="tooltip" data-placement="top" title="Modificar detalle del producto"><i class="fa fa-edit"></i> | modificar</button>';
+                $('td', row).eq(8).html('<div class="btn-group">' + btnModificar + '</div>');
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Inventario</b></h6>');
+                $('#tableButton').html('<button class="btn btn-success btn-sm printExcel"><i class="fa fa-print"></i> | Imprimir inventario en excel</button>');
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+                
+                $('.printExcel').click(function(){
+                	abrirLoad('Espere por favor, la generacion del reporte tardara unos momentos.');
+                    fetch('../reporte/reportExcel')
+                    .then(resp => resp.blob())
+                    .then(blob => {
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.style.display = 'none';
+                      a.href = url;
+                      a.download = 'reporte.xls';
+                      document.body.appendChild(a);
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                      cerrarLoad();
+                    })
+                    .catch(() => console.log('Error al generar reporte excel'));
+                });
+            }
+        });
+        $('#example tbody').on('click', 'tr td button.modificar', function() {
+        	let obj = $('#example').DataTable().row($(this).closest('tr')).data();
+        	productSelect = obj;
+        	obj.xconcentracion=obj.concentracion + ' ' + obj.xmedida;
+        	$('#tablaInfoModificar').loadJSON(obj);
+        	$('#cantidadActual').html(obj.cantidad);
+        	$('#formularioModificar').data('formValidation').resetForm();
+            $('#formularioModificar')[0].reset();
+            $('input[name="codpro"]').val(obj.codpro);
+            $('#modalModificar').modal('show');
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup', function(e) {
+                if (e.keyCode == 13 || this.value === '') {
+                    if ($('#example').DataTable().column(i).search() !== this.value) {
+                    	$('#example').DataTable().order([i, 'asc']);
+                        $('#example').DataTable().column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+        $('#formularioModificar').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status) {
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+        $('input[name="cantidad"]').blur(function(){
+        	let xcan = $(this).val();
+        	if(xcan && xcan!=''){
+        		xcantidad = parseInt(xcan);
+        		$('#cantidadNueva').html(productSelect.cantidad + xcantidad);		
+        	}
+        })
+    });
+</script>

@@ -1,0 +1,380 @@
+<form name="formulario" role="form" id="formulario" method="post" action="../margen/guardar"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+	      data-fv-icon-invalid="glyphicon glyphicon-remove"
+	      data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+<div class="modal fade" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" style="min-width: 95%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalTitle">Adicionar Nuevo Margen</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-md-4">
+      			<dl class="row text-sm">
+	      			<dt class="col-sm-4">Usuario</dt>
+	      			<dd class="col-sm-8" aria-label="xusuario"></dd>
+	      			<dt class="col-sm-4">Fecha de registro</dt>
+	      			<dd class="col-sm-8" aria-label="dateRegister"></dd>
+	      		</dl>
+	      		<input type="hidden" name="codusu" />
+	      		<input type="hidden" name="dateRegister" />
+	      		<input type="hidden" name="codMargen" />
+	      		<div id="divButtonLastMargen" class="row" style="display:none;">
+	      			<div class="col-md-6">
+	      				<button class="btn btn-sm btn-success" type="button" id="btnLastMargen"> Obtener ultimo margen</button>
+	      			</div>
+	      		</div>
+      		</div>
+      		<div class="col-md-8">
+      			<div class="form-group">
+					<label>Observaciones</label>
+					<textarea id="observacion" name="observacion" class="form-control input-sm" rows="3" data-fv-notempty="true">Sin observaciones</textarea>
+				</div>
+      		</div>
+      	</div>
+			<br/>
+			<p style="display: none;" id="messageValidation"><span class="w3-tag w3-small w3-yellow">Atenci&oacute;n, debe completar todos los campos de los detalles para guardar los datos</span></p>
+			<table id="tableDetalle" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+	            <thead>
+	                <tr>
+	                    <td colspan="5" style="text-align: center;"><b>Detalle de margen</b></td>
+	                </tr>
+	                <tr>
+	                    <td>No.</td>
+	                    <td width="50%">Concepto</td>
+	                    <td width="150px">Nombre Tipo de Margen</td>
+	                    <td>Unidad minima venta</td>
+	                    <td><button type="button" class="btn btn-sm btn-success" id="addDetail"><i class="fa fa-plus"></i> | Adicionar</button></td>
+	                </tr>
+	            </thead>
+	            <tbody></tbody>
+	        </table>
+	  </div>
+      <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+				<button type="submit" id="btnAdicionarConfirmacion" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</form>
+
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../margen/eliminar"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+	      data-fv-icon-invalid="glyphicon glyphicon-remove"
+	      data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog " style="width: 40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar margen</h4>
+      </div>
+      <div class="modal-body">
+   			<input type="hidden" name="codMargen" />	
+   			<div class="row">
+   				<div class="col-md-9"><h3>Desea eliminar el margen C&oacute;digo: <b id="margenLabel"></b></h3></div>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+				<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+<div class="row">
+	<div class="col-lg-5">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <thead>
+                        <tr>
+                        	<th>Cod.</th>
+                        	<th>Usuario </th>
+                        	<th>Fecha</th>
+                        	<th width="200px"></th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-7">
+		<h4>Detalle Margen</h4>
+		<div class="row">
+			<div class="col-md-12" id="viewHeader">
+				<dl class="row text-sm">
+					<dt class="col-sm-2">Usuario</dt>
+					<dd class="col-sm-10" aria-label="xusuario">_</dd>
+					<dt class="col-sm-2">Fecha de registro</dt>
+					<dd class="col-sm-10" aria-label="dateRegister">_</dd>
+					<dt class="col-sm-2">Observaci&oacute;n</dt>
+					<dd class="col-sm-10" aria-label="observacion">_</dd>
+				</dl>
+			</div>
+		</div>
+		<table id="tableView" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+			<thead>
+				<tr>
+					<td>No.</td>
+	                <td width="55%">Concepto</td>
+	                <td>Tipo de Margen</td>
+	                <td>Unidad minima venta</td>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+</div> 
+<script type="text/javascript">
+var data = {
+		detail:{
+			numberMargin:0,
+			concept:'',
+			typeMargin:'',
+			porcentajeUnidad:0,
+			porcentajeCaja:0,
+			porcentajePaquete:0
+		},
+		listDetail : []
+}
+function addRow(){
+	let row = $('<tr></tr>');
+	$('<td class="numberRow"></td>').appendTo(row);
+	$('<td><div class="form-group"><input type="text" class="form-control input-sm" data-fv-notempty="true" style="min-width:100%" name="conceptVec" /></div></td>').appendTo(row);
+	$('<td><div class="form-group"><input type="text" class="form-control input-sm text-uppercase" data-fv-notempty="true" name="typeMarginVec" /></div></td>').appendTo(row);
+	$('<td><div class="form-group"><div class="input-group"><input type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-integer="true" name="porcentajeUnidadVec" /><span class="input-group-addon"> %&nbsp;&nbsp; </span></div></div></td>').appendTo(row);
+	$('<td><button type="button" class="btn btn-sm btn-danger rowRemove"><i class="fa fa-times"></i> | eliminar</button></td>').appendTo(row);
+	$('#tableDetalle > tbody:last').append(row);
+	renumeration();
+	revalidateField();
+}
+function renumeration(){
+	$('.numberRow').each(function(index){
+		$(this).html(index+1);
+	})
+}
+function validateDetail(){
+	let isValidate = true;
+	if(!isComplety('input[name="conceptVec"]')){
+		mostrarMensaje('info','Detalle concepto no completo');
+		isValidate = false;
+	}
+	if(!isComplety('input[name="typeMarginVec"]')){
+		mostrarMensaje('info','Detalle tipo de margen no completo');
+		isValidate = false;
+	}
+	if(!isComplety('input[name="porcentajeUnidadVec"]')){
+		mostrarMensaje('info','Detalle unidd minima de venta no completo');
+		isValidate = false;
+	}
+	if(!isValidate){
+		$('#messageValidation').show(1000);
+	}else{
+		$('#messageValidation').hide();
+	}
+	return isValidate;
+}
+function isComplety(xid){
+	let isValid = true;
+	$(xid).each(function(ind){
+		if(!($(this).val()))
+			isValid = false;
+	});
+	return isValid;
+}
+function loadDetailList(detalleList){
+	$('#tableDetalle >tbody').html('');
+	detalleList.forEach(item =>{
+		let row = $('<tr></tr>');
+		$('<td class="numberRow">'+item.numberMargin+'</td>').appendTo(row);
+		$('<td><div class="form-group"><input type="text" class="form-control input-sm" style="min-width:100%" name="conceptVec" value="'+item.concept+'" /></div></td>').appendTo(row);
+		$('<td><div class="form-group"><input type="text" class="form-control input-sm text-uppercase" name="typeMarginVec" value="'+item.typeMargin+'" /></div></td>').appendTo(row);
+		$('<td><div class="form-group"><div class="input-group"><input type="text" class="form-control input-sm text-right" name="porcentajeUnidadVec" value="'+item.porcentajeUnidad+'" /><span class="input-group-addon"> %&nbsp;&nbsp; </span></div></div></td>').appendTo(row);
+		$('<td><button type="button" class="btn btn-sm btn-danger rowRemove"><i class="fa fa-times"></i> | eliminar</button></td>').appendTo(row);
+		$('#tableDetalle > tbody:last').append(row);
+		revalidateField();
+	});
+}
+function revalidateField(){
+	$('#formulario').formValidation('addField','conceptVec');
+	$('#formulario').formValidation('addField','typeMarginVec');
+	$('#formulario').formValidation('addField','porcentajeUnidadVec');
+}
+$(document).ready(function() {
+	var btnGroup='';
+	$('#example').DataTable( {
+		"oLanguage": {
+			"sUrl": "../../js/Spanish.lang"
+			},
+		"processing": true,
+		"dom":"<'row w3-tiny'<'col-sm-4'<'#tableTitle'>><'col-sm-4'<'#tableHeader'>><'col-sm-4'f>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+		"serverSide": true,
+		"ajax": {
+			"type": "POST",
+			"url": "../margen/lista",
+			"data": function ( d ) {
+				d.estado = 1;
+			}
+		},
+		"columns": [
+			{ "data": "codMargen" },
+			{ "data": "xusuario" },
+			{ "data": "dateRegister" },
+			{ "data": "codMargen" }
+		],
+		"createdRow": function ( row, data, index ){
+			if(data.estado){
+				$('td',row).eq(2).html(moment(data.dateRegister).format('DD/MM/YY HH:mi:ss'));
+				btnGroup='';
+				btnGroup+='<button class="btn btn-xs btn-primary modificar"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="'+data.codMargen+'"><i class="fa fa-edit"></i> | modificar</button>';
+				btnGroup+='<button class="btn btn-xs btn-danger eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="'+data.codMargen+'"><i class="glyphicon glyphicon-remove-sign"></i> | eliminar</button>';
+				$('td',row).eq(3).html('<div class="btn-group">'+btnGroup+'</div>');
+			}
+		},
+		"drawCallback": function( settings ) {
+			$('#tableTitle').html('<h6><b>Margenes</b></h6>');
+			$('#tableHeader').html('<button class="btn btn-xs btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | adicionar</button>');
+			$('#btnAdicionar').click(function(){
+				$('#modalTitle').html('Adicionar margen');
+				$('#formulario').data('formValidation').resetForm();
+				$('#formulario')[0].reset();
+				$('input[type="hidden"]').val('');
+				$('dd[aria-label="dateRegister"]').html(moment(new Date()).format('DD/MM/YY'));
+				$('dd[aria-label="xusuario"]').html('$xusuario');
+				$('#tableDetalle >tbody').html('');
+				$('#messageValidation').hide();
+				$('#divButtonLastMargen').show();
+				addRow();
+				$('#modalAdicionar').modal('show');
+			});	
+			$('.modificar').click(function(){ 
+				$('#formulario').data('formValidation').resetForm();
+				$('#formulario')[0].reset();
+				$('#divButtonLastMargen').hide();
+				$.post('../margen/obtener?codMargen='+$(this).data('id'), function(result) {
+					if(result.status){
+						$('#modalTitle').html('Modificar margen');
+						$('dd[aria-label="dateRegister"]').html(result.data.dateRegister);
+						$('dd[aria-label="xusuario"]').html(result.data.xusuario);
+						$('#formulario').loadJSON(result.data);
+						let detalleList = result.data.detalleList;
+						if(detalleList){
+							loadDetailList(detalleList);
+							$('#modalAdicionar').modal('show');
+						}
+					}else{
+						mostrarMensaje('error','No se realizo con exito la Transaccion');
+					}
+				}, 'json');
+			});
+			$('.eliminar').click(function(){ 
+				$('#formularioEliminar').data('formValidation').resetForm();
+				$('#formularioEliminar')[0].reset();
+				$.post('../margen/obtener?codMargen='+$(this).data('id'), function(result) {
+					if(result.status){
+						$('#modalEliminar').modal('show');
+						$('#formularioEliminar').loadJSON(result.data);
+						$('#margenLabel').html(result.data.codMargen);
+					}else{
+						mostrarMensaje('error','No se realizo con exito la Transacciion');
+					}
+				}, 'json');
+			});
+                              		
+			$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+			}
+		} );
+	$('#example tbody').on('click', 'tr', function() {
+        var obj = $('#example').DataTable().row(this).data();
+        $.post('../margen/obtener?codMargen='+obj.codMargen, function(result) {
+			if(result.status){
+				$('#viewHeader').loadJSON(result.data);
+				let detalleList = result.data.detalleList;
+				if(detalleList){
+					$('#tableView >tbody').html('');
+					detalleList.forEach(item =>{
+						let row = $('<tr></tr>');
+						$('<td>'+item.numberMargin+'</td>').appendTo(row);
+						$('<td>'+item.concept+'</td>').appendTo(row);
+						$('<td>'+item.typeMargin+'</td>').appendTo(row);
+						$('<td>'+item.porcentajeUnidad+'</td>').appendTo(row);
+						$('#tableView > tbody:last').append(row);
+					});
+				}
+			}else{
+				mostrarMensaje('error','No se realizo con exito la Transaccion');
+			}
+		}, 'json');
+    });
+	$('#addDetail').click(function(){
+		addRow();
+	});
+	$('#tableDetalle').on('click','.rowRemove',function(){
+		let tam = $('#tableDetalle >tbody >tr').length;
+		if(tam > 1){
+			$(this).closest("tr").remove();
+			renumeration();
+			revalidateField();
+		}else
+			mostrarMensaje('info','No se puede dejar sin detalles');
+	});
+	$('#btnLastMargen').click(function(){
+		$.get('../margen/getLastMargen',function(resp){
+			if(resp.status){
+				loadDetailList(resp.data.detalleList);
+				mostrarMensaje('info', 'Se cargo el margen #'+resp.data.codMargen);
+			}else{
+				mostartMensaje('info','No se encontro ningun margen anterior');
+			}
+		});
+	});
+	$('#formulario').formValidation(
+			{locale: 'es_ES'}).on('success.form.fv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				if(validateDetail()){
+					$.post($form.attr('action'), $form.serialize(), function(result) {
+						if(result.status){
+							$('#example').dataTable().fnDraw('page');
+							$('.modal').modal('hide');
+							mostrarMensaje('info','Se realizo con exito la Transaccion');
+						}else{
+							mostrarMensaje('error','No se realizo con exito la Transaccion');
+						}
+					}, 'json');
+				}
+		});
+	$('#formularioEliminar').formValidation(
+			{locale: 'es_ES'}).on('success.form.fv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if(result.status){
+						$form.data('formValidation').resetForm();
+						$('#formularioEliminar')[0].reset();
+						$('#example').dataTable().fnDraw('page');
+						mostrarMensaje('info','Se realizo con exito la Transaccion');
+						$('.modal').modal('hide');
+					}else{
+						mostrarMensaje('error','No se realizo con exito la Transaccion');
+					}
+				
+			}, 'json');
+		});
+	});
+</script>
+                

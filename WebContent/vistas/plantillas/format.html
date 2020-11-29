@@ -1,0 +1,204 @@
+<script src="../../js/fileinput.js"></script>
+<form name="formulario" role="form" id="formulario" method="post"
+	action="../producto/guardar2" enctype="multipartform-data"
+	data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok"
+	data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+	<div class="form-group">
+		<label>Input</label> <input id="nombre" name="nombre" type="text"
+			placeholder="ingrese nombres"
+			class="form-control input-sm text-uppercase" data-fv-notempty="true">
+	</div>
+	<div class="form-group">
+		<label>Textarea</label>
+		<textarea id="area" name="area" class="form-control input-sm" rows="3"></textarea>
+	</div>
+	<div class="form-group">
+		<label>File input</label> <input type="file" class="form-control file">
+	</div>
+	<div class="form-group">
+		<label>Checkbox vertical</label>
+		<div>
+			<label class="container"> <input type="checkbox"
+				class="w3-check" checked="checked"> One
+			</label> <label class="container"> <input type="checkbox"
+				class="w3-check"> Two
+			</label> <label class="container"> <input type="checkbox"
+				class="w3-check"> Three
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Checkbox horizontal</label>
+		<div class="row">
+			<label class="container col-md-4"> <input type="checkbox"
+				class="w3-check"> One
+			</label> <label class="container col-md-4"> <input type="checkbox"
+				class="w3-check"> Two
+			</label> <label class="container col-md-4"> <input type="checkbox"
+				class="w3-check"> Three
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Radio Horizontal</label>
+		<div class="row">
+			<label class="col-md-4"> <input type="radio"
+				name="optionsRadios" class="w3-radio" value="option1" checked />
+				Radio 1
+			</label> <label class="col-md-4"> <input type="radio"
+				name="optionsRadios" class="w3-radio" value="option1" /> Radio 2
+			</label> <label class="col-md-4"> <input type="radio"
+				name="optionsRadios" class="w3-radio" value="option1" /> Radio 3
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Radio Vertical</label>
+		<div>
+			<label class="container"> <input name="optionradio"
+				type="radio" class="w3-radio" checked="checked"> One
+			</label> <label class="container"><input name="optionRadio"
+				type="radio" class="w3-radio"> Two </label> <label class="container"><input
+				name="optionRadio" type="radio" class="w3-radio"> Three</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Seleccionador</label> <select id="codare" name="codare"
+			class="form-control input-sm" data-fv-notempty="true">
+			<option value="">Seleccionar</option>
+			<option value="1">opcion 1</option>
+			<option value="2">opcion 2</option>
+		</select>
+	</div>
+	<div class="pull-right">
+		<button type="button" class="btn btn-danger" id="btnCancelar"
+			data-dismiss="modal">
+			<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+		</button>
+		<button type="submit" id="btnAdicionarConfirmacion"
+			class="btn btn-primary">
+			<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+		</button>
+	</div>
+</form>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('select').chosen({
+							no_results_text : "No se encuentra:",
+							width : '100%'
+						});
+						$('#formulario')
+								.formValidation({
+									locale : 'es_ES'
+								})
+								.on(
+										'success.form.fv',
+										function(e) {
+											e.preventDefault();
+											var $form = $(e.target);
+											$
+													.post(
+															$form
+																	.attr('action'),
+															$form.serialize(),
+															function(result) {
+																if (result.status == true) {
+																	$form
+																			.data(
+																					'formValidation')
+																			.resetForm();
+																	$('#formulario')[0]
+																			.reset();
+																	$('.modal')
+																			.modal(
+																					'hide');
+																	mostrarMensaje(
+																			'info',
+																			'Se realizo con exito la Transaccion');
+																} else {
+																	mostrarMensaje(
+																			'error',
+																			'No se realizo con exito la Transaccion');
+																}
+															}, 'json');
+										});
+					});
+</script>
+
+<div class="form-group">
+	<label>Input</label> <input id="nombre" name="nombre" type="text"
+		placeholder="ingrese nombres"
+		class="form-control input-sm text-uppercase" data-fv-notempty="true">
+</div>
+
+<div class="form-group">
+	<label>Textarea</label>
+	<textarea id="area" name="area" class="form-control input-sm" rows="3"></textarea>
+</div>
+
+<div class="form-group">
+	<label>File input</label> <input type="file" class="form-control file">
+</div>
+
+<div class="form-group">
+	<label>Checkbox vertical</label>
+	<div>
+		<label class="container"> <input type="checkbox"
+			class="w3-check" checked="checked"> One
+		</label> <label class="container"> <input type="checkbox"
+			class="w3-check"> Two
+		</label> <label class="container"> <input type="checkbox"
+			class="w3-check"> Three
+		</label>
+	</div>
+</div>
+
+<div class="form-group">
+	<label>Checkbox horizontal</label>
+	<div class="row">
+		<label class="container col-md-4"> <input type="checkbox"
+			class="w3-check"> One
+		</label> <label class="container col-md-4"> <input type="checkbox"
+			class="w3-check"> Two
+		</label> <label class="container col-md-4"> <input type="checkbox"
+			class="w3-check"> Three
+		</label>
+	</div>
+</div>
+
+<div class="form-group">
+	<label>Radio Horizontal</label>
+	<div class="row">
+		<label class="col-md-4"> <input type="radio"
+			name="optionsRadios" class="w3-radio" value="option1" checked />
+			Radio 1
+		</label> <label class="col-md-4"> <input type="radio"
+			name="optionsRadios" class="w3-radio" value="option1" /> Radio 2
+		</label> <label class="col-md-4"> <input type="radio"
+			name="optionsRadios" class="w3-radio" value="option1" /> Radio 3
+		</label>
+	</div>
+</div>
+
+<div class="form-group">
+	<label>Radio Vertical</label>
+	<div>
+		<label class="container"> <input name="optionradio"
+			type="radio" class="w3-radio" checked="checked"> One
+		</label> <label class="container"><input name="optionRadio"
+			type="radio" class="w3-radio"> Two </label> <label class="container"><input
+			name="optionRadio" type="radio" class="w3-radio"> Three</label>
+	</div>
+</div>
+
+<div class="form-group">
+	<label>Seleccionador</label> <select id="codare" name="codare"
+		class="form-control input-sm" data-fv-notempty="true">
+		<option value="">Seleccionar</option>
+		<option value="1">opcion 1</option>
+		<option value="2">opcion 2</option>
+	</select>
+</div>

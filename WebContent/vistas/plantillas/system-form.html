@@ -1,0 +1,323 @@
+<script src="../../js/fileinput.js"></script>
+<div id="wrapper">
+	<div id="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Formulario</h1>
+			</div>
+		</div>
+		<ul class="nav nav-pills">
+  <li class="active">
+    <a data-toggle="tab" href="#template1">Formulario General</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#template2">Detalle Formulario</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#template3">Select Chosen</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#template4">DataTable</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#template4">Date</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="template1">
+  <div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Formulario general</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<form name="formulario" role="form" id="formulario" method="post" action="../producto/guardar2" enctype="multipartform-data" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+									<div class="form-group">
+										<label>Input</label> <input id="nombre" name="nombre"
+											type="text" placeholder="ingrese nombres"
+											class="form-control input-sm text-uppercase"
+											data-fv-notempty="true">
+									</div>
+									<div class="form-group">
+										<label>Textarea</label>
+										<textarea id="area" name="area" class="form-control input-sm"
+											rows="3"></textarea>
+									</div>
+									<div class="form-group">
+										<label>File input</label> <input type="file"
+											class="form-control file">
+									</div>
+									<div class="form-group">
+										<label>Checkbox vertical</label>
+										<div>
+											<label class="container"> <input type="checkbox"
+												class="w3-check" checked="checked"> One
+											</label> <label class="container"> <input type="checkbox"
+												class="w3-check"> Two
+											</label> <label class="container"> <input type="checkbox"
+												class="w3-check"> Three
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Checkbox horizontal</label>
+										<div class="row">
+											<label class="container col-md-4"> <input
+												type="checkbox" class="w3-check"> One
+											</label> <label class="container col-md-4"> <input
+												type="checkbox" class="w3-check"> Two
+											</label> <label class="container col-md-4"> <input
+												type="checkbox" class="w3-check"> Three
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Radio Horizontal</label>
+										<div class="row">
+											<label class="col-md-4">
+											<input type="radio" name="optionsRadios" class="w3-radio" value="option1" checked /> 
+											Radio 1
+											</label> 
+											<label class="col-md-4">
+											<input type="radio" name="optionsRadios" class="w3-radio" value="option1"/> 
+											Radio 2
+											</label> 
+											<label class="col-md-4">
+											<input type="radio" name="optionsRadios" class="w3-radio" value="option1"/> 
+											Radio 3
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Radio Vertical</label>
+										<div>
+											<label class="container">
+											<input name="optionradio" type="radio" class="w3-radio" checked="checked"> 
+											One
+											</label>
+											<label class="container"><input name="optionRadio" type="radio" class="w3-radio"> 
+											Two
+											</label> 
+											<label class="container"><input name="optionRadio" type="radio" class="w3-radio"> 
+											Three</label>
+										</div>
+									</div>
+									<div class="form-group">
+									<label>Seleccionador</label>
+									<select id="codare" name="codare" class="form-control input-sm" data-fv-notempty="true">
+							<option value="">Seleccionar</option>
+							<option value="1">opcion 1</option>
+							<option value="2">opcion 2</option>
+						</select>
+									</div>
+									<div class="pull-right">
+        <button type="button" class="btn btn-danger" id="btnCancelar" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+        <button type="submit" id="btnAdicionarConfirmacion" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+    </div>
+								</form>
+							</div>
+							<div class="col-lg-6" style="height: 700px;overflow-y: scroll">
+								<pre class="prettyprint linenums" onclick="clip(this);">&lt;script src=&quot;../../js/fileinput.js&quot;&gt;&lt;/script&gt;<br/>&lt;form name=&quot;formulario&quot; role=&quot;form&quot; id=&quot;formulario&quot; method=&quot;post&quot;<br/>	action=&quot;../producto/guardar2&quot; enctype=&quot;multipartform-data&quot;<br/>	data-fv-excluded=&quot;disabled&quot; data-fv-icon-valid=&quot;glyphicon glyphicon-ok&quot;<br/>	data-fv-icon-invalid=&quot;glyphicon glyphicon-remove&quot;<br/>	data-fv-icon-validating=&quot;glyphicon glyphicon-refresh&quot;&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Input&lt;/label&gt; &lt;input id=&quot;nombre&quot; name=&quot;nombre&quot; type=&quot;text&quot;<br/>			placeholder=&quot;ingrese nombres&quot;<br/>			class=&quot;form-control input-sm text-uppercase&quot; data-fv-notempty=&quot;true&quot;&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Textarea&lt;/label&gt;<br/>		&lt;textarea id=&quot;area&quot; name=&quot;area&quot; class=&quot;form-control input-sm&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;File input&lt;/label&gt; &lt;input type=&quot;file&quot;<br/>			class=&quot;form-control file&quot;&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Checkbox vertical&lt;/label&gt;<br/>		&lt;div&gt;<br/>			&lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot; checked=&quot;checked&quot;&gt; One<br/>			&lt;/label&gt; &lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot;&gt; Two<br/>			&lt;/label&gt; &lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot;&gt; Three<br/>			&lt;/label&gt;<br/>		&lt;/div&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Checkbox horizontal&lt;/label&gt;<br/>		&lt;div class=&quot;row&quot;&gt;<br/>			&lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot;&gt; One<br/>			&lt;/label&gt; &lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot;&gt; Two<br/>			&lt;/label&gt; &lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>				class=&quot;w3-check&quot;&gt; Three<br/>			&lt;/label&gt;<br/>		&lt;/div&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Radio Horizontal&lt;/label&gt;<br/>		&lt;div class=&quot;row&quot;&gt;<br/>			&lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>				name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; checked /&gt;<br/>				Radio 1<br/>			&lt;/label&gt; &lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>				name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; /&gt; Radio 2<br/>			&lt;/label&gt; &lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>				name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; /&gt; Radio 3<br/>			&lt;/label&gt;<br/>		&lt;/div&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Radio Vertical&lt;/label&gt;<br/>		&lt;div&gt;<br/>			&lt;label class=&quot;container&quot;&gt; &lt;input name=&quot;optionradio&quot;<br/>				type=&quot;radio&quot; class=&quot;w3-radio&quot; checked=&quot;checked&quot;&gt; One<br/>			&lt;/label&gt; &lt;label class=&quot;container&quot;&gt;&lt;input name=&quot;optionRadio&quot;<br/>				type=&quot;radio&quot; class=&quot;w3-radio&quot;&gt; Two &lt;/label&gt; &lt;label class=&quot;container&quot;&gt;&lt;input<br/>				name=&quot;optionRadio&quot; type=&quot;radio&quot; class=&quot;w3-radio&quot;&gt; Three&lt;/label&gt;<br/>		&lt;/div&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;form-group&quot;&gt;<br/>		&lt;label&gt;Seleccionador&lt;/label&gt; &lt;select id=&quot;codare&quot; name=&quot;codare&quot;<br/>			class=&quot;form-control input-sm&quot; data-fv-notempty=&quot;true&quot;&gt;<br/>			&lt;option value=&quot;&quot;&gt;Seleccionar&lt;/option&gt;<br/>			&lt;option value=&quot;1&quot;&gt;opcion 1&lt;/option&gt;<br/>			&lt;option value=&quot;2&quot;&gt;opcion 2&lt;/option&gt;<br/>		&lt;/select&gt;<br/>	&lt;/div&gt;<br/>	&lt;div class=&quot;pull-right&quot;&gt;<br/>		&lt;button type=&quot;button&quot; class=&quot;btn btn-danger&quot; id=&quot;btnCancelar&quot;<br/>			data-dismiss=&quot;modal&quot;&gt;<br/>			&lt;i class=&quot;glyphicon glyphicon-remove-sign&quot;&gt;&lt;/i&gt; Cancelar<br/>		&lt;/button&gt;<br/>		&lt;button type=&quot;submit&quot; id=&quot;btnAdicionarConfirmacion&quot;<br/>			class=&quot;btn btn-primary&quot;&gt;<br/>			&lt;i class=&quot;glyphicon glyphicon-floppy-disk&quot;&gt;&lt;/i&gt; Guardar<br/>		&lt;/button&gt;<br/>	&lt;/div&gt;<br/>&lt;/form&gt;<br/>&lt;script type=&quot;text/javascript&quot;&gt;<br/>$(document).ready(function() {<br/>	$('select').chosen({no_results_text: &quot;No se encuentra:&quot;,width: '100%'});<br/>	$('#formulario').formValidation({locale: 'es_ES'}).on('success.form.fv', function(e) {<br/>		e.preventDefault();<br/>		var $form = $(e.target);<br/>		$.post($form.attr('action'), $form.serialize(), function(result) {<br/>			if (result.status == true) {<br/>				$form.data('formValidation').resetForm();<br/>				$('#formulario')[0].reset();<br/>				$('.modal').modal('hide');<br/>				mostrarMensaje('info', 'Se realizo con exito la Transaccion');<br/>			} else {<br/>				mostrarMensaje('error', 'No se realizo con exito la Transaccion');<br/>			}<br/>		}, 'json');<br/>	});<br/>});<br/>&lt;/script&gt;</pre>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  <div class="tab-pane fade" id="template2">
+  <div class="row">
+  	<div class="col-md-6">
+  	<div class="form-group">
+  	<label>Input</label> <input id="nombre" name="nombre" type="text" placeholder="ingrese nombres" class="form-control input-sm text-uppercase" data-fv-notempty="true">
+  	</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Input&lt;/label&gt; <br/>	&lt;input id=&quot;nombre&quot; name=&quot;nombre&quot; type=&quot;text&quot; placeholder=&quot;ingrese nombres&quot; class=&quot;form-control input-sm text-uppercase&quot; data-fv-notempty=&quot;true&quot;&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Textarea</label>
+			<textarea id="area" name="area" class="form-control input-sm" rows="3"></textarea>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Textarea&lt;/label&gt;<br/>	&lt;textarea id=&quot;area&quot; name=&quot;area&quot; class=&quot;form-control input-sm&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>File input</label> <input type="file" class="form-control file">
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;File input&lt;/label&gt; &lt;input type=&quot;file&quot; class=&quot;form-control file&quot;&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Checkbox vertical</label>
+			<div>
+				<label class="container"> <input type="checkbox"
+					class="w3-check" checked="checked"> One
+				</label> <label class="container"> <input type="checkbox"
+					class="w3-check"> Two
+				</label> <label class="container"> <input type="checkbox"
+					class="w3-check"> Three
+				</label>
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Checkbox vertical&lt;/label&gt;<br/>	&lt;div&gt;<br/>		&lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot; checked=&quot;checked&quot;&gt; One<br/>		&lt;/label&gt; &lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot;&gt; Two<br/>		&lt;/label&gt; &lt;label class=&quot;container&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot;&gt; Three<br/>		&lt;/label&gt;<br/>	&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Checkbox horizontal</label>
+			<div class="row">
+				<label class="container col-md-4"> <input type="checkbox"
+					class="w3-check"> One
+				</label> <label class="container col-md-4"> <input type="checkbox"
+					class="w3-check"> Two
+				</label> <label class="container col-md-4"> <input type="checkbox"
+					class="w3-check"> Three
+				</label>
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Checkbox horizontal&lt;/label&gt;<br/>	&lt;div class=&quot;row&quot;&gt;<br/>		&lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot;&gt; One<br/>		&lt;/label&gt; &lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot;&gt; Two<br/>		&lt;/label&gt; &lt;label class=&quot;container col-md-4&quot;&gt; &lt;input type=&quot;checkbox&quot;<br/>			class=&quot;w3-check&quot;&gt; Three<br/>		&lt;/label&gt;<br/>	&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Radio Horizontal</label>
+			<div class="row">
+				<label class="col-md-4"> <input type="radio"
+					name="optionsRadios" class="w3-radio" value="option1" checked />
+					Radio 1
+				</label> <label class="col-md-4"> <input type="radio"
+					name="optionsRadios" class="w3-radio" value="option1" /> Radio 2
+				</label> <label class="col-md-4"> <input type="radio"
+					name="optionsRadios" class="w3-radio" value="option1" /> Radio 3
+				</label>
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Radio Horizontal&lt;/label&gt;<br/>	&lt;div class=&quot;row&quot;&gt;<br/>		&lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>			name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; checked /&gt;<br/>			Radio 1<br/>		&lt;/label&gt; &lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>			name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; /&gt; Radio 2<br/>		&lt;/label&gt; &lt;label class=&quot;col-md-4&quot;&gt; &lt;input type=&quot;radio&quot;<br/>			name=&quot;optionsRadios&quot; class=&quot;w3-radio&quot; value=&quot;option1&quot; /&gt; Radio 3<br/>		&lt;/label&gt;<br/>	&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Radio Vertical</label>
+			<div>
+				<label class="container"> <input name="optionradio"
+					type="radio" class="w3-radio" checked="checked"> One
+				</label> <label class="container"><input name="optionRadio"
+					type="radio" class="w3-radio"> Two </label> <label class="container"><input
+					name="optionRadio" type="radio" class="w3-radio"> Three</label>
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Radio Vertical&lt;/label&gt;<br/>	&lt;div&gt;<br/>		&lt;label class=&quot;container&quot;&gt; &lt;input name=&quot;optionradio&quot;<br/>			type=&quot;radio&quot; class=&quot;w3-radio&quot; checked=&quot;checked&quot;&gt; One<br/>		&lt;/label&gt; &lt;label class=&quot;container&quot;&gt;&lt;input name=&quot;optionRadio&quot;<br/>			type=&quot;radio&quot; class=&quot;w3-radio&quot;&gt; Two &lt;/label&gt; &lt;label class=&quot;container&quot;&gt;&lt;input<br/>			name=&quot;optionRadio&quot; type=&quot;radio&quot; class=&quot;w3-radio&quot;&gt; Three&lt;/label&gt;<br/>	&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		<div class="form-group">
+			<label>Seleccionador</label> <select id="codare" name="codare"
+				class="form-control input-sm" data-fv-notempty="true">
+				<option value="">Seleccionar</option>
+				<option value="1">opcion 1</option>
+				<option value="2">opcion 2</option>
+			</select>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums" onclick="clip(this);">&lt;div class=&quot;form-group&quot;&gt;<br/>	&lt;label&gt;Seleccionador&lt;/label&gt; &lt;select id=&quot;codare&quot; name=&quot;codare&quot;<br/>		class=&quot;form-control input-sm&quot; data-fv-notempty=&quot;true&quot;&gt;<br/>		&lt;option value=&quot;&quot;&gt;Seleccionar&lt;/option&gt;<br/>		&lt;option value=&quot;1&quot;&gt;opcion 1&lt;/option&gt;<br/>		&lt;option value=&quot;2&quot;&gt;opcion 2&lt;/option&gt;<br/>	&lt;/select&gt;<br/>&lt;/div&gt;</pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+		
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums"></pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums"></pre>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<div class="col-md-6">
+
+  	</div>
+  	<div class="col-md-6">
+  		<pre class="prettyprint linenums"></pre>
+  	</div>
+  </div>
+  <hr/>
+  </div>
+  <div class="tab-pane fade" id="template3">
+  Plantilla 3
+  </div>
+</div>
+	</div>
+</div>
+<script type="text/javascript">
+var clip = function(el) {
+	  var range = document.createRange();
+	  range.selectNodeContents(el);
+	  var sel = window.getSelection();
+	  sel.removeAllRanges();
+	  sel.addRange(range);
+	};
+	jQuery(document).ready(function() {
+		prettyPrint();
+		$('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+		$('#formulario').formValidation({locale: 'es_ES'}).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status == true) {
+                    $form.data('formValidation').resetForm();
+                    //                       	            $('#formularioEliminar')[0].reset();
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+	});
+</script>

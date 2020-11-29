@@ -1,0 +1,49 @@
+<br>
+<form id="formulario" name="formulario" action="../cliente/busqueda" method="post"
+data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+	      data-fv-icon-invalid="glyphicon glyphicon-remove"
+	      data-fv-icon-validating="glyphicon glyphicon-refresh">
+<div class="row">
+	<div class="col-md-1 pull-left">
+		<label style="font-size: 18px;">Buscar </label>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<input type="text" name="search" class="form-control input-sm" placeholder="buscar.." >
+		</div>
+		<div class="form-group">
+			<select id="searchc" name="searchc" class="form-control input-sm"  data-placeholder="Seleccione categoria..." data-fv-notempty="true" >
+			<option value="0">Seleccione categoria...</option>
+				#foreach($c in $categorias)
+				<option id="pro-$c.codcat" value="$c.codcat">$c.nomcat </option>
+				#end
+			</select>
+		</div>
+	</div>
+	<div class="col-md-3">
+	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+	</div>
+	<div id="subcontenedor"></div>
+</div>
+</form>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#searchc').chosen({
+        no_results_text: "No se encuentra:",
+        width: '100%',
+        height: '25px'
+    });
+$('#formulario').formValidation(
+			{locale: 'es_ES'}).on('success.form.fv', function(e) {
+      e.preventDefault();
+      var $form = $(e.target);
+      $.post($form.attr('action'), $form.serialize(), function(result) {
+      	$('#subcontenedor').html(result);
+      	mostrarMensaje('success','Se obtuvieron los siguientes productos');
+	    }
+      );
+  });
+});
+</script>                  

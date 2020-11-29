@@ -1,0 +1,374 @@
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../producto/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Producto</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="codpro4" name="codpro" />
+                    <div class="row">
+                        <div class="col-md-3"><img id="fotoEliminar" class="img-thumbnail" width="150px" /> </div>
+                        <div class="col-md-9">
+                            <h3>&iquest; Esta seguro de eliminar al producto? <b id="rolLabel"></b></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <thead>
+                            <tr>
+                                <th width="80px">C&oacute;digo</th>
+                                <th>Nombre Comercial</th>
+                                <th>Gen&eacute;rico</th>
+                                <th width="160px">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="w3-card-4" align="center">
+            <div class="w3-container">
+                <table id="tablaInformacionProductoIncompleto" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                    <tbody>
+                    	<tr>
+                    	<td colspan="2"><b>Datos Incompletos</b></td>
+                    	</tr>
+                        <tr>
+                            <td>Concentracion</td>
+                            <td aria-label="concentracion"></td>
+                        </tr>
+                        <tr>
+                            <td>Medida</td>
+                            <td aria-label="codmed"></td>
+                        </tr>
+                        <tr>
+                            <td>Pareto:</td>
+                            <td aria-label="pareto"></td>
+                        </tr>
+                        <tr>
+                            <td>Precio costo Unidad</td>
+                            <td aria-label="pcUnit"></td>
+                        </tr>
+                        <tr>
+                            <td>PPrecio costo caja</td>
+                            <td aria-label="pcCaja"></td>
+                        </tr>
+                        <tr>
+                            <td>Precio costo paquete</td>
+                            <td aria-label="pcPaquete"></td>
+                        </tr>
+                        <tr>
+                            <td>Precio p&uacute;blico unidad</td>
+                            <td aria-label="pvUnit"></td>
+                        </tr>
+                        <tr>
+                            <td>Precio p&uacute;blico por caja</td>
+                            <td aria-label="pvCaja"></td>
+                        </tr>
+                        <tr>
+                            <td>Precio p&uacute;blico por paquete</td>
+                            <td aria-label="pvPaquete"></td>
+                        </tr>
+                        <tr>
+                            <td>Inventario M&iacute;nimo por unidad</td>
+                            <td aria-label="inventarioMinimoUnidad"></td>
+                        </tr>
+                        <tr>
+                            <td>Inventario M&iacute;nimo Por caja</td>
+                            <td aria-label="inventarioMinimoCaja"></td>
+                        </tr>
+                        <tr>
+                            <td>Inventario M&iacute;nimo por paquete: </td>
+                            <td aria-label="inventarioMinimoPaquete"></td>
+                        </tr>
+                        <tr>
+                            <td>Porcentaje de venta por unidad</td>
+                            <td aria-label="porcentajeUnidad"></td>
+                        </tr>
+                        <tr>
+                            <td>Porcentaje de venta por caja: </td>
+                            <td aria-label="porcentajeCaja"></td>
+                        </tr>
+                        <tr>
+                            <td>Porcentaje de venta por paquete </td>
+                            <td aria-label="porcentajePaquete"></td>
+                        </tr>
+                        <tr>
+                            <td>Relacion de cantidad en unidades</td>
+                            <td aria-label="unixcaja"></td>
+                        </tr>
+                        <tr>
+                            <td>Relacion de cantidad en Cajas</td>
+                            <td aria-label="unixpaquete"></td>
+                        </tr>
+                        <tr>
+                            <td>Relacion de cantidad en Paquetes</td>
+                            <td aria-label="uniEnPaquete"></td>
+                        </tr>
+                    </tbody>
+                </table><br/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="w3-card-4" align="center">
+            <img id="ximg" onclick="onClick(this);" src="../../archivos/producto/producto.png" width="150px" alt="Alps">
+            <div class="w3-container">
+                <table id="tablaInformacionProducto" class="w3-table-all w3-tiny w3-card-4">
+                    <tbody>
+                    	<tr>
+                    	<td colspan="2"><b>Informaci&oacute;n del producto</b> <a class="text-primary" href="#" id="btnInformacionProducto"><span class="fa fa-search"></span> Ver producto</a></td>
+                    	</tr>
+                        <tr>
+                            <td>Cod: <b aria-label="xcodpro"></b></td>
+                            <td>Categoria: <b aria-label="xcategoria"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Nombre: <b aria-label="xnombre"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Generico: <b aria-label="generico"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Proveedor: <b aria-label="xlaboratorio"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Cod.Barra: <b aria-label="codigobarra"></b></td>
+                            <td>Area: <b aria-label="xarea"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Concentracion</td>
+                            <td aria-label="xconcentracion"></td>
+                        </tr>
+                        <tr>
+                            <td>Es controlado: <b aria-label="xcontrolado"></b></td>
+                            <td>Pareto: <b aria-label="pareto"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Precio costo de compra</td>
+                            <td>Por unidad: <b aria-label="pcUnit"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="pcCaja"></b></td>
+                            <td>por paquete: <b aria-label="pcPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Precio p&uacute;blico a la venta</td>
+                            <td>Por unidad: <b aria-label="pvUnit"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="pvCaja"></b></td>
+                            <td>por paquete: <b aria-label="pvPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Inventario M&iacute;nimo</td>
+                            <td>Por unidad: <b aria-label="inventarioMinimoUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="inventarioMinimoCaja"></b></td>
+                            <td>por paquete: <b aria-label="inventarioMinimoPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Porcentaje de venta</td>
+                            <td>Por unidad: <b aria-label="porcentajeUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="porcentajeCaja"></b></td>
+                            <td>por paquete: <b aria-label="porcentajePaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Relacion de cantidad</td>
+                            <td>En unidades: <b aria-label="unixcaja"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Cajas: <b aria-label="unixpaquete"></b></td>
+                            <td>Paquetes: <b aria-label="uniEnPaquete"></b></td>
+                        </tr>
+                    </tbody>
+                </table><br/>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+    <img class="w3-modal-content" id="img01" style="width:500px;">
+</div>
+<div class="modal fade" id="modalInformacionProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                <div class="w3-container">
+                <table id="contentInformation" class="w3-table-all w3-card-4"></table>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
+<script type="text/javascript">
+	RUTA_PRODUCTOS = '../..'+'$RUTA_PRODUCTOS'+'/';
+	IMG_DEFAULT = '$IMG_DEFAULT';
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+    }
+    function imgError(image) {
+        $(image).hide();
+    };
+    $(document).ready(function() {
+    	$('#btnInformacionProducto').click(function(){
+    		$('#contentInformation').html($('#tablaInformacionProducto').html());
+    		$('#modalInformacionProducto').modal('show');
+    	});
+    	$('#ximg').prop('src',RUTA_PRODUCTOS+IMG_DEFAULT);
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+        var table = $('#example').DataTable({
+            select: true,
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "processing": true,
+            "dom": "<'row w3-tiny'<'col-sm-7'<'#tableTitle'>><'col-sm-5'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": "../producto/listaIncompletos"
+            },
+            "columns": [{
+                "data": "codpro","name": "codpro"
+            }, {
+                "data": "nombre","name": "nombre"
+            }, {
+                "data": "generico","name": "generico"
+            }, {
+                "data": "codpro","name": "codpro"
+            }],
+            "createdRow": function(row, data, index) {
+            	let btnGroup = '';
+            	btnGroup += '<button class="btn btn-xs btn-primary modificar"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="' + data.codpro + '"><i class="fa fa-edit"></i> | Modificar</button>';
+            	btnGroup += '<button class="btn btn-xs btn-danger eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="' + data.codpro + '"><i class="glyphicon glyphicon-remove-sign"></i> | Eliminar </button>';
+            	$('td', row).eq(3).html('<div class="btn-group">' + btnGroup + '</div>');
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Productos Incompletos</b></h6>');
+                $('#tableHeader').html('<button class="btn btn-sm btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | adicionar</button>');
+                $('#btnAdicionar').click(function() {
+                    $('#contenedor').fadeOut(200, function() {
+                        $('#contenedor').load('../producto/adicionar?esIncompleto=true', function() {
+                            $('#contenedor').fadeIn(200);
+                        });
+                    });
+                });
+                $('.modificar').click(function() {
+                	let codpro = $(this).data('id');
+                	$('#contenedor').fadeOut(200, function() {
+                        $('#contenedor').load('../producto/adicionar?codpro='+parseInt(codpro)+'&esIncompleto=true', function() {
+                            $('#contenedor').fadeIn(200);
+                        });
+                    });
+                });
+                $('.eliminar').click(function() {
+                    $('#formularioEliminar').data('formValidation').resetForm();
+                    $('#formularioEliminar')[0].reset();
+                    $.post('../producto/obtener?codpro=' + $(this).data('id'), function(result) {
+                        if (result.status) {
+                            $('#modalEliminar').modal('show');
+                            $('#formularioEliminar').loadJSON(result.data);
+                            $('#fotoEliminar').attr('src', RUTA_PRODUCTOS + result.data.foto);
+                            $('#rolLabel').html(result.data.nombre);
+                        } else {
+                            mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                        }
+                    }, 'json');
+                });
+
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+
+            }
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup', function(e) {
+                if (e.keyCode == 13) {
+                    if ($('#example').DataTable().column(i).search() !== this.value) {
+                    	$('#example').DataTable().order([i, 'asc']);
+                        $('#example').DataTable().column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+        $('#example tbody').on('click', 'tr', function() {
+            var obj = $('#example').DataTable().row(this).data();
+            $.get(RUTA_PRODUCTOS + obj.foto).done(function() {
+                $('#ximg').attr('src', RUTA_PRODUCTOS + obj.foto);
+            }).fail(function() {
+                $('#ximg').attr('src', RUTA_PRODUCTOS + IMG_DEFAULT);
+            });
+            obj.xconcentracion = obj.concentracion ? (obj.concentracion + ' ' + obj.xmedida) : '';
+			obj.xnombre = obj.xtipo + ' ' + obj.nombre;
+			obj.xcontrolado = obj.controlado ? 'Si' : 'No';
+			$('#tablaInformacionProducto').loadJSON(obj);
+			$('#tablaInformacionProductoIncompleto > tbody tr td').removeClass('w3-red');
+			$('#tablaInformacionProductoIncompleto > tbody tr td').removeClass('w3-center');
+			$('#tablaInformacionProductoIncompleto > tbody tr td:last').html('');
+			$('#tablaInformacionProductoIncompleto').loadJSON(obj);
+			$('#tablaInformacionProductoIncompleto > tbody tr td:empty').addClass('w3-red');
+			$('#tablaInformacionProductoIncompleto > tbody tr td:empty').addClass('w3-center');
+			$('#tablaInformacionProductoIncompleto > tbody tr td:empty').html('<span class="fa fa-close"></span>');
+            
+        });
+        $('.estado').click(function() {
+            $('#example').dataTable().fnDraw('page');
+        });
+        $('#formularioEliminar').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status == true) {
+                    $form.data('formValidation').resetForm();
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+    });
+</script>

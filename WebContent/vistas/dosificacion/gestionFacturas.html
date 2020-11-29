@@ -1,0 +1,184 @@
+<br/>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Facturas de dosificacion</h3>	
+	</div>
+	<div class="col-md-6">
+	<div class="btn-group">
+					<label for="xactivo" class="btn btn-sm btn-info estadoradio"><input
+						type="radio" id="xactivo" name="xestado" value="activo" checked="checked"/>Facturas Activas</label>
+					<label for="xanulado" class="btn btn-sm btn-primary active estadoradio"><input
+						type="radio" id="xanulado" name="xestado" value="anulado"
+						 />Facturas Anuladas</label> 
+				</div>
+	</div>
+</div>
+<div class="row" >
+<div class="col-md-12">
+	<div class="row">
+	<div class="col-md-4">
+		<dl class="dl-horizontal">
+			<dt>Razon social</dt>
+			<dd id="xrazonsocial">$dosificacion.razonsocial</dd>
+			<dt>Direccion</dt>
+			<dd id="xdireccion">$dosificacion.direccion</dd>
+		</dl>
+	</div>
+	<div class="col-md-4">
+		<dl class="dl-horizontal">
+			
+			<dt>Nit</dt>
+			<dd id="xnit">$dosificacion.nit</dd>
+			<dt>Numero atorizacion</dt>
+			<dd id="numaut">$dosificacion.numaut</dd>
+			
+		</dl>
+	</div>
+	<div class="col-md-4">
+	<dl class="dl-horizontal">
+			<dt>Fecha de limite</dt>
+			<dd id="xflimite">$dosificacion.flimite</dd>
+			<dt>Fecha de tramite</dt>
+			<dd id="xftramite">$dosificacion.ftramite</dd>
+		</dl>
+	</div>
+</div>
+		<div class="responsive">
+			<table id="datatable1" class="w3-table-all w3-tiny w3-hoverable w3-card-4" style="width:100%;" >
+				<thead>
+					<tr>
+						<th>NIT</th>
+						<th>Cliente </th>
+						<th>No.Factura</th>
+						<th>Fecha</th>
+						<th>Cod.Control</th>
+						<th>Total</th>
+						<th>Estado</th>
+						<th width="180px"></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	
+</div>
+
+</div>
+
+
+<form name="formEliFactura" role="form" id="formEliFactura" method="post" action="../dosificacion/anularFactura"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+	      data-fv-icon-invalid="glyphicon glyphicon-remove"
+	      data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+
+<div class="modal fade" id="modalEliFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Anulacion de factura</h4>
+      </div>
+      	<div class="modal-body">
+<input type=hidden id="codven" name="codven" />
+<label for="" id="xdosificacion"></label>
+<div class="row">
+	<div class="col-md-6">
+	<dl class="dl-horizontal">
+			<dt>Cliente</dt>
+			<dd id="xcliente"></dd>
+			<dt>Fecha</dt>
+			<dd id="xfecfac"></dd>
+			<dt>Total</dt>
+			<dd id="xtotal"></dd>
+		</dl>
+	</div>
+	<div class="col-md-6">
+	<dl class="dl-horizontal">
+			<dt>No.Factura</dt>
+			<dd id="xnumfac"></dd>
+			<dt>Codigo de control</dt>
+			<dd id="xcodcontrol"></dd>
+		</dl>
+	</div>
+</div>
+
+<p>Esta seguro de anular esta factura?</p>
+</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </form>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	var table1 = $('#datatable1').DataTable({"dom": 'ftp',"processing": true,"serverSide": true,"oLanguage": {"sUrl": "../../js/Spanish.lang"},"order": [[1, 'asc']],
+		"ajax": {
+			"type": "GET","url": "../dosificacion/listarFacturas",
+			"data":function(d){
+				d.coddosificacion='$dosificacion.coddosificacion',
+				d.xestado = $('input[name=xestado]:checked').val();
+			}
+  		},
+		"columns": [
+			{"data": "nitfac"},
+			{"data": "clienteNit"},
+			{"data": "numfac"},
+			{"data": "fecfac"},
+			{"data": "codcontrol"},
+			{"data": "total"},
+			{"data": "estado"},
+			{"data": "coddosificacion"}
+		],
+	    "createdRow": function ( row, data, index ){
+	    	var xboton='';
+	    	if(data.estado=='activo' && parseInt('$dosificacion.est')==1){
+	    		xboton+='<a href="#" class="btn btn-xs btn-danger eliminarFactura" data-toggle="tooltip" data-placement="bottom" title="Eliminar factura"><span class="icon-highlight_off"></span> Anular factura</a>';
+	    	}
+	    	var botones='<div class="btn-group">'+
+	    	'<a href="#" class="btn btn-xs btn-info imprimirFactura" data-toggle="tooltip" data-placement="bottom" title="Imprimir factura"><span class="fa fa-print"></span>Imprimir</a>'+
+	    	xboton+
+	    	'</div>';
+	    	$('td', row).eq(7).html(botones);
+        },
+        "drawCallback": function( settings ) {
+        }
+	});
+	$('.estadoradio').click(function(){$('#datatable1').dataTable().fnDraw();});
+	$('#datatable1 tbody').on('click','tr td a.eliminarFactura',function(){
+        $('#formEliFactura').trigger('reset');
+		var row = table1.row( $(this).closest('tr') ).data();
+		$('#xcliente').html(row.cliente);$('#xnumfac').html(row.numfac);
+		$('#xcodcontrol').html(row.codcontrol);$('#xtotal').html(row.total);
+		$('#xfecfac').html(row.fecfac);
+		$('#formEliFactura').loadJSON(row);
+        $('#modalEliFactura').modal('show');
+	})
+	$('#datatable1 tbody').on('click','tr td a.imprimirFactura',function(){
+		var row = table1.row( $(this).closest('tr') ).data();
+        $("#frameReportes").attr("src", "../venta/imprimirfactura?codven="+row.codven);
+        $("#reportes").modal('show');
+     });
+	 $('#formEliFactura').formValidation({framework: 'bootstrap',locale: 'es_ES', excluded: ':disabled'}).on('success.form.fv', function(e) {e.preventDefault();var $form = $(e.target);
+	 $.post($form.attr('action'), $form.serialize(), function(result) {
+     	if(result.status==true){
+           $form.data('formValidation').resetForm();
+   	 		$('.modal').modal('hide');
+           $('#datatable1').dataTable().fnDraw('page');
+           mostrarMensaje('info','Se realizo con exito la Transaccion');
+       }else
+     		mostrarMensaje('error','No se realizo con exito la Transaccion');
+       }, 'json');
+   	});
+	
+	
+});
+</script>

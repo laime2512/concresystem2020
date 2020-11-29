@@ -1,0 +1,221 @@
+<form name="formulario" role="form" id="formulario" method="post"
+	action="../caja/guardar" data-fv-excluded="disabled"
+	data-fv-icon-valid="glyphicon glyphicon-ok"
+	data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+	<div class="modal fade" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Iniciar caja</h4>
+				</div>
+				<div class="modal-body">
+			
+					<label><b>Usuario:</b> $user.nombre $user.ap</label>
+					<label><b>Fecha de caja:</b> $fecha_literal</label>
+					<br />
+					<input type="hidden" id="codcaja" name="codcaja" value=""/>
+					<input type="hidden" id="codcaja" name="codusu" value="$user.codusu"/>
+					<div class="form-group">
+						<label>Monto de inicio</label> <input type="text" id="monini"
+							name="monini" class="form-control input-sm text-right"
+							data-fv-notempty="true" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+					<button type="submit" id="btnAdicionarConfirmacion"
+						class="btn btn-primary">
+						<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</form>
+
+<div class="modal fade" id="modalFinalizar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioFinalizar" role="form" id="formularioFinalizar"
+		method="post" action="../caja/finalizar" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Cerrar caja</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="codcaja4" name="codcaja" />
+					<br />
+					<label><b>Usuario sesionado:</b> $user.nombre $user.ap</label><br />
+					<label>$fecha_literal</label>
+					<br />
+					<div class="row">
+						<div class="col-md-5">
+							<div class="form-group">
+								<label>Monto inicial</label>
+								<input type="text" class="form-control input-sm text-right" name="inicial" value="$caja.monini" />
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label>Monto final</label>
+								<input type="text" class="form-control input-sm text-right" id="monfin" name="monfin" onClick="this.setSelectionRange(0, this.value.length)" data-fv-numeric="true" />
+							</div>
+						</div>
+					</div>
+							<div class="form-group">
+								<label>Observaci&oacute;n</label>
+								<textarea name="observacion" id="observacion" class="form-control" placeholder="Ingrese sus observaciones en su turno"></textarea>
+							</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<br /><br />
+<div class="container" id="cajaVendedor">
+<div class="row">
+		<div class="col-md-8">
+		<div class="w3-card-4">
+		<br />
+			<header class="w3-container w3-light-grey">
+				<b>Usuario:</b> $user.nombre $user.ap $!{user.am} (<b>Rol:</b> $rol.nombre ) 
+			</header>
+	<div class="w3-container">
+		<label>$fecha_literal</label>
+		#if($isActive)
+			<!-- Caja activa -->
+			<div class="divCerrar">
+				<h5>Caja activa</h5>
+				<img src="../../img/user.png" style="margin-right:45px" alt="Sin imagen" class="w3-left w3-circle" />
+				<p> <b>* Fecha de inicio:</b> $caja.xfecha</p>
+				<p> <b>* Monto de inicio:</b> $caja.monini</p>
+				<br />
+				<div class="pull-right">
+					<button class="btn btn-danger btn-sm" id="btnFinalizar"><span class="fa fa-close"></span> Cerrar caja</button>
+				</div>
+			</div>
+		#else
+			<!-- Caja inactiva -->
+			#if($existLastCaja)
+			<!-- existe ultima caja -->
+			<div class="divAbrir">
+				<h5>&Uacute;ltima caja iniciada</h5>
+				<img src="../../img/user.png" style="margin-right:45px" alt="Sin imagen" class="w3-left w3-circle" />
+				<p> <b>* Fecha de inicio:</b> $lastCaja.xfecha</p>
+				<p> <b>* Fecha de fin:</b> $lastCaja.xffin</p>
+				<p> <b>* Monto de inicio:</b> $lastCaja.monini</p>
+				<p> <b>* Monto de final:</b> $lastCaja.monfin</p>
+				<p> <b>* Estado caja:</b> Finalizado</p>
+				<p><b>Observacion:</b> <label>$lastCaja.observacion</label></p>
+				<br />
+				<div class="pull-right">
+					<button class="btn btn-primary btn-sm" id="btnImprimir" data-id="$lastCaja.codcaja"><span class="fa fa-print"></span> Imprimir caja con detalle</button>
+					<button class="btn btn-primary btn-sm" id="btnImprimirSimple"  data-id="$lastCaja.codcaja"><span class="fa fa-print"></span> Imprimir caja</button>
+					<button class="btn btn-success btn-sm" id="btnAdicionar" data-id="$lastCaja.codcaja"><span class="fa fa-edit"></span> Iniciar caja</button>
+				</div>
+			</div>
+			#else
+			<!-- No existe ultima caja -->
+			<div class="alert alert-info">
+				No se tiene ninguna caja iniciada por el usuario en la sucursal $sucursal.nombre
+			</div>
+			<br/>
+			<div class="pull-right">
+					<button class="btn btn-success btn-sm" id="btnAdicionar" data-id="$lastCaja.codcaja"><span class="fa fa-edit"></span> Iniciar caja</button>
+				</div>
+			#end			
+		#end
+		
+		
+		<br /><br />
+	</div>
+		</div>
+	</div>	
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#btnAdicionar').click(function(){
+		$('#formulario').data('formValidation').resetForm();
+		$('#formulario')[0].reset();
+		$('#modalAdicionar').modal('show');
+	});
+	$('#btnImprimir').click(function(){ 
+			$("#frameReportes").attr("src",'../caja/imprimir?codcaja=$!{lastCaja.codcaja}');
+		$("#reportes").modal('show');
+		});
+	$('#btnImprimirSimple').click(function(){ 
+		$("#frameReportes").attr("src",'../caja/imprimirSimple?codcaja=$!{lastCaja.codcaja}');
+		$("#reportes").modal('show');
+	});
+	$('#btnFinalizar').click(function(){
+		$('#formularioFinalizar').data('formValidation').resetForm();
+		$('#formularioFinalizar')[0].reset();
+		$.post('../caja/obtener?codcaja=$caja.codcaja', function(result) {
+			if(result.status){
+				$('#modalFinalizar').modal('show');
+				$('#formularioFinalizar').loadJSON(result.data);
+				$('#monfin').val('');
+			}else{
+				mostrarMensaje('error','No se realizo con exito la Transaccion');
+			}
+		}, 'json');
+	});
+	$('#formulario').formValidation(
+		{locale: 'es_ES'}).on('success.form.fv', function(e) {
+		e.preventDefault();
+		var $form = $(e.target);
+		$.post($form.attr('action'), $form.serialize(), function(result) {
+		if(result.status){
+			$('#contenedor').load('../caja/gestionVendedor');
+			$form.data('formValidation').resetForm();
+			mostrarMensaje('info','Se realizo con exito la Transaccion');
+		}else{
+			mostrarMensaje('error','No se realizo con exito la Transaccion');
+		}
+		$('.modal').appendTo("body").modal('hide');
+		}, 'json');
+	});
+	$('#formularioFinalizar').formValidation(
+			{locale: 'es_ES'}).on('success.form.fv', function(e) {
+			e.preventDefault();
+			var $form = $(e.target);
+			$('#modalFinalizar').appendTo("body").modal('hide');
+			$.post($form.attr('action'), $form.serialize(), function(result) {
+			if(result.status){
+				$form.data('formValidation').resetForm();
+				mostrarMensaje('info','Se realizo con exito la Transaccion');
+				$('#contenedor').load('../caja/gestionVendedor');
+				$("#frameReportes").attr("src",'../caja/imprimirSimple?codcaja=$!{caja.codcaja}');
+				$("#reportes").modal('show');
+			}else{
+				mostrarMensaje('error','No se realizo con exito la Transaccin');
+			}
+			}, 'json');
+		});
+});
+</script>

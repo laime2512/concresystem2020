@@ -1,0 +1,286 @@
+<div class="modal fade" id="modalRevisar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioRevisar" role="form" id="formularioRevisar" method="post" action="../compra/revisar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Revisar Compra</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="codcompra2" name="codcom" />
+                    <h5>Esta seguro de finalizar la compra al credito pendiente Nro.<b id="compraLabel2"></b>?</h5>
+                    <table class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <tr>
+                            <td>
+                                <b>Fecha</b>
+                                <i id="xfecha2"></i>
+                            </td>
+                            <td>
+                                <b>Registrado por</b>
+                                <i id="xusuario2"></i>
+                            </td>
+                            <td>
+                                <b>Provedor</b>
+                                <i id="xproveedor2"></i>
+                            </td>
+                            <td>
+                                <b>Tipo de nota</b>
+                                <i id="xtiponota2"></i>
+                            </td>
+                            <td>
+                                <b>Numero de nota</b>
+                                <i id="xnumnota2"></i>
+                            </td>
+                            <td>
+                                <b>Subtotal</b>
+                                <i id="xsubtotal2"></i>
+                            </td>
+                            <td>
+                                <b>Descuento</b>
+                                <i id="xdescuento2"></i>
+                            </td>
+                            <td>
+                                <b>Total a Pagar</b>
+                                <i id="xtotal2"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-ok"></i> Finalizar cr&eacute;dito</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../compra/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Compra</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="codcompra" name="codcom" />
+                    <h3>Esta seguro de eliminar la compra Nro.<b id="compraLabel"></b>?</h3>
+                    <table class="table small">
+                        <tr>
+                            <td>
+                                <h6>Fecha</h6>
+                                <b id="xfecha"></b>
+                            </td>
+                            <td>
+                                <h6>Registrado por</h6>
+                                <b id="xusuario"></b>
+                            </td>
+                            <td>
+                                <h6>Provedor</h6>
+                                <b id="xproveedor"></b>
+                            </td>
+                            <td>
+                                <h6>Total</h6>
+                                <b id="xtotal"></b>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <thead>
+                            <tr>
+                                <th>Cod.</th>
+                                <th>Tipo Compra</th>
+                                <th>Proveedor</th>
+                                <th>Fecha</th>
+                                <th>Subtotal</th>
+                                <th>Desc-<br/>uento</th>
+                                <th>Bonifi-<br/>cacion</th>
+                                <th>Total</th>
+                                <th>A cuenta</th>
+                                <th>Saldo</th>
+                                <th width="200px">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+
+        function ir_pagina(dir) {
+            $('#contenedor').fadeOut(200, function() {
+                $('#contenedor').load(dir, function() {
+                    $('#contenedor').fadeIn(200);
+                });
+            });
+        }
+        var table1 =$('#example').DataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row w3-tiny'<'col-sm-4'<'#tableTitle'>><'col-sm-4'<'#tableOption'>><'col-sm-4'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": "../compra/lista",
+                "data": function(d) {
+                    //d.estado = 1;
+                }
+            },
+            "columnDefs":[
+            	{className : "w3-right-align", "targets":[4,5,6,7,8,9]},
+            	{className : "w3-center", "targets":[3]}
+            ],
+            "order":[[0,'desc']],
+            "columns": [{
+                "data": "codcom","name":"codcom"
+            }, {
+                "data": "xcredito","name":"credito"
+            }, {
+                "data": "xproveedor","name":"xproveedor"
+            }, {
+                "data": "xfecha","name":"xfecha"
+            }, {
+                "data": "subtotal","name":"subtotal"
+            }, {
+                "data": "descuento","name":"descuento"
+            }, {
+                "data": "bonificacion","name":"bonificacion"
+            }, {
+                "data": "total","name":"total"
+            }, {
+                "data": "acuenta","name":"acuenta"
+            }, {
+                "data": "xsaldo","name":"total"
+            }, {
+                "data": "codcom","name":"codcom"
+            }],
+            "createdRow": function(row, data, index) {
+            	$(row).addClass('w3-hover-blue');
+                var btnPago = '';
+                if (data.credito && data.estadoCredito) {
+                    btnPago = '<button class="btn btn-xs btn-info pago"  data-toggle="tooltip" data-placement="top" title="Pagar credito" data-id="' + data.codcom + '"><i class="glyphicon glyphicon-plus"></i> | Finalizar</button>';
+                }
+                $('td', row).eq(10).html('<div class="btn-group">' + btnPago + '<button class="btn btn-xs btn-danger eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="' + data.codcom + '"><i class="glyphicon glyphicon-remove-sign"></i> | eliminar</button><button class="btn btn-xs btn-success ver"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="' + data.codcom + '"><i class="glyphicon glyphicon-print"></i> | imprimir</button></div>');
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Gestion Compras</b></h6>');
+                $('#tableOption').html('');
+                $('#tableHeader').html('<button class="btn btn-sm btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | Adicionar compra</button>');
+                $('#btnAdicionar').click(function() {
+                    ir_pagina('../compra/adicionar');
+                });
+                $('.eliminar').click(function() {
+                    $('#formularioEliminar').data('formValidation').resetForm();
+                    $('#formularioEliminar')[0].reset();
+                    $.post('../compra/obtener?codcompra=' + $(this).data('id'), function(result) {
+                        if (result.status) {
+                            $('#modalEliminar').modal('show');
+                            $('#formularioEliminar').loadJSON(result.data);
+                            $('#xfecha').html(result.data.xfecha);
+                            $('#xproveedor').html(result.data.xproveedor);
+                            $('#xusuario').html(result.data.xusuario);
+                            $('#xtotal').html(result.data.total);
+                            $('#compraLabel').html(result.data.codcom);
+                        } else {
+                            mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                        }
+                    }, 'json');
+                });
+                $('.pago').click(function() {
+                    $('#formularioRevisar').data('formValidation').resetForm();
+                    $('#formularioRevisar')[0].reset();
+                    $.post('../compra/obtener?codcompra=' + $(this).data('id'), function(result) {
+                        if (result.status) {
+                            $('#modalRevisar').modal('show');
+                            $('#formularioRevisar').loadJSON(result.data);
+                            $('#xfecha2').html(result.data.xfecha);
+                            $('#xproveedor2').html(result.data.xproveedor);
+                            $('#xtiponota2').html((result.data.tiponota == 1 ? 'Nota de Venta' : 'Factura'));
+                            $('#xnumnota2').html(result.data.numnota);
+                            $('#xdescuento2').html(result.data.descuento);
+                            $('#xsubtotal2').html(result.data.subtotal);
+                            $('#xusuario2').html(result.data.xusuario);
+                            $('#xtotal2').html(result.data.total);
+                            $('#compraLabel2').html(result.data.codcom);
+                        } else {
+                            mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                        }
+                    }, 'json');
+                });
+                $('.ver').click(function() {
+                    $("#frameReportes").attr("src", '../compra/ver?codcom=' + $(this).data('id'));
+                    $("#reportes").modal('show');
+                });
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+
+            }
+        });
+
+        $('.estado').click(function() {
+            $('#example').dataTable().fnDraw('page');
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+        	var title = $(this).text();
+        	if(title!=''){
+        		$(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+                $('input', this).on('keyup', function(e) {
+                    if (e.keyCode == 13 || this.value === '') {
+                        if ($('#example').DataTable().column(i).search() !== this.value) {
+                            $('#example').DataTable().column(i).search(this.value).draw();
+                        }
+                    }
+                });
+        	}
+        });
+        $('#formularioEliminar,#formularioRevisar').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    $('#formularioEliminar')[0].reset();
+
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+    });
+</script>

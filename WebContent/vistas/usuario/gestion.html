@@ -1,0 +1,1008 @@
+<script src="../../js/fileinput.js"></script>
+<div class="modal fade" id="modalAdicionar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formulario" role="form" id="formulario" method="post"
+		action="../usuario/guardar" enctype="multipart/form-data"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog modal-lg" style="width: 80%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Registrar Nueva
+						Persona</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>C&eacute;dula de identidad:</label> <input id="ci" name="ci" type="text"
+									placeholder="" class="form-control input-sm text-right"
+									data-fv-greaterthan="true" data-fv-greaterthan-value="100000"
+									data-fv-integer="true">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Nombre:</label> <input id="nombre" name="nombre"
+									type="text" placeholder="ingrese nombres"
+									class="form-control input-sm text-uppercase"
+									data-fv-notempty="true">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Apellido Paterno:</label> <input id="ap" name="ap" type="text"
+									placeholder="ingrese apellido paterno"
+									class="form-control input-sm text-uppercase"
+									data-fv-notempty="true">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Apellido Materno:</label> <input id="am" name="am" type="text"
+									placeholder="ingrese apellido materno"
+									class="form-control input-sm text-uppercase">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Genero o sexo:</label>
+								<div class="row">
+									<div class="col-md-6">
+										<input type="radio" class="w3-radio" id="generoM" name="genero" value="M" data-fv-notempty="true">
+										<label for="generoM">Masculino</label>
+									</div>
+									<div class="col-md-6">
+										<input type="radio" class="w3-radio" id="generoF" name="genero" value="F" data-fv-notempty="true">
+										<label for="generoF">Femenino</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Fecha de nacimiento:</label> <input id="fnac" name="fnac"
+									type="text" class="form-control input-sm fecha">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Estado civil:</label> <select id="ecivil" name="ecivil"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione Tipo]</option>
+									<option value="Soltero">Soltero(a)</option>
+									<option value="Casado">Casado(a)</option>
+									<option value="Divorciado">Divorciado(o)</option>
+									<option value="Viudo">Viudo(a)</option>
+									<option value="Union Libre">Union Libre</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Sucursales asignadas a usuario:</label> <select id="codsuc"
+									name="vsucursales" multiple
+									data-placeholder="[Seleccione Sucursal]"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione sucursal]</option> 
+									#foreach($s in $sucursales)
+									<option value="$s.codsuc">$s.nombre</option> 
+									#end
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Tipo acceso para usuario:</label> <select id="tipoper"
+									name="tipoper" data-placeholder="[Seleccione Tipo]"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione Tipo]</option>
+									<option value="A">Administrativo</option>
+									<option value="P">Vendedor</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label>Alias o nick del usuario:</label> <input id="alias" name="alias" type="text"
+								placeholder="ingrese apellido alias"
+								class="form-control input-sm" data-fv-notempty="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Foto:</label> <input type="file" id="foto" name="fotito"
+							class="form-control input-sm file">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal fade" id="modalModificar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioModificar" role="form" id="formularioModificar"
+		method="post" action="../usuario/actualizar"
+		enctype="multipart/form-data" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog modal-lg" style="width: 90%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Modificar Persona</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="codusu">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>C&eacute;dula de identidad:</label> <input id="ci1" name="ci" type="text"
+									placeholder="ingrese cedula" class="form-control input-sm text-right"
+									data-fv-greaterthan="true" data-fv-greaterthan-value="100000"
+									data-fv-integer="true">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Nombre:</label> <input id="nombre1" name="nombre"
+									type="text" placeholder="ingrese nombres"
+									class="form-control input-sm text-uppercase"
+									data-fv-notempty="true">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Apellido Paterno:</label> <input id="ap1" name="ap" type="text"
+									placeholder="ingrese apellido paterno"
+									class="form-control input-sm text-uppercase"
+									data-fv-notempty="true">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Apellido Materno:</label> <input id="am1" name="am" type="text"
+									placeholder="ingrese apellido materno"
+									class="form-control input-sm text-uppercase">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>G&eacute;nero o sexo:</label>
+								<div class="row">
+									<div class="col-md-6">
+										<input type="radio" class="w3-radio" id="generoM1" name="genero" value="M">
+										<label for="generoM1">Masculino</label>
+									</div>
+									<div class="col-md-6">
+										<input type="radio" class="w3-radio" id="generoF1" name="genero" value="F">
+										<label for="generoF1">Femenino</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Fecha de nacimiento:</label> <input id="fnac1" name="fnac"
+									type="text" class="form-control input-sm fecha">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Estado civil:</label> <select id="ecivil1" name="ecivil"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione Tipo]</option>
+									<option value="Soltero">Soltero(a)</option>
+									<option value="Casado">Casado(a)</option>
+									<option value="Divorciado">Divorciado(o)</option>
+									<option value="Viudo">Viudo(a)</option>
+									<option value="Union Libre">Union Libre</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Sucursales asignadas a usuario:</label> <select id="codsuc2"
+									name="vsucursales" multiple
+									data-placeholder="[Seleccione Sucursal]"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione sucursal]</option> 
+									#foreach($s in $sucursales)
+									<option value="$s.codsuc">$s.nombre</option> 
+									#end
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Tipo de aceso para usuario:</label> <select id="tipoper2"
+									name="tipoper" data-placeholder="[Seleccione Tipo]"
+									class="form-control input-sm select-chosen"
+									data-fv-notempty="true">
+									<option value="">[Seleccione Tipo]</option>
+									<option value="A">Administrativo</option>
+									<option value="P">Vendedor</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label>Alias o nick del usuario:</label> <input id="alias1" name="alias" type="text"
+								placeholder="ingrese apellido alias"
+								class="form-control input-sm" data-fv-notempty="true">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Foto Anterior:</label>
+								<img id="fotoAnt" width="50px">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Foto:</label>
+								<input type="file" id="foto1" name="fotito" class="form-control input-sm file">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioEliminar" role="form" id="formularioEliminar"
+		method="post" action="../usuario/eliminar" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 40%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Eliminar Persona</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="codusu2" name="codusu" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoEliminar" class="img-thumbnail" width="75px" />
+						</div>
+						<div class="col-md-9">
+							<h3>
+								Desea eliminar a <b id="usuarioLabel"></b>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalHabilitar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioHabilitar" role="form" id="formularioHabilitar"
+		method="post" action="../usuario/habilitar"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 40%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Habilitar Persona</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="codusu3" name="codusu" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoHabilitar" class="img-thumbnail" width="75px"
+								src="../../fotos/user.png" />
+						</div>
+						<div class="col-md-9">
+							<h3>
+								Desea habilitar a <b id="usuario1Label"></b>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalAsignar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioAsignar" role="form" id="formularioAsignar"
+		method="post" action="../usuario/asignar" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 40%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Asignar Datos de
+						Acceso</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="codusu4" name="codusu" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoAsignar" class="img-thumbnail" width="75px" />
+						</div>
+						<div class="col-md-9">
+							<h3>
+								Persona: <b id="usuario2Label"></b>
+							</h3>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Nombre de Usuario</label> <input type="text" id="login"
+							name="login" class="form-control input-sm"
+							data-fv-notempty="true" />
+					</div>
+					<div class="form-group">
+						<label>Password</label> <input type="password" id="passwd"
+							name="passwd" class="form-control input-sm"
+							data-fv-notempty="true" autocomplete="off" />
+					</div>
+					<div class="form-group">
+						<label>Repetir Password</label> <input type="password"
+							id="passwd4" name="passwd1" class="form-control input-sm"
+							data-fv-notempty="true" data-fv-identical="true"
+							data-fv-identical-field="passwd"
+							data-fv-message="No es correcto a la Password" autocomplete="off" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalReasignar" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioReasignar" role="form" id="formularioReasignar"
+		method="post" action="../usuario/reasignar"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 30%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Modificar Datos de
+						Acceso</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="codusu5" name="codusu" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoReasignar" class="img-thumbnail" width="75px" />
+						</div>
+						<div class="col-md-9">
+							<dl>
+								<dt>Persona</dt>
+								<dd id="usuario3Label"></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Nombre de Usuario</label> <input type="text" id="login0"
+							name="login" class="form-control input-sm"
+							data-fv-notempty="true" />
+					</div>
+					<div class="form-group">
+						<label>Password Anterior</label> <input type="hidden" id="passwd0"
+							name="passwd" /> <input type="password" id="passwdAnt"
+							name="passwdAnt" class="form-control input-sm"
+							data-fv-notempty="true" data-fv-identical="true"
+							data-fv-identical-field="passwd"
+							data-fv-message="No es correcto a la Password" autocomplete="off" />
+
+					</div>
+					<div class="form-group">
+						<label>Password</label> <input type="password" id="passwd1"
+							name="passwd1" class="form-control input-sm"
+							data-fv-notempty="true" autocomplete="off" />
+					</div>
+					<div class="form-group">
+						<label>Repetir Password</label> <input type="password"
+							id="passwd2" name="passwd2" class="form-control input-sm"
+							data-fv-notempty="true" data-fv-identical="true"
+							data-fv-identical-field="passwd1"
+							data-fv-message="No es correcto a la Password" autocomplete="off" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalAsignarRoles" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel">
+	<form name="formularioAsignarRoles" role="form"
+		id="formularioAsignarRoles" method="post"
+		action="../usuario/asignarRoles" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 40%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Asignar Roles de
+						acceso</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="login4" name="login" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoAsignarRoles" class="img-thumbnail" width="75px" />
+						</div>
+						<div class="col-md-9">
+							<h3>
+								Usuario: <b id="usuarioRolesLabel"></b>
+							</h3>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Roles</label> <select
+							class="form-control input-sm select-chosen" id="roles"
+							name="roles" data-fv-notempty="true" multiple>
+							#foreach($r in $roles)
+							<option value="$r.codr">$r.nombre</option> #end
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalReasignarRoles" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel">
+	<form name="formularioReasignarRoles" role="form"
+		id="formularioReasignarRoles" method="post"
+		action="../usuario/asignarRoles" data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog " style="width: 40%" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Reasignar Roles de
+						acceso</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="login5" name="login" />
+					<div class="row">
+						<div class="col-md-3">
+							<img id="fotoReasignarRoles" class="img-thumbnail" width="75px" />
+						</div>
+						<div class="col-md-9">
+							<h3>
+								Usuario: <b id="usuarioRoles2Label"></b>
+							</h3>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Roles</label> <select
+							class="form-control input-sm select-chosen" id="roles2"
+							name="roles" data-fv-notempty="true" multiple>
+							#foreach($r in $roles)
+							<option value="$r.codr">$r.nombre</option> #end
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<form name="formularioVer" role="form" id="formularioVer" method="post"
+		action="../usuario/actualizar" enctype="multipart/form-data"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+		data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Perfil del usuario</h4>
+				</div>
+				<div class="modal-body">
+				<div class="row">
+					<div class="col-md-8">
+						<dl class="row text-sm">
+                            <dt class="col-sm-6 text-right">C&eacute;dula de identidad</dt>
+                            <dd class="col-sm-6" aria-label="ci"></dd>
+                            <dt class="col-sm-6 text-right">Nombre</dt>
+                            <dd class="col-sm-6" aria-label="nombre"></dd>
+                            <dt class="col-sm-6 text-right">Apellido Paterno</dt>
+                            <dd class="col-sm-6" aria-label="ap"></dd>
+                            <dt class="col-sm-6 text-right">Apellido Materno</dt>
+                            <dd class="col-sm-6" aria-label="am"></dd>
+                            <dt class="col-sm-6 text-right">G&eacute;nero o sexo</dt>
+                            <dd class="col-sm-6" aria-label="genero"></dd>
+                            <dt class="col-sm-6 text-right">Fecha de nacimiento</dt>
+                            <dd class="col-sm-6" aria-label="fnac"></dd>
+                            <dt class="col-sm-6 text-right">Estado civil</dt>
+                            <dd class="col-sm-6" aria-label="ecivil"></dd>
+                            <dt class="col-sm-6 text-right">Tipo de acceso</dt>
+                            <dd class="col-sm-6" aria-label="tipoper"></dd>
+                            <dt class="col-sm-6 text-right">Alias de usuario</dt>
+                            <dd class="col-sm-6" aria-label="alias"></dd>
+                		</dl>
+					</div>
+					<div class="col-md-4">
+						<img id="fotoVer" class="w3-border w3-padding" alt="Perfil usuario" />
+						<p style="text-align: center;font-weight:bolder;">Perfil del usuario</p>
+					</div>
+				</div>
+				<dl class="row text-sm">
+					<dt class="col-sm-4 text-right">Sucursales asignadas</dt>
+                    <dd class="col-sm-6" aria-label="allSucursal"></dd>
+				</dl>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger"
+						data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Salir
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example"
+						class="w3-table w3-striped w3-tiny w3-bordered w3-hoverable w3-card-4">
+						<thead>
+							<tr>
+								<th>C.I.</th>
+								<th>Apellidos y Nombres</th>
+								<th>Sucursales</th>
+								<th>Roles</th>
+								<th width="500px"></th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var btnGroup = '';
+		$(".fecha").mask("99/99/99", {
+			placeholder : "dd/mm/aa"
+		});
+		$('.select-chosen').chosen({
+			no_results_text : "No se encuentra:",
+			width : '90%'
+		});
+		$('#example').DataTable({
+			"oLanguage" : {
+				"sUrl" : "../../js/Spanish.lang"
+			},
+			"processing" : true,
+			"dom" : "<'row w3-tiny'<'col-sm-8'<'#tableTitle'>><'col-sm-1'<'#tableHeader'>><'col-sm-3'f>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+			"serverSide" : true,
+			"ajax" : {
+				"type" : "POST",
+				"url" : "../usuario/lista",
+				"data" : function(d) {
+					d.estado = 1;
+					d.tipo = 'T';
+				}
+			},
+			"columns" : [ 
+				{"data" : "ci"}, 
+				{"data" : "codusu"}, 
+				{"data" : "xsucursales"}, 
+				{"data" : "xroles"}, 
+				{"data" : "codusu"} 
+			],
+			"createdRow" : function(row, data,index) {
+				$('td', row).eq(1).html(data.ap+ ' '+ (data.am != null ? data.am: '')+ ' '+ data.nombre);
+				btnGroup = '';
+				if (data.rol > 0)
+					btnGroup += '<button class="btn btn-xs btn-success reasignarRoles"  data-toggle="tooltip" data-placement="top" title="Reasignar roles" data-id="' + data.codusu + '"><i class="fa fa-user"></i> | reasignar roles</button>';
+				else
+					btnGroup += '<button class="btn btn-primary btn-xs asignarRoles"  data-toggle="tooltip" data-placement="top" title="Asignar roles" data-id="' + data.codusu + '"><i class="fa fa-user"></i> | asignar roles</button>';
+				btnGroup += '<button class="btn w3-indigo btn-xs modificar"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="' + data.codusu + '"><i class="fa fa-edit"></i> | modificar</button>';
+				btnGroup += '<button class="btn btn-danger btn-xs eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-remove-sign"></i> | eliminar</button>';
+				btnGroup += '<button class="btn w3-teal btn-xs ver"  data-toggle="tooltip" data-placement="top" title="Ver" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-search"></i> | ver</button>';
+				if (data.clave > 0)
+					btnGroup += '<button class="btn btn-success btn-xs reasignar"  data-toggle="tooltip" data-placement="top" title="Reasignar clave" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-lock"></i> | modificar clave</button>';
+				else
+					btnGroup += '<button class="btn btn-warning btn-xs asignar"  data-toggle="tooltip" data-placement="top" title="Asignar clave" data-id="' + data.codusu + '"><i class="fa fa-unlock"></i> | adicionar clave</button>';
+				$('td', row).eq(4).html('<div class="btn-group">'+ btnGroup+ '</div>');
+			},
+			"drawCallback" : function(settings) {
+					$('#tableTitle').html('<h6><b>Gestion Usuarios<b></h6>');
+					$('#tableHeader').html('<button class="btn btn-xs btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | adicionar</button>');
+					$('#btnAdicionar').click(function() {
+						$('#formulario').data('formValidation').resetForm();
+						$('#formulario')[0].reset();
+						$('#modalAdicionar').modal('show');
+					});
+					$('.modificar').click(function() {
+						$('#formularioModificar').data('formValidation').resetForm();
+						$('#formularioModificar')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalModificar').modal('show');
+								$('#formularioModificar').loadJSON(result.data);
+								$('#alias1').val(result.data.alias);
+								$('#genero1').val(result.data.genero).trigger('chosen:updated');
+								$('#ecivil1').val(result.data.ecivil).trigger('chosen:updated');
+								$('#fnac1').val(result.data.xfnac);
+								$('#tipoper2').val(result.data.tipoper).trigger('chosen:updated');
+								$('#fotoAnt').attr('src','../../fotos/'+ result.data.foto);
+								var vSucursales = [];
+								for (let i = 0; i < result.sucursales.length; i++) {
+									vSucursales[i] = result.sucursales[i].codsuc;
+								}
+								$('#codsuc2').val(vSucursales).trigger('chosen:updated');
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.eliminar').click(function() {
+						$('#formularioEliminar').data('formValidation').resetForm();
+						$('#formularioEliminar')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalEliminar').modal('show');
+								$('#formularioEliminar').loadJSON(result.data);
+								$('#fotoEliminar').attr('src','../../fotos/'+ result.data.foto);
+								$('#usuarioLabel').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.habilitar').click(function() {
+						$('#formularioHabilitar').data('formValidation').resetForm();
+						$('#formularioHabilitar')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalHabilitar').modal('show');
+								$('#formularioHabilitar').loadJSON(result.data);
+								$('#fotoHabilitar').attr('src','../../fotos/user.png');
+								$('#usuario1Label').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.asignar').click(function() {
+						$('#formularioAsignar').data('formValidation').resetForm();
+						$('#formularioAsignar')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalAsignar').modal('show');
+								$('#formularioAsignar').loadJSON(result.data);
+								$('#fotoAsignar').attr('src','../../fotos/'+ result.data.foto);
+								$('#usuario2Label').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.reasignar').click(function() {$('#formularioReasignar').data('formValidation').resetForm();
+						$('#formularioReasignar')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalReasignar').modal('show');
+								$('#formularioReasignar').loadJSON(result.data);
+								$('#fotoReasignar').attr('src','../../fotos/'+ result.data.foto);
+								$('#usuario3Label').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.asignarRoles').click(function() {
+						$('#formularioAsignarRoles').data('formValidation').resetForm();
+						$('#formularioAsignarRoles')[0].reset();
+						$('#roles').val('').trigger('chosen:updated');
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status && result.data !== null) {
+								if (result.data.login !== null) {
+									$('#modalAsignarRoles').modal('show');
+									$('#formularioAsignarRoles').loadJSON(result.data);
+									$('#fotoAsignarRoles').attr('src','../../fotos/'+ result.data.foto);
+									$('#usuarioRolesLabel').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+								} else {
+									mostrarMensaje('warning','Adicionar claves, antes de asignar roles.');
+								}
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+								
+							}
+						},'json');
+					});
+					$('.reasignarRoles').click(function() {
+						$('#formularioReasignarRoles').data('formValidation').resetForm();
+						$('#formularioReasignarRoles')[0].reset();
+						$('#roles2').val('').trigger('chosen:updated');
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalReasignarRoles').modal('show');
+								var roles = result.roles;
+								var vroles = [];
+								if (roles != null)
+									for (let i = 0; i < roles.length; i++) {
+										vroles[i] = roles[i].codr;
+									}
+								$('#roles2').val(vroles).trigger('chosen:updated');
+								$('#formularioReasignarRoles').loadJSON(result.data);
+								$('#fotoReasignarRoles').attr('src','../../fotos/'+ result.data.foto);
+								$('#usuarioRoles2Label').html(result.data.nombre+ ' '+ result.data.ap+ ' '+ result.data.am);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+					});
+					$('.ver').click(function() {
+						$('#formularioVer').data('formValidation').resetForm();
+						$('#formularioVer')[0].reset();
+						$.post('../usuario/obtener?codusu='+ $(this).data('id'),function(result) {
+							if (result.status) {
+								$('#modalVer').modal('show');
+								if (result.data.genero == 'M')
+									result.data.genero = 'Masculino';
+								else
+									result.data.genero = 'Femenino';
+								if (result.data.tipoper == 'A')
+									result.data.tipoper = 'Administrador';
+								else
+									result.data.tipoper = 'Vendedor';
+								let allSucursal = [];
+								if(result.sucursales){
+									allSucursal = result.sucursales.map(function(x){
+										return x.nombre;
+									});
+									result.data.allSucursal = allSucursal.length == 0 ? 'Sin sucursales asignadas' : allSucursal.toString();
+								}else
+									result.data.allSucursal = 'Sin sucursales asignadas';
+								$('#formularioVer').loadJSON(result.data);
+								$('#fotoVer').attr('src','../../fotos/'+ result.data.foto);
+							} else {
+								mostrarMensaje('error','No se realizo con exito la Transaccion');
+							}
+						},'json');
+						});
+					$('button[data-toggle="tooltip"]').tooltip({animated : 'fade',placement : 'bottom',});
+				}
+			});
+		$('.estado').click(function() {
+			$('#example').dataTable().fnDraw('page');
+		});
+		$('#tipo').chosen().change(function() {
+			$('#example').dataTable().fnDraw('page');
+		});
+		$('#formulario').formValidation({excluded : [ ':disabled' ]}).on('success.form.fv',function(e) {
+			e.preventDefault();
+			var $form = $(e.target);
+			var formData = new FormData(document.getElementById("formulario"));
+			$.ajax({
+				url : $form.attr("action"),
+				type : "post",
+				dataType : "json",
+				data : formData,
+				cache : false,
+				contentType : false,
+				processData : false
+			}).done(function(result) {
+				if (result.status) {
+					$('#example').dataTable().fnDraw('page');
+					mostrarMensaje('info','Se realizo con exito la Transaccion');
+				} else {
+					mostrarMensaje('error','No se realizo con exito la Transaccion');
+				}
+				$('.modal').modal('hide');
+				$('#formulario')[0].reset();
+				$form.data('formValidation').resetForm();
+			});
+		});
+		$('#formularioModificar').formValidation({excluded : [ ':disabled' ]}).on('success.form.fv',function(e) {
+			e.preventDefault();
+			var $form = $(e.target);
+			var formData = new FormData(document.getElementById("formularioModificar"));
+			$.ajax({
+				url : $form.attr("action"),
+				type : "post",
+				dataType : "json",
+				data : formData,
+				cache : false,
+				contentType : false,
+				processData : false
+			}).done(function(result) {
+				if (result.status) {
+					$('#example').dataTable().fnDraw('page');
+					mostrarMensaje('info','Se realizo con exito la Transaccion');
+				} else {
+					mostrarMensaje('error','No se realizo con exito la Transaccion');
+				}
+				$('.modal').modal('hide');
+				$('#formularioModificar')[0].reset();
+				$form.data('formValidation').resetForm();
+			});
+		});
+		$('#formularioEliminar,#formularioHabilitar,#formularioReasignar,#formularioAsignarRoles,#formularioReasignarRoles,#formularioVer').formValidation({locale : 'es_ES'}).on('success.form.fv',function(e) {
+			e.preventDefault();
+			var $form = $(e.target);
+			$.post($form.attr('action'),$form.serialize(),function(result) {
+				if (result.status) {
+					$form.data('formValidation').resetForm();
+					$('#formularioEliminar')[0].reset();
+					$('#formularioHabilitar')[0].reset();
+					$('#formularioAsignar')[0].reset();
+					$('#formularioReasignar')[0].reset();
+					$('#example').dataTable().fnDraw('page');
+					mostrarMensaje('info','Se realizo con exito la Transaccion');
+				} else {
+					mostrarMensaje('error','No se realizo con exito la Transaccion');
+				}
+				$('.modal').modal('hide');
+			}, 'json');
+		});
+		$('#formularioAsignar').formValidation({locale : 'es_ES'}).on('success.form.fv',function(e) {
+			e.preventDefault();
+			var $form = $(e.target);
+			$.post($form.attr('action'),$form.serialize(),function(result) {
+				if (result.status) {
+					$form.data('formValidation').resetForm();
+					$('#formularioEliminar')[0].reset();
+					$('#formularioHabilitar')[0].reset();
+					$('#formularioAsignar')[0].reset();
+					$('#formularioReasignar')[0].reset();
+					$('#example').dataTable().fnDraw('page');
+					mostrarMensaje('info','Se realizo con exito la Transaccion');
+				} else {
+					mostrarMensaje('error',result.msg);
+				}
+				$('.modal').modal('hide');}, 'json');
+			});
+		});
+</script>

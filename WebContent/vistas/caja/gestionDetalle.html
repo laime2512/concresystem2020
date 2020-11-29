@@ -1,0 +1,114 @@
+<div class="row">
+	<div class="col-lg-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-9">
+						<h4><b>Detalle de caja Cod. #$!{caja.codcaja}</b></h4>
+					</div>
+					<div class="col-md-3 pull-right"><button class="btn btn-sm btn-danger" id="btnAtras">Volver a Gestion Caja</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example"
+						class="w3-table-all w3-small w3-table-hoverable w3-card-4">
+						<thead>
+							<tr>
+								<th>Cod</th>
+								<th>Cuenta</th>
+								<th>Debe</th>
+								<th>Haber</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h4><b>INFORME DE CAJA</b></h4>
+			</div>
+			<div class="panel-body">
+			<div class="row">
+					<div class="col-md-12">
+						<table class="w3-table-all w3-tiny">
+							<tr>
+								<td><b>Usuario</b></td>
+								<td>$!{caja.xusuario}</td>
+							</tr>
+							<tr class="w3-wide">
+								
+								<td><b>Sucursal</b></td>
+								<td><b>Monto inicial</b></td>
+								<td><b>Monto actual</b></td>
+							</tr>
+							<tr>
+								<td>$!{caja.xsucursal}</td>
+								<td>$!{caja.monini}</td>
+								<td>$!{caja.monsistema}</td>
+							</tr>
+							<tr class="w3-wide">
+								<td><b>Fecha Inicio</b></td>
+								<td colspan="2"><b>Observaciones</b></td>
+							</tr>
+							<tr>
+								<td>$!{caja.xfecha}</td>
+								<td colspan="2">$!{caja.observacion}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+                        $(document).ready(function() {
+                        	$('#btnAtras').click(function(){ 
+              	        		$.post('../caja/gestion', function(resp) {
+                  	      			$("#contenedor").html(resp);
+                  	  	    	});
+                      		});
+                        	$('select').chosen({no_results_text: "No se encuentra:",width:'100%'});
+                        	$('#example').DataTable( {
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../caja/listaDetalles",
+                      	        	"data": function ( d ) {
+                      	                d.estado = 1;
+                      	                d.codcaja='$caja.codcaja';
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "coddetcaja","name": "coddetcaja" },
+                      		              	{ "data": "xcuenta","name": "xcuenta" },
+                      		            	{ "data": "monto","name": "monto" },
+                      		            	{ "data": "monto","name": "monto" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                          		    if(data.xtipo=='t'){
+                          		    	$('td', row).eq(2).html(data.monto);
+                          		    	$('td', row).eq(3).html('');
+                              		}else{
+                              			$('td', row).eq(3).html(data.monto);
+                          		    	$('td', row).eq(2).html('');
+                                  	}
+                      	        },
+                      	        "drawCallback": function( settings ) {}
+                        } );
+                        
+                        });
+                        </script>

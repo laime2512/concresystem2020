@@ -1,0 +1,131 @@
+<div class="modal fade" id="modalFacturar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioFacturar" role="form" id="formularioFacturar" method="post" action="../venta/adicionarVentaPedido"
+		data-fv-excluded="disabled"
+		data-fv-icon-valid="glyphicon glyphicon-ok"
+	      data-fv-icon-invalid="glyphicon glyphicon-remove"
+	      data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog " style="width: 40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Facturar Pedido</h4>
+      </div>
+      <div class="modal-body">
+   			<input type="hidden" id="codped" name="codped" />	
+   			<div class="container">
+   			<h3>esta seguro de facturar el pedido: <b id="pedidoLabel"></b></h3>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+<h1>Control de Pedidos</h1>
+			</div>
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                        	<th>Descripcion</th>
+                        	<th>Celular</th>
+                        	<th>Direccion</th>
+                        	<th>Estado del pedido</th>
+                        	<th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	var xtipo=['Rechazado','Pendiente','Realizado'];
+                        	$('#example').DataTable( {
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../venta/lista_x_usuario",
+                      	        	"data": function ( d ) {
+                      	                d.estado = 1;
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codped" },
+                      		              { "data": "celular" },
+                      		            { "data": "direccion" },
+                      		                { "data": "estado" },
+                      		              { "data": "codped" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html('Pedido #'+data.codped+' Fecha '+data.xfecha);
+                      		    	$('td',row).eq(3).html(xtipo[data.estado]);
+                      		    	var btnGroup ='<button class="btn btn-sm btn-primary ver"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="'+data.codped+'"><i class="fa fa-print"></i> | Imprimir</button>';
+                      		    	if(data.estado == 1){//Facturar
+                      		    		btnGroup +='<button class="btn btn-sm btn-success facturar"  data-toggle="tooltip" data-placement="top" title="Facturar" data-id="'+data.codped+'"><i class="fa fa-plus"></i> | Facturar</button>';
+                      		    		btnGroup +='<button class="btn btn-sm btn-danger eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="'+data.codped+'"><i class="fa fa-remove"></i> | Eliminar</button>';
+                      		    	}
+                      		    		
+                      		    	if(data.estado == 2)//Anular
+                      		    		btnGroup +='<button class="btn btn-sm btn-danger anular"  data-toggle="tooltip" data-placement="top" title="Anular" data-id="'+data.codped+'"><i class="fa fa-close"></i> | Anular </button>';
+                      		    	$('td', row).eq(4).html('<div class="btn-group">'+btnGroup+'</div>');
+                      	        },
+                      	        "drawCallback": function( settings ) {
+                      	        	$('.ver').click(function(){
+                      	        		$("#frameReportes").attr("src", '../venta/imprimirc?codped='+$(this).data('id'));
+                              	        $("#reportes").modal('show');
+                      	        	});
+                      	        	$('.facturar').click(function(){ 
+                                		$('#formularioFacturar')[0].reset();
+              							var cod = $(this).data('id');
+              							$('#pedidoLabel').html(cod);
+              							$('#codped').val(cod);
+              							console.log('-->',cod);
+              							$('#modalFacturar').modal('show');
+                              		});
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                      	        }
+                        } );
+                        
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        
+                        $('#formularioFacturar').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	          	$('#formulario')[0].reset();
+									
+                      	        	mostrarMensaje('info','Se realizo con exito la Transacción');
+                      	        }else{
+                      	        	mostrarMensaje('info','Se realizo con exito la Transacción');
+                      	        	//mostrarMensaje('error','No se realizo con exito la Transacción');
+                              	}
+                              	$('#example').dataTable().fnDraw('page');
+                            	$('.modal').modal('hide');
+                      	    }, 'json');
+                          });
+                        });
+                        </script>
+                

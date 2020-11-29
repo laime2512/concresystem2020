@@ -1,0 +1,581 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="datatable1" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                    <thead>
+                        <tr>
+                            <th>Informacion</th>
+                            <th>Datos de dosificacion</th>
+                            <th width="150px"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="formAddDosificacion" role="form" id="formAddDosificacion" method="post" action="../dosificacion/adicionar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <div class="modal fade" id="modalAddDosificacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 90%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">AdicionarDosificacion</h4>
+                </div>
+                <div class="modal-body">
+                    <input type=hidden id="coddosificacion" name="coddosificacion" value="0" />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Sigla</label>
+                            <input type="text" class="form-control input-sm" id="sigla" name="sigla" data-fv-notempty="true">
+                            </div>
+                            <div class="form-group">
+                            	<label>Sucursal</label>
+                            	<select name="codsuc" id="codsuc" class="form-control input-sm">
+                            		<option value="">Seleccionar sucursal</option>
+                            		#foreach($s in $sucursales)
+                            		<option value="$s.codsuc">$s.nombre</option>
+                            		#end
+                            	</select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Actividad</label>
+                                <textarea class="form-control input-sm" id="actividad" name="actividad" rows="3" data-fv-notempty="true"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Razon social</label>
+                                <input type="text" class="form-control input-sm" id="razonsocial" name="razonsocial" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>NIT</label>
+                                <input type="text" class="form-control input-sm" id="nit" name="nit" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Telefono</label>
+                                <input type="text" class="form-control input-sm" id="telefono" name="telefono" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Lugar</label>
+                                <input type="text" class="form-control input-sm" id="lugar" name="lugar" data-fv-notempty="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Direccion</label>
+                                <textarea class="form-control input-sm" name="direccion" id="direccion" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Leyenda</label>
+                                <textarea class="form-control input-sm" name="leyenda" id="leyenda" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Mensaje impuestos</label>
+                                <textarea class="form-control input-sm" name="mensaje" id="mensaje" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No.Autorizacion</label>
+                                <input type="text" class="form-control input-sm" id="numaut" name="numaut" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Fecha Limite</label>
+                                <input type="text" class="form-control input-sm fecha xdate" id="flimite" name="flimite" data-fv-notempty="true" data-fv-regexp="true" data-fv-regexp-message="formato dd/MM/yyyy" pattern="^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d$" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>F.tramite</label>
+                                <input type="text" class="form-control input-sm fec xdate" id="ftramite" name="ftramite" data-fv-notempty="true" data-fv-regexp="true" data-fv-regexp-message="formato dd/MM/yyyy" pattern="^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d$"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No.de Tramite</label>
+                                <input type="text" class="form-control input-sm" id="numtramite" name="numtramite">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Sistema de facturacion</label>
+                                <textarea class="form-control input-sm" name="sfc" id="sfc" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No. inicio factura</label>
+                                <input type="text" class="form-control input-sm" id="numinifac" name="numinifac" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No. fin factura</label>
+                                <input type="text" class="form-control input-sm" id="numfinfac" name="numfinfac" placeholder="Dejar vacio si no existe">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>LLave</label>
+                                <input type="text" class="form-control input-sm" id="llave" name="llave" data-fv-notempty="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnModificarConfirmacion" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<form name="formModDosificacion" role="form" id="formModDosificacion" method="post" action="../dosificacion/modificar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+
+    <div class="modal fade" id="modalModDosificacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog modal-lg" style="width: 90%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modificar Dosificacion</h4>
+                </div>
+                <div class="modal-body">
+                    <input type=hidden id="coddosificacion1" name="coddosificacion" value="0" />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            	<label>Sigla</label>
+                            	<input type="text" class="form-control input-sm" id="sigla1" name="sigla" data-fv-notempty="true">
+                            </div>
+                            <div class="form-group">
+                            	<label>Sucursal</label>
+                            	<select name="codsuc" id="codsuc2" class="form-control input-sm">
+                            		<option value="">Seleccionar sucursal</option>
+                            		#foreach($s in $sucursales)
+                            		<option value="$s.codsuc">$s.nombre</option>
+                            		#end
+                            	</select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Actividad</label>
+                                <textarea class="form-control input-sm" id="actividad1" name="actividad" rows="3" data-fv-notempty="true"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Razon social</label>
+                                <input type="text" class="form-control input-sm" id="razonsocial1" name="razonsocial" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>NIT</label>
+                                <input type="text" class="form-control input-sm" id="nit1" name="nit" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Telefono</label>
+                                <input type="text" class="form-control input-sm" id="telefono1" name="telefono" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Lugar</label>
+                                <input type="text" class="form-control input-sm" id="lugar1" name="lugar" data-fv-notempty="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Direccion</label>
+                                <textarea class="form-control input-sm" name="direccion" id="direccion1" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Leyenda</label>
+                                <textarea class="form-control input-sm" name="leyenda" id="leyenda1" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Mensaje impuestos</label>
+                                <textarea class="form-control input-sm" name="mensaje" id="mensaje1" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No.Autorizacion</label>
+                                <input type="text" class="form-control input-sm" id="numaut1" name="numaut" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Fecha Limite</label>
+                                <input type="text" class="form-control input-sm fecha" id="flimite1" name="flimite" data-fv-notempty="true" data-fv-regexp="true" data-fv-regexp-message="formato dd/MM/yyyy" pattern="^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d$"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>F.tramite</label>
+                                <input type="text" class="form-control input-sm fecha" id="ftramite1" name="ftramite" data-fv-notempty="true" data-fv-regexp="true" data-fv-regexp-message="formato dd/MM/yyyy" pattern="^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d$"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No.de Tramite</label>
+                                <input type="text" class="form-control input-sm" id="numtramite1" name="numtramite">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Sistema de facturacion</label>
+                                <textarea class="form-control input-sm" name="sfc" id="sfc1" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No. inicio factura</label>
+                                <input type="text" class="form-control input-sm" id="numinifac1" name="numinifac" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>No. fin factura</label>
+                                <input type="text" class="form-control input-sm" id="numfinfac1" name="numfinfac" placeholder="Dejar vacio si no existe">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>LLave</label>
+                                <input type="text" class="form-control input-sm" id="llave1" name="llave" data-fv-notempty="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form name="formEliDosificacion" role="form" id="formEliDosificacion" method="post" action="../dosificacion/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+
+    <div class="modal fade" id="modalEliDosificacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Dosificacion</h4>
+                </div>
+                <div class="modal-body">
+                    <input type=hidden id="coddosificacion2" name="coddosificacion" />
+                    <input type=hidden id="xtipo2" name="tipo2" />
+                    <label for="" id="xdosificacion"></label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>Razon social</dt>
+                                <dd id="xrazonsocial"></dd>
+                                <dt>Direccion</dt>
+                                <dd id="xdireccion"></dd>
+                                <dt>Lugar</dt>
+                                <dd id="xlugar"></dd>
+                                <dt>Telefono</dt>
+                                <dd id="xtelefono"></dd>
+                                <dt>Actividad</dt>
+                                <dd id="xactividad"></dd>
+                                <dt>Nit</dt>
+                                <dd id="xnit"></dd>
+                                <dt>Numero atorizacion</dt>
+                                <dd id="numaut"></dd>
+                                <dt>Llave</dt>
+                                <dd>
+
+                                    <textarea class="form-control" readonly="readonly" name="xllave" id="xllave" rows="2"></textarea>
+                                </dd>
+                                <dt>Leyenda</dt>
+                                <dd id="xleyenda"></dd>
+                                <dt>Mensaje</dt>
+                                <dd id="xmensaje"></dd>
+                                <dt>Fecha de limite</dt>
+                                <dd id="xflimite"></dd>
+                                <dt>Fecha de tramite</dt>
+                                <dd id="xftramite"></dd>
+                                <dt>Numero de tramite</dt>
+                                <dd id="xnumtramite"></dd>
+                                <dt>Sistema Computarizado</dt>
+                                <dd id="xsfc"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <p id="xtitulo"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("input[type=text]").focus(function() {
+            this.select();
+        });
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '90%'
+        });
+        $(".fecha").mask("99/99/9999", {
+            placeholder: "dd/mm/aaaa"
+        });
+        var table1 = $('#datatable1').DataTable({
+            "dom": "<'row w3-tiny'<'col-sm-4'<'#tableTitle'>><'col-sm-4'<'#tableOption'>><'col-sm-1'<'#tableHeader.pull-right'>><'col-sm-3'f>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "order": [
+                [1, 'asc']
+            ],
+            "ajax": {
+                "type": "GET",
+                "url": "../dosificacion/listar",
+                "data": function(d) {
+                    d.xestado = ($('input[name=xestado]:checked').val() == undefined ? 1 : $('input[name=xestado]:checked').val());
+                }
+            },
+            "columns": [{
+                "data": "nit"
+            }, {
+                "data": "razonsocial"
+            }, {
+                "data": "coddosificacion"
+            }],
+            "createdRow": function(row, data, index) {
+                var xdescripcion = $('<dl></dl>');
+                $('<dt>Mensaje:</dt><dd>' + data.mensaje+ '</dd>').appendTo(xdescripcion);
+                $('<dt>Actividad</dt><dd>' + data.actividad + '</dd>').appendTo(xdescripcion);
+                $('<dt>Leyenda</dt><dd>' + data.leyenda + '</dd>').appendTo(xdescripcion);
+                $('<dt>Direccion:</dt><dd>' + data.direccion + '</dd>').appendTo(xdescripcion);
+                $('td', row).eq(1).html(xdescripcion);
+                
+                var xfecha = $('<dl></dl>');
+                $('<dt>Sucursal</dt><dd>' + data.xsucursal+ '</dd>').appendTo(xfecha);
+                $('<dt>No.Autorizacion</dt><dd>' + data.numaut+ '</dd>').appendTo(xfecha);
+                $('<dt>F. tramite</dt><dd>' + data.ftramite+ '</dd>').appendTo(xfecha);
+                $('<dt>F. Limite</dt><dd>' + data.flimite + '</dd>').appendTo(xfecha);
+                $('td', row).eq(0).html(xfecha);
+                var xboton = '';
+                if (data.est == 2)
+                    xboton += '<a href="#" class="btn btn-xs btn-success detalleFacturas" data-toggle="tooltip" data-placement="bottom" title="Ingresar a facturas"><span class="fa fa-book"></span> | Ver facturas</a> ';
+                if (data.est == 1) {
+                    xboton += '<a href="#" class="btn btn-xs btn-success btn-block detalleFacturas" data-toggle="tooltip" data-placement="bottom" title="Ingresar a facturas"><span class="fa fa-book"></span> | Ver facturas</a> ';
+                    xboton += '<a href="#" class="btn btn-xs btn-warning btn-block finalizarDosificacion" data-toggle="tooltip" data-placement="bottom" title="Finalizar dosificacion"><span class="fa fa-times"></span> | Finalizar dosificacion</a> ';
+                    xboton += '<a href="#" class="btn btn-xs btn-primary btn-block modificarDosificacion" data-toggle="tooltip" data-placement="bottom" title="Modificar dosificacion"><span class="icon-create"></span> | Modificar</a> ';
+                    xboton += '<a href="#" class="btn btn-xs btn-danger btn-block eliminarDosificacion" data-toggle="tooltip" data-placement="bottom" title="Eliminar dosificacion"><span class="icon-highlight_off"></span> | Eliminar</a> ';
+                }
+                var botones = '' +
+                    '<a href="#" class="btn btn-xs btn-info btn-block imprimirDosificacion" data-toggle="tooltip" data-placement="bottom" title="Imprimir dosificacion"><span class="fa fa-print"></span> | Imprimir</a>' + xboton + ' ';
+                $('td', row).eq(2).html(botones);
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h2>Dosificaciones</h2>');
+                $('#tableOption').html('<div class="btn-group"><label for="xactivo" class="btn btn-info btn-xs estadoradio"><input type="radio" id="xactivo" name="xestado" value="1" checked="checked"/>Activas</label><label for="xfinalizado" class="btn btn-xs btn-success active estadoradio"><input type="radio" id="xfinalizado" name="xestado" value="2"/>Finalizadas</label><label for="xeliminado" class="btn btn-danger btn-xs active estadoradio"><input type="radio" id="xeliminado" name="xestado" value="0"/> | Anuladas</label></div>');
+                $('#tableHeader').html('<button class="btn btn-sm btn-primary" id="btnAddDosificacion"><i class="fa fa-plus-circle"></i> | adicionar</button>');
+                $('#btnAddDosificacion').click(function() {
+                    $.get('../dosificacion/getLastData', function(response) {
+                        console.log(response);
+                        $('#formAddDosificacion').trigger('reset');
+                        $('#formAddDosificacion').data('formValidation').resetForm();
+                        $('#formAddDosificacion').loadJSON(response);
+                        $('#flimite').val('');
+                        $('#llave').val('');
+                        $('#numaut').val('');
+                        $('#numinifac').val(1);
+                        $('#modalAddDosificacion').modal('show');
+                    });
+
+                });
+            }
+        });
+        $('.estadoradio').click(function() {
+            $('#datatable1').dataTable().fnDraw();
+        });
+        $('#datatable1 tbody').on('click', 'tr td a.imprimirDosificacion', function() {
+            var row = table1.row($(this).closest('tr')).data();
+            $("#frameReportes").attr("src", "../dosificacion/ver?coddosificacion=" + row.coddosificacion);
+            $("#reportes").modal('show');
+        });
+        $('#datatable1 tbody').on('click', 'tr td a.detalleFacturas', function() {
+            var row = table1.row($(this).closest('tr')).data();
+            $.get('../dosificacion/gestionFacturas/' + row.coddosificacion, function(resp) {
+                $('#contenedor').html(resp);
+            })
+        });
+        $('#datatable1 tbody').on('click', 'tr td a.modificarDosificacion', function() {
+            $('#formModDosificacion').trigger('reset');
+            var row = table1.row($(this).closest('tr')).data();
+            $('#formModDosificacion').loadJSON(row);
+            $('#leyenda1').html(row.leyenda);
+            $('#direccion1').html(row.direccion);
+            $('#mensaje1').html(row.mensaje);
+            $('#codsuc2').val(row.codsuc).trigger('chosen:updated');
+            $('#modalModDosificacion').modal('show');
+        })
+        $('#datatable1 tbody').on('click', 'tr td a.eliminarDosificacion', function() {
+            $('#formEliDosificacion').trigger('reset');
+            var row = table1.row($(this).closest('tr')).data();
+            $('#xrazonsocial').html(row.razonsocial);
+            $('#xllave').html(row.llave);
+            $('#xtelefono').html(row.telefono);
+            $('#xleyenda').html(row.leyenda);
+            $('#xdireccion').html(row.direccion);
+            $('#xmensaje').html(row.mensaje);
+            $('#xlugar').html(row.lugar);
+            $('#xflimite').html(row.flimite);
+            $('#xnit').html(row.nit);
+            $('#xftramite').html(row.ftramite);
+            $('#xnumaut').html(row.numaut);
+            $('#xnumtramite').html(row.numtramite);
+            $('#xactividad').html(row.actividad);
+            $('#xsfc').html(row.sfc);
+            $('#formEliDosificacion').loadJSON(row);
+            $('#xdosificacion').html('Codigo de dosificacion : ' + row.coddosificacion);
+            $('#xtipo2').val(1);
+            $('#xtitulo').html('Esta seguro de eliminar esata dosificacion.');
+            $('#modalEliDosificacion').modal('show');
+        });
+        $('#datatable1 tbody').on('click', 'tr td a.finalizarDosificacion', function() {
+            $('#formEliDosificacion').trigger('reset');
+            var row = table1.row($(this).closest('tr')).data();
+            $('#xrazonsocial').html(row.razonsocial);
+            $('#xllave').html(row.llave);
+            $('#xtelefono').html(row.telefono);
+            $('#xleyenda').html(row.leyenda);
+            $('#xdireccion').html(row.direccion);
+            $('#xmensaje').html(row.mensaje);
+            $('#xlugar').html(row.lugar);
+            $('#xflimite').html(row.flimite);
+            $('#xnit').html(row.nit);
+            $('#xftramite').html(row.ftramite);
+            $('#xnumaut').html(row.numaut);
+            $('#xnumtramite').html(row.numtramite);
+            $('#xactividad').html(row.actividad);
+            $('#xsfc').html(row.sfc);
+            $('#formEliDosificacion').loadJSON(row);
+            $('#xdosificacion').html('Codigo de dosificacion : ' + row.coddosificacion);
+            $('#xtipo2').val(2);
+            $('#xtitulo').html('Esta seguro de finalizar esta dosificacion.');
+            $('#modalEliDosificacion').modal('show');
+        })
+
+        $('#formAddDosificacion').formValidation({
+            framework: 'bootstrap',
+            locale: 'es_ES',
+            excluded: ':disabled'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status == true) {
+                    $form.data('formValidation').resetForm();
+                    $('.modal').modal('hide');
+                    $('#datatable1').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+            }, 'json');
+        });
+        $('#formModDosificacion').formValidation({
+            framework: 'bootstrap',
+            locale: 'es_ES',
+            excluded: ':disabled'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status == true) {
+                    $form.data('formValidation').resetForm();
+                    $('.modal').modal('hide');
+                    $('#datatable1').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+            }, 'json');
+        });
+
+        $('#formEliDosificacion').formValidation({
+            framework: 'bootstrap',
+            locale: 'es_ES',
+            excluded: ':disabled'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status == true) {
+                    $form.data('formValidation').resetForm();
+                    $('.modal').modal('hide');
+                    $('#datatable1').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+            }, 'json');
+        });
+
+
+    });
+</script>

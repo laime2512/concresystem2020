@@ -1,0 +1,437 @@
+<div class="modal fade" id="modalValidacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title" id="myModalLabel">Mensaje de Validacion</h6>
+            </div>
+            <div class="modal-body">
+                <ul id="listaValidacion"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h4>Revisar salida</h4>
+    <div class="col-md-9">
+        <div>
+            <form name="formularioDetalle" role="form" id="formularioDetalle" method="post" action="#" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+                <table id="tableProducto" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                    <tr>
+                        <td #if($esTraspaso) colspan="5" #else colspan="8" #end style="text-align:center"><b>Detalle de salida</b></td>
+                    </tr>
+                    <tr>
+                        <td>Cod. Almacen</td>
+                        <td>Producto</td>
+                        <td>F.Ingreso</td>
+                        <td>F.Vencimiento</td>
+                        <td>Cantidad</td>
+                        #if(!($esTraspaso))
+                        <td>Nuevo F.Ingreso</td>
+                        <td>Nuevo F.Vencimiento</td>
+                        <td>Cantidad Nueva</td>
+                        #end
+                    </tr>
+                    #if($salida.detalleSalidaList) 
+                    #foreach($det in $salida.detalleSalidaList)
+                    <tr>
+                        <td>$det.codalmacen</td>
+                        <td>$det.nombre</td>
+                        <td>$!{det.fingreso}</td>
+                        <td>$!{det.fvencimiento}</td>
+                        <td>$det.cantidad
+                        <input type="hidden" name="codalmacenes" value="$det.codalmacen" />
+                        <input type="hidden" name="codlugares" value="$det.codlugar" />
+                        </td>
+                        #if(!($esTraspaso)) 
+                        <td>
+                        <div class="form-group">
+                        <input type="text" class="form-control input-sm fecha nuevo" name="ingresos" disabled="disabled" data-fv-notEmpty="true" />
+                        </div>
+                        </td>
+                        <td>
+                        <div class="form-group">
+                        <input type="text" class="form-control input-sm fecha nuevo" name="vencimientos" disabled="disabled" data-fv-notEmpty="true" />
+                        </div>
+                        </td>
+                        <td>
+                        <div class="form-group">
+                        <input type="text" class="form-control input-sm nuevo" name="cantidades" disabled="disabled" data-fv-notEmpty="true" />
+                        </div>
+                        </td>
+                        #end
+                    </tr>
+                    #end 
+                    #end
+                </table>
+            </form>
+        </div>
+        <br />
+        <div class="row" id="divTabla" style="display: none;">
+        	<div class="col-md-8">
+        	<div class="dataTable_wrapper" >
+        	<form role="form" id="formularioDetalleProductoNuevo"  method="post" action="#" >
+        	<table class="w3-table-all w3-tiny w3-table-hoverable">
+        			<tr>
+        				<td>
+        					<div class="form-group w3-green">
+			                <label>Seleccionar Producto: </label><br />
+			                <b id="xproducto"></b>
+			            	</div>
+        				</td>
+        				<td width="120px">
+        				<div class="form-group">
+			                <label>Unidades</label>
+			                <input type="text" class="form-control input-sm" name="cantidad" data-fv-notempty="true">
+			            </div>
+        				</td>
+        				<td width="120px">
+        				<div class="form-group">
+			                <label>F. Ingreso</label>
+			                <input type="text" class="form-control input-sm fecha" name="fingreso">
+			            </div>
+        				</td>
+        				<td width="120px">
+        				<div class="form-group">
+			                <label>F. Vencimiento</label>
+			                <input type="text" class="form-control input-sm fecha" name="fvencimiento">
+			            </div>
+        				</td>
+        				<td width="80px">
+        				<div class="form-group">
+        				<label>Adicionar</label><br />
+        				<button type="submit" class="btn btn-xs btn-success"> Add | <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+        				</div>
+        				</td>
+        			</tr>
+        		</table>
+        		</form>
+            <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                <thead>
+                    <tr>
+                        <th width="80px">Cod.</th>
+                        <th>Nombre Comercial</th>
+                        <th>Generico</th>
+                        <th>Sel.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	
+                </tbody>
+            </table>
+        </div>
+        	</div>
+        	<div class="col-md-4">
+        		<form id="formularioTablaNuevo" action="#">
+        		<table id="tablaDetalleNuevoProducto" class="w3-table-all w3-tiny w3-table-hoverable">
+        			<thead>
+        				<tr>
+        				<th>Producto</th>
+        				<th>Cantidad</th>
+        				<th>F.Ingreso</th>
+        				<th>F.Vencimiento</th>
+        				<th></th>
+        				</tr>
+        			</thead>
+        			<tbody></tbody>
+        		</table>
+        		</form>
+        	</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    	<table id="tableSalida" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+            <tr>
+                <td colspan="3">
+                    <b>Datos de la salida</b>
+                </td>
+            </tr>
+            <tr>
+                <td>C&oacute;digo de salida</td>
+                <td colspan="2"><b>$salida.codsal</b></td>
+            </tr>
+            <tr>
+                <td>Usuario de registro</td>
+                <td colspan="2"><b>$salida.xusuario</b></td>
+            </tr>
+            <tr>
+                <td>Motivo</td>
+                <td colspan="2"><b>$salida.tipo</b></td>
+            </tr>
+            #if($esTraspaso && $salida.tipo != 8)
+            <tr>
+                <td colspan="3">Sucursal de origen: <b>$salida.xsuc_origen</b></td>
+            </tr>
+            <tr>
+                <td colspan="3">Sucursal de destino: <b>$salida.xsuc_destino</b></td>
+            </tr>
+            #end
+            <tr>
+                <td>Fecha de registro</td>
+                <td colspan="2"><b>$salida.xfsalida</b></td>
+            </tr>
+            <tr>
+                <td>Descripci&oacute;n</td>
+                <td colspan="2">$salida.descripcion</td>
+            </tr>
+        </table>
+        <hr />
+        <form name="formulario" role="form" id="formulario" method="post" action="../salida/guardarRevision" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <input type="hidden" id="codsal" name="codsal" value="$salida.codsal" />
+        <div class="form-group">
+	<label>Estado de la revision</label>
+	<div class="row">
+		<label class="col-md-4"> <input type="radio"
+			name="estado" class="w3-radio" value="a" data-fv-notempty="true" /> Aceptar
+		</label> <label class="col-md-4"> <input type="radio"
+			name="estado" class="w3-radio" value="r" data-fv-notempty="true" /> Rechazar
+		</label>
+	</div>
+</div>
+			#if($esTraspaso)
+				<input type="hidden" name="solucion" value="5" />
+			#else
+            <div class="form-group">
+                <label>Tipo solucion</label>
+                <select class="form-control input-sm" name="solucion" id="solucion" data-fv-notempty="true">
+                    <option value="">Seleccionar...</option>
+                    <option value="1">Cambio del mismo producto</option>
+                    <option value="2">Cambio con otro producto</option>
+                    <option value="3">Se modifico el vencimiento</option>
+                    <option value="4">Se devolvio con credito en otra compra</option>
+                    <option value="5">Sin devolucion</option>
+                </select>
+            </div>
+            #end
+            
+            <div class="form-group" id="fieldCredito" style="display: none">
+                <label>Monto de credito</label>
+                <input type="text" class="form-control input-sm" id="monto" name="monto">
+            </div>
+            <div class="form-group">
+                <label>Conclusion</label>
+                <textarea class="form-control input-sm" name="conclusion" id="conclusion" rows="2"></textarea>
+            </div>
+            <br />
+            <div class="row">
+            	<div class="col-md-6">
+            	<button type="button" class="btn btn-danger btn-block btn-sm" id="cancelar">
+					<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+				</button>
+            	</div>
+            	<div class="col-md-6">
+            	<button type="submit" id="btnAdicionar" class="btn btn-primary btn-block btn-sm">
+					<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+				</button>
+            	</div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var selectRow = undefined;
+    var esTraspaso = '$esTraspaso' == 'true';
+
+    function calcularCantidad() {
+        if (selectRow !== null && selectRow !== undefined && selectRow !== '') {
+            let can = $('#cantidad').val();
+            if (can === '' || can === null)
+                can = 0;
+            let resp = selectRow.cantidad - can;
+            $('#xunidad_nueva').html(resp);
+            let respCaja = parseInt(resp / selectRow.xunixcaja);
+            $('#xcaja_nueva').html(respCaja);
+        }
+    }
+
+    function validarTipo() {
+        var xsolucion = $('#solucion option:selected').val();
+        if (xsolucion !== '' && xsolucion != null) {
+            let cantidad, msg, monto, fecha, codpro, conclusion;
+            msg = '';
+            switch (parseInt(xsolucion)) {
+                case 1:
+                    cantidad = $('#cantidad').val();
+                    
+                    if (cantidad === '') {
+                        msg = '<li>Ingrese la cantidad</li>';
+                    }
+                    return msg;
+                case 2:
+                    cantidad = $('#cantidad').val();
+                    codpro = $('#codpro').val();
+                    msg = '';
+                    if (cantidad === '') {
+                        msg += '<li>Ingrese la cantidad</li>';
+                    }
+                    if (codpro === '') {
+                        msg += '<li>Seleccione un producto</li>';
+                    }
+                    return msg;
+                case 3:
+                    msg = '';
+                    let lengthTableNew = $('#tablaDetalleNuevoProducto > tbody tr').length;
+                    if(lengthTableNew > 0){
+                    	msg = '<li>Ingrese la fecha de vencimiento</li>';
+                    }
+                    return msg;
+                case 4:
+                    monto = $('#monto').val();
+                    msg = '';
+                    if (monto === '') {
+                        msg = '<li>Ingrese el monto de credito</li>';
+                    }
+                    return msg;
+                case 5:
+                    conclusion = $('#conclusion').val();
+                    msg = '';
+                    if (conclusion === '') {
+                        msg = '<li>Ingrese una conclusion</li>';
+                    }
+                    return msg;
+                default:
+                    break;
+            }
+        }
+        return 'Seleccione tipo de solucion';
+    }
+    $(document).ready(function() {
+        $('.fecha').mask('00/00/00', {placeholder: "dd/MM/yy"});
+        $('#cancelar').click(function() {
+            $('#contenedor').fadeOut(200, function() {
+                $('#contenedor').load('../salida/gestion', function() {
+                    $('#contenedor').fadeIn(200);
+                });
+            });
+        });
+        $('#formularioDetalle').formValidation({locale: 'es_ES'});
+        $('#formulario').formValidation({locale: 'es_ES'}).on('success.form.fv', function(e) {
+            e.preventDefault();
+            let resp = esTraspaso ? '' : validarTipo();
+            if (resp === '') {
+                var $form = $(e.target);
+                let esNuevoProducto = esTraspaso ? esTraspaso :(parseInt($('#solucion option:selected').val()) == 2);
+                let detalleSerialize = esNuevoProducto ? $('#formularioTablaNuevo').serialize() : $('#formularioDetalle').serialize();
+                $.post($form.attr('action'), detalleSerialize + '&' + $form.serialize(), function(result) {
+                    if (result.status) {
+                        mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                        $('#contenedor').fadeOut(200, function() {
+                            $('#contenedor').load('../salida/gestion', function() {
+                                $('#contenedor').fadeIn(200);
+                            });
+                        });
+                    } else {
+                        mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                    }
+                    $('.modal').modal('hide');
+                }, 'json');
+            } else {
+                $('#listaValidacion').html(resp);
+                $('#modalValidacion').modal('show');
+            }
+            $('#btnAdicionar').removeClass('disabled');
+            $('#btnAdicionar').removeAttr('disabled');
+        });
+        $('#solucion').on('change', function() {
+            let xsolucion = $('#solucion option:selected').val();
+            if (xsolucion !== '' && xsolucion != null) {
+                switch (parseInt(xsolucion)) {
+                    case 1://Cambio del mismo producto
+                        $('#fieldCredito,#divTabla').hide(1000);
+                    	$('.nuevo').removeAttr('disabled');
+                    	$('#formularioDetalle').data('formValidation').enableFieldValidators('cantidades',true).revalidateField('cantidades');
+                        break;
+                    case 2://Cambio con otro producto
+                        $('#divTabla').show(1000);
+                        $('#fieldCredito').hide(1000);
+                        $('.nuevo').attr('disabled', 'disabled');
+                        $('#formularioDetalle').data('formValidation').enableFieldValidators('cantidades',false).revalidateField('cantidades');
+                        break;
+                    case 3://Se modifica el vencimiento
+                        $('.nuevo').removeAttr('disabled');
+                        $('#formularioDetalle').data('formValidation').enableFieldValidators('cantidades',true).revalidateField('cantidades');
+                        break;
+                    case 4://Se devolvio con credito en otra compra
+                        $('#fieldCredito').show(1000);
+                        $('#divTabla').hide(1000);
+                        $('.nuevo').attr('disabled', 'disabled');
+                        $('#formularioDetalle').data('formValidation').enableFieldValidators('cantidades',false).revalidateField('cantidades');
+                        break;
+                    case 5://Sin devolucion
+                        $('#divTabla').hide(1000);
+                        $('.nuevo').attr('disabled', 'disabled');
+                        $('#formularioDetalle').data('formValidation').enableFieldValidators('cantidades',false).revalidateField('cantidades');
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        var table = $('#example').DataTable({select: true,"oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row w3-tiny'<'col-sm-7'<'#tableTitle'>><'col-sm-5'<'#tableHeader'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,"ajax": {"type": "POST","url": "../producto/lista"
+            },
+            "pageLength": 5,
+            "columns": [
+            	{"data": "codpro","name":"codpro"}, 
+            	{"data": "nombre","name":"nombre"},  
+            	{"data": "generico","name":"generico"}, 
+            	{"data": "codpro","name":"codpro"}
+            ],
+            "createdRow": function(row, data, index) {
+            	btnAction = '<a class="btn btn-xs btn-primary seleccionar" href="#" data-toggle="tooltip" data-placement="top" title="Modificar"><i class="glyphicon glyphicon-circle-arrow-left"></i> | Seleccionar</a>';
+            	$('td', row).eq(3).html('<div class="btn-group">' + btnAction + '</div>');
+            }
+        });
+
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+        	if(i<3){
+        		let title = $(this).text();
+                $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+                $('input', this).on('keyup', function(e) {
+                    if (e.keyCode == 13 || this.value === '') {
+                        if ($('#example').DataTable().column(i).search() !== this.value) {
+                            $('#example').DataTable().column(i).search(this.value).draw();
+                        }
+                    }
+                });
+        	}
+        });
+        $('#example tbody').on('click', 'tr td a.seleccionar', function() {
+            let row = $('#example').DataTable().row($(this).closest('tr')).data();
+            selectRow = row;
+            $('#xproducto').html(row.nombre);
+            $('#formularioDetalleProductoNuevo')[0].reset();
+        	$('#formularioDetalleProductoNuevo').data('formValidation').resetForm();
+        });
+        $('#formularioDetalleProductoNuevo').formValidation({locale: 'es_ES'}).on('success.form.fv', function(e) {
+        	e.preventDefault();
+        	let row = $('<tr></tr>');
+        	let dataForm = UtilForm.getFormData($('#formularioDetalleProductoNuevo'));
+        	let dataInput = selectRow.nombre+'<input type="hidden" name="cantidades" value="'+dataForm.cantidad+'">';
+        	dataInput += '<input type="hidden" name="ingresos" value="'+dataForm.fingreso+'">';
+        	dataInput += '<input type="hidden" name="vencimientos" value="'+dataForm.fvencimiento+'">';
+        	dataInput += '<input type="hidden" name="productos" value="'+selectRow.codpro+'">';
+        	$('<td>'+dataInput+'</td>').appendTo(row);
+        	$('<td class="w3-right-align">'+dataForm.cantidad+'</td>').appendTo(row);
+        	$('<td>'+dataForm.fingreso+'</td>').appendTo(row);
+        	$('<td>'+dataForm.fvencimiento+'</td>').appendTo(row);
+        	$('<td><button type="button" class="btn btn-xs btn-danger input-remove-row"><span class="fa fa-close"></span></button></td>').appendTo(row);
+        	$('#tablaDetalleNuevoProducto > tbody:last').append(row);
+        	$('#formularioDetalleProductoNuevo')[0].reset();
+        	$('#formularioDetalleProductoNuevo').data('formValidation').resetForm();
+        	$('.input-remove-row').click(function() {
+                var tr = $(this).closest('tr');
+                tr.fadeOut(100, function() {
+                    tr.remove();
+                });
+            });
+            $('.input-remove-row').on('click');
+        });
+    });
+</script>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="420" pageHeight="595" columnWidth="420" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="bb7ab14d-c79c-41b1-b3ef-ad17127a65fb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MIASUPER"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="158"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="835"/>
+	<parameter name="codcom" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[select tipo.nomtip xtipo,producto.nombre xproducto,producto.concentracion xconcentracion,area.nombre xarea,laboratorio.nombre xlaboratorio,medida.nombre xmedida
+,detallecompra.* 
+					from detallecompra
+					join producto on producto.codpro=detallecompra.codpro 
+					join medida on medida.codmed=producto.codmed
+					join tipo on tipo.codtip=producto.codtip
+					join area on area.codare=producto.codare
+					left join almacen on almacen.codalmacen=detallecompra.codalmacen
+					join laboratorio on laboratorio.codlab=producto.codlab
+					where codcom= $P{codcom}]]>
+	</queryString>
+	<field name="xtipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xtipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo"/>
+	</field>
+	<field name="xproducto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xproducto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="xconcentracion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xconcentracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="xarea" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xarea"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="area"/>
+	</field>
+	<field name="xlaboratorio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xlaboratorio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="laboratorio"/>
+	</field>
+	<field name="xmedida" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xmedida"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medida"/>
+	</field>
+	<field name="codcom" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="codcom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="codpro" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="codpro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="precio" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="subtotal" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="subtotal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="fingreso" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fingreso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="fvencimiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fvencimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="codalmacen" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="codalmacen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="coddcom" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="coddcom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="impuestos" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="impuestos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="devolucion" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="devolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="descuento" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="descuento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="porcentaje_unidad" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="porcentaje_unidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="porcentaje_caja" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="porcentaje_caja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="porcentaje_paquete" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="porcentaje_paquete"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<field name="tipo_compra" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_compra"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detallecompra"/>
+	</field>
+	<variable name="xdevolucion" class="java.lang.String">
+		<variableExpression><![CDATA[$F{devolucion}?"Si":"No"]]></variableExpression>
+	</variable>
+	<variable name="xsubtotal" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{cantidad}*$F{precio}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{cantidad}*$F{precio}]]></initialValueExpression>
+	</variable>
+	<variable name="can1" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "1" )?$F{cantidad}:null]]></variableExpression>
+	</variable>
+	<variable name="pre1" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "1" )?$F{precio}:null]]></variableExpression>
+	</variable>
+	<variable name="can2" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "2" )?$F{cantidad}:null]]></variableExpression>
+	</variable>
+	<variable name="pre2" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "2" )?$F{precio}:null]]></variableExpression>
+	</variable>
+	<variable name="can3" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "3" )?$F{cantidad}:null]]></variableExpression>
+	</variable>
+	<variable name="pre3" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{tipo_compra}.equals( "3" )?$F{precio}:null]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="420" height="12" uuid="4ced61ea-71b5-48ab-a971-3382ed923cc6"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{xtipo}+" "+$F{xproducto}+" "+$F{xconcentracion}+" "+$F{xmedida}+", Lab: "+$F{xlaboratorio}+", Area: "+$F{xarea}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="282" y="12" width="23" height="12" uuid="83001b40-9659-413e-8809-48ced9acfed4"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pre3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
+				<reportElement x="305" y="12" width="23" height="12" uuid="9f4e4bc9-6ba9-4f4f-82c5-d67f2f1c3701"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{xsubtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
+				<reportElement x="354" y="12" width="23" height="12" uuid="b1212662-3e39-428f-b820-e472974a2dbe"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impuestos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="377" y="12" width="23" height="12" uuid="b9d2bc02-de43-4600-9d68-075524c60c62"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="190" y="12" width="23" height="12" uuid="b9723162-5146-40ca-97d9-1a332aa27a51"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pre1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="236" y="12" width="23" height="12" uuid="b6c8c1db-193d-469e-98d7-34df8c0489b6"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pre2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="213" y="12" width="23" height="12" uuid="29e9c3f6-5783-4684-a257-e48f780d512e"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{can2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="259" y="12" width="23" height="12" uuid="d2e56d1e-3f47-481e-8ff1-7f89bb7dbce8"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{can3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
+				<reportElement x="328" y="12" width="26" height="12" uuid="6aa56f06-038c-47fa-be83-9c9a52263021"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyy" isBlankWhenNull="true">
+				<reportElement x="121" y="12" width="23" height="12" uuid="7e7f25b8-edb7-40b8-824a-28b85e249f8a"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{xdevolucion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#;(#,###.00#-)" isBlankWhenNull="true">
+				<reportElement x="167" y="12" width="23" height="12" uuid="9b635b83-d046-43ec-8412-85149c0356bb"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{can1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement x="144" y="12" width="23" height="12" uuid="8823549b-85cb-47a8-a05f-cbe3969102e3"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fvencimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

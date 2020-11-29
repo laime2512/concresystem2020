@@ -1,0 +1,777 @@
+<div class="container">
+<form name="formulario" role="form" id="formulario" method="post" action="../producto/guardar2" enctype="multipart/form-data" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <br/>
+    <div class="w3-card-4">
+    <div class="w3-container">
+    <div class="row">
+    	<div class="col-md-3">
+    		<h4 id="titleProducto">Registrar Nuevo Producto</h4>
+    	</div>
+    	<div class="col-md-9">
+    		<div class="alert alert-success">
+    			<p><b>Recomendaci&oacute;n:</b> Ingrese primeramente la foto si es que se tiene, para luego ingresar a los campos con las teclas <kbd>Enter y Tab</kbd>.</p>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    		<div class="row">
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>C&oacute;digo del producto</label> 
+		                <input id="codpro" name="codpro" type="text" class="form-control input-sm" readonly>
+		            </div>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Nombre comercial</label> <input id="nombre" name="nombre" type="text" placeholder="ingrese nombres" class="form-control input-sm text-uppercase" data-fv-notempty="true">
+		            </div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Nombre Generico</label> <input id="generico" name="generico" type="text" placeholder="ingrese nombre generico" class="form-control input-sm text-uppercase" data-fv-notempty="true">
+		            </div>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Area</label>
+		                <select id="codare" name="codare" class="form-control input-sm" data-fv-notempty="true">
+							<option value="">Seleccionar</option>
+							#foreach($a in $areas)
+							<option value="$a.codare">$a.nombre</option>
+							#end
+						</select>
+		            </div>	
+    			</div>
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Laboratorio</label>
+		                <select id="codlab" name="codlab" class="form-control input-sm" data-fv-notempty="true">
+							<option value="">Seleccionar</option>
+							#foreach($l in $laboratorios)
+							<option value="$l.codlab">$l.nombre</option>
+							#end
+						</select>
+		            </div>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Codigo de Barras</label>
+		                <input id="codigobarra" name="codigobarra" type="text" placeholder="ingrese codigo de barra" class="form-control input-sm">
+		            </div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Tipo</label>
+		                <select id="codtip" name="codtip" class="form-control input-sm">
+							<option value="">Seleccionar</option>
+							#foreach($t in $tipos)
+							<option value="$t.codtip">$t.nomtip</option>
+							#end
+						</select>
+		            </div>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-md-6">
+    				<div class="form-group">
+		                <label>Concentracion</label>
+		                <input id="concentracion" name="concentracion" type="text" placeholder="ingrese concentracion" class="form-control input-sm" data-fv-notempty="true">
+		            </div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="form-group">
+                		<label>Unidad de medida</label>
+                		<select id="codmed" name="codmed" class="form-control input-sm" data-placeholder="Seleccione..." data-fv-notempty="true">
+							<option value=""></option>
+							#foreach($m in $medidas)
+							<option value="$m.codmed">$m.nombre</option>
+							#end
+						</select>
+            		</div>
+    			</div>
+    		</div>
+    		<div class="row">
+        		<div class="col-md-6">
+            		<div class="form-group">
+                		<label>Pareto</label>
+                		<input id="pareto" name="pareto" type="text" placeholder="ingrese pareto" class="form-control input-sm text-uppercase">
+            		</div>
+        		</div>
+        		<div class="col-md-6">
+    				<div class="form-group">
+						<label>Controlado</label>
+					<div>
+					<label class="container"> <input type="checkbox"
+						class="w3-check" id="controlado" name="controlado" value="true"> Si <b class="text-success">(Tickear con <kbd>tecla: SPACE</kbd>)</b>
+					</label>
+					</div>
+					</div>
+        		</div>
+    		</div>
+    	</div>
+    	<div class="col-md-6">
+	    	<div class="form-group">
+	    		<div class="text-center">
+			    	<div class="file-loading">
+			    		<input id="fotito" name="fotito" class="file" type="file" accept="image/*"/>
+			    	</div>
+		    	</div>
+	    	</div>
+    	</div>
+    </div>    
+    		<br/>
+    	</div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="w3-card-4">
+    			<div class="w3-container">
+    				<br/>
+    				<div class="row">
+    					<div class="col-md-3">
+    						<div class="form-group">
+				                <label>Tipo de margen</label>
+				                <select id="margen" name="margen" class="form-control input-sm" data-fv-notempty="true">
+				                </select>
+				            </div>
+    					</div>
+    					<div class="col-md-9">
+    						<div class="alert alert-success" style="display: none;" id="alertMargen"></div>
+    					</div>
+    				</div>
+		            <br/>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-4">
+    		<div class="w3-card-4">
+    			<div class="w3-container">
+    				<br/>
+    				<p align="center"><label>Unidades</label></p>
+				<div class="form-group">
+	                <label>Relaciones - Unidades por caja</label>
+	                <input type="text" class="form-control input-sm text-right" name="unixcaja" data-fv-notempty="true" data-fv-integer="true" />
+	            </div>
+	            <div class="form-group">
+	                <label>Presentacion para la venta</label>
+	                <select name="presentacionUnidad" class="form-control input-sm" data-placeholder="Seleccione..." data-fv-notempty="true">
+					<option value="">[Seleccionar]</option>
+					#foreach($p in $presentaciones)
+					<option value="$p.nombre">$p.nombre</option>
+					#end
+					</select>
+	            </div>
+	            <div class="form-group">
+	                <label>Precio de costo</label>
+	                <input name="pcUnit" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+	            </div>
+	            <div class="form-group">
+		                <label>Porcentaje</label>
+		                <div class="input-group">
+		                	<input name="porcentajeUnidad" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		                	<span class="input-group-addon"> % </span>
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label>Precio p&uacute;blico</label>
+		                <input name="pvUnit" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		            </div>
+		            <div class="form-group">
+		                <label>Inventario m&iacute;nimo</label>
+		                <input name="inventarioMinimoUnidad" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		            </div>
+		            <div class="form-group">
+						<label>Compra por unidades</label>
+						<div>
+							<label class="container"> <input type="radio" name="tipoCompra" value="1" data-fv-notempty="true" class="w3-radio"> Si
+							</label>
+						</div>
+					</div>
+	            <br/>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="w3-card-4">
+    			<div class="w3-container">
+    				<br/>
+    				<p align="center"><label>Cajas</label></p>
+					<div class="form-group">
+	                <label>Relaciones - Cajas por paquete</label>
+	                <input type="text" class="form-control input-sm text-right" name="unixpaquete"  data-fv-notempty="true" data-fv-integer="true" />
+	            	</div>
+	            	<div class="form-group">
+	                <label>Presentacion para la venta</label>
+	                <select name="presentacionCaja" class="form-control input-sm" data-placeholder="Seleccione..." data-fv-notempty="true">
+					<option value="">[Seleccionar]</option>
+					#foreach($p in $presentaciones)
+					<option value="$p.nombre">$p.nombre</option>
+					#end
+					</select>
+	            	</div>
+	            	<div class="form-group">
+		                <label>Precio de costo</label>
+		                <input name="pcCaja" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		            </div>
+		            <div class="row">
+		            	<div class="col-md-6">
+		            		<div class="form-group">
+			                <label>Descuento</label>
+			                <div class="input-group">
+			                	<input name="porcentajeDescuentoCaja" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+			                	<span class="input-group-addon"> % </span>
+			                </div>
+			            	</div>
+		            	</div>
+		            	<div class="col-md-6">
+		            		<div class="form-group">
+			                <label>Porcentaje</label>
+			                <div class="input-group">
+			                <input name="porcentajeCaja" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+			                <span class="input-group-addon"> % </span>
+			                </div>
+			            </div>
+		            	</div>
+		            </div>
+		            <div class="form-group">
+		                <label>Precio p&uacute;blico</label>
+		                <input name="pvCaja" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+		            </div>
+		            <div class="form-group">
+		                <label>Inventario m&iacute;nimo</label>
+		                <input name="inventarioMinimoCaja" type="text" class="form-control input-sm text-right"  data-fv-notempty="true" data-fv-numeric="true">
+		            </div>
+		            <div class="form-group">
+						<label>Compra por caja</label>
+						<div>
+							<label class="container"> <input type="radio" name="tipoCompra" value="2" class="w3-radio"  data-fv-notempty="true"> Si
+							</label>
+						</div>
+					</div>
+	            	<br/>
+    			</div>
+        	</div>    		
+    	</div>
+    	<div class="col-md-4">
+    		<div class="w3-card-4">
+    			<div class="w3-container">
+    				<br/>
+					<p align="center"><label>Paquete</label></p>
+					<div class="form-group">
+	                <label>Relaciones - Paquetes</label>
+	                <input type="text" class="form-control input-sm text-right" name="uniEnPaquete" value="1" data-fv-integer="true"  data-fv-notempty="true"/>
+	            	</div>
+	            	<div class="form-group">
+	                <label>Presentacion para la venta</label>
+	                <select name="presentacionPaquete" class="form-control input-sm" data-placeholder="Seleccione..." data-fv-notempty="true">
+					<option value="">[Seleccionar]</option>
+					#foreach($p in $presentaciones)
+					<option value="$p.nombre">$p.nombre</option>
+					#end
+					</select>
+	            	</div>
+	            	<div class="form-group">
+		                <label>Precio de costo</label>
+		                <input name="pcPaquete" type="text" class="form-control input-sm text-right" data-fv-numeric="true"  data-fv-notempty="true">
+		            </div>
+		            <div class="row">
+		            	<div class="col-md-6">
+		            		<div class="form-group">
+			                <label>Descuento</label>
+			                <div class="input-group">
+			                	<input name="porcentajeDescuentoPaquete" type="text" class="form-control input-sm text-right" data-fv-notempty="true" data-fv-numeric="true">
+			                	<span class="input-group-addon"> % </span>
+			                </div>
+			            	</div>
+		            	</div>
+		            	<div class="col-md-6">
+		            		<div class="form-group">
+			                <label>Porcentaje</label>
+			                <div class="input-group">
+			                	<input name="porcentajePaquete" type="text" class="form-control input-sm text-right" data-fv-numeric="true"  data-fv-notempty="true">
+			                	<span class="input-group-addon"> % </span>
+			                </div>
+			            </div>
+		            	</div>
+		            </div>
+		            <div class="form-group">
+		                <label>Precio p&uacute;blico</label>
+		                <input name="pvPaquete" type="text" class="form-control input-sm text-right" data-fv-numeric="true"  data-fv-notempty="true">
+		            </div>
+		            <div class="form-group">
+		                <label>Inventario m&iacute;nimo</label>
+		                <input name="inventarioMinimoPaquete" type="text" class="form-control input-sm text-right" data-fv-numeric="true"  data-fv-notempty="true">
+		            </div>
+		            <div class="form-group">
+						<label>Compra por paquete</label>
+						<div>
+							<label class="container"> <input type="radio" name="tipoCompra" value="3" class="w3-radio"  data-fv-notempty="true"> Si
+							</label>
+						</div>
+					</div>
+	            	<br/>
+    			</div>
+        </div>    		
+    	</div>
+    </div>
+    <br/>
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger" id="btnCancelar" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+        <button type="submit" id="btnAdicionarConfirmacion" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+    </div>
+    <br/>
+</form>
+<br/>
+</div>
+<br/>
+<script type="text/javascript">
+	RUTA_PRODUCTOS = '../..'+'$RUTA_PRODUCTOS'+'/';
+	IMG_DEFAULT = '$IMG_DEFAULT';
+    var data = {
+    	margen:{}
+    }
+    function PORCENTAJE(num){
+    	if(num){
+    		return parseFloat(num)/100.0;
+    	}
+    }
+    function calcularPrecioCompra(){
+    	let vPcPaquete = $('input[name="pcPaquete"]').val();
+		let vUnixpaquete = $('input[name="unixpaquete"]').val();
+		if(vPcPaquete && vUnixpaquete){
+			calcularPrecioVenta('input[name="pvPaquete"]',vPcPaquete,$('input[name="porcentajePaquete"]').val());
+			let vPcCaja = parseFloat(vPcPaquete) / parseFloat(vUnixpaquete);
+			if(vPcCaja){
+				$('input[name="pcCaja"]').val(roundMoney(vPcCaja).toFixed(1));
+				calcularPrecioVenta('input[name="pvCaja"]',vPcCaja,$('input[name="porcentajeCaja"]').val());
+				let vUnixcaja = $('input[name="unixcaja"]').val();
+				if(vUnixcaja){
+					let vPcUnidad = parseFloat(vPcCaja) / parseFloat(vUnixcaja);
+					if(vPcUnidad){
+						$('input[name="pcUnit"]').val(roundMoney(vPcUnidad).toFixed(1));
+						calcularPrecioVenta('input[name="pvUnit"]',vPcUnidad,$('input[name="porcentajeUnidad"]').val());
+					}
+				}
+			}
+		}
+    }
+    function calcularPrecioCompraPorCaja(){
+    	let pcCaja = $('input[name="pcCaja"]').val();
+    	let unixpaquete = $('input[name="unixpaquete"]').val();
+    	if(pcCaja && unixpaquete){
+    		let pcPaquete = parseFloat(pcCaja) * parseFloat(unixpaquete);
+    		$('input[name="pcPaquete"]').val(roundMoney(pcPaquete).toFixed(1));
+    	}
+    	let unixcaja = $('input[name="unixcaja"]').val();
+    	if(pcCaja && unixcaja){
+    		let pcUnit = parseFloat(pcCaja) / parseFloat(unixcaja);
+    		$('input[name="pcUnit"]').val(roundMoney(pcUnit).toFixed(1));
+    	}
+    }
+    function calcularPrecioCompraPorUnidad(){
+    	let pcUnit = $('input[name="pcUnit"]').val();
+    	let unixcaja = $('input[name="unixcaja"]').val();
+    	if(pcUnit && unixcaja){
+    		let pcCaja = parseFloat(pcUnit) * parseFloat(unixcaja);
+    		$('input[name="pcCaja"]').val(roundMoney(pcCaja).toFixed(1));
+    		let unixpaquete = $('input[name="unixpaquete"]').val();
+    		if(pcCaja && unixpaquete){
+    			let pcPaquete = pcCaja * parseFloat(unixpaquete);
+    			$('input[name="pcPaquete"]').val(roundMoney(pcPaquete).toFixed(1));
+    		}
+    	}
+    }
+    function calcularPrecioVenta(idInput,precio,porcentaje){
+    	if(porcentaje && precio){
+    		precio = parseFloat(precio);
+    		porcentaje = parseFloat(porcentaje);
+    		let res = (precio*(porcentaje/100))+precio;
+    		$(idInput).val(roundMoney(res).toFixed(1));
+    	}
+    }
+    function calcularInventario(){
+    	let vInventarioMinimoUnidad = $('input[name="inventarioMinimoUnidad"]').val();
+		let vUnixcaja = $('input[name="unixcaja"]').val();
+		if(vUnixcaja && vInventarioMinimoUnidad){
+			let resInventarioMinimoCaja = parseFloat(vInventarioMinimoUnidad) / parseFloat(vUnixcaja);
+			if(resInventarioMinimoCaja){
+				$('input[name="inventarioMinimoCaja"]').val(roundMoney(resInventarioMinimoCaja).toFixed(1));
+				let vUnixpaquete = $('input[name="unixpaquete"]').val();
+				if(vUnixpaquete && resInventarioMinimoCaja){
+					let resInventarioMinimoPaquete = parseFloat(resInventarioMinimoCaja)/vUnixpaquete;
+					if(resInventarioMinimoPaquete)
+						$('input[name="inventarioMinimoPaquete"]').val(roundMoney(resInventarioMinimoPaquete).toFixed(1));
+					else
+						$('input[name="inventarioMinimoPaquete"]').val('');
+				}	
+			}else{
+				$('input[name="inventarioMinimoCaja"]').val('');
+			}
+		}
+    }
+    function stopRKey(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if ((evt.keyCode == 13 || evt.keyCode == 9) && (node.type == "text" || node.type == "checkbox" || node.type == "radio")) {
+            return false;
+        }
+    }
+    document.onkeypress = stopRKey;
+    document.onkeydown  = stopRKey;
+    $(document).ready(function() {
+        var btnGroup = '';
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '90%'
+        });
+        setTimeout(function() {
+            $('input[name="nombre"]').focus()
+        }, 500);
+		
+        $.get('../margen/getLastMargen', function(resp){
+    		if(resp.status){
+    			data.margen = resp.data;
+    			$('#margen').html('');
+    			if(data.margen){
+    				if(data.margen.detalleList){
+    					let nuevo = $('<option value="">Seleccionar</option>');
+    					$('#margen').append(nuevo);
+    					data.margen.detalleList.forEach(item =>{
+    						let opt = $('<option value="'+item.numberMargin+'">'+item.typeMargin+'</option>');
+    						$('#margen').append(opt);
+    					});
+    					$('#margen').trigger('chosen:updated');
+    				}
+    			}
+    		}else{
+    			mostartMensaje('error','No se encontro un margen activo.');
+    		}
+    	});
+        $('#margen').chosen().change(function(){
+        	let value = $('#margen option:selected').val();
+        	data.margen.detalleList.forEach(item =>{
+				if(item.numberMargin == parseInt(value)){
+					$('#alertMargen').show(1000);
+					$('#alertMargen').html('<b>Concepto: </b>'+item.concept);
+					$('input[name="porcentajeUnidad"]').val(item.porcentajeUnidad);
+					$('input[name="porcentajeCaja"]').val(item.porcentajeUnidad);
+					$('input[name="porcentajePaquete"]').val(item.porcentajeUnidad);
+					$('input[name="porcentajeDescuentoCaja"]').val(0);
+					$('input[name="porcentajeDescuentoPaquete"]').val(0);
+					calcularPrecioCompra();
+					setTimeout(function() {
+						$('input[name="unixcaja"]').focus(function(){
+							$('html, body').animate({
+						        scrollTop: ($(this).offset().top-50) + 'px'
+						    }, 500);
+						});
+		                $('input[name="unixcaja"]').focus()
+		            }, 500);
+				}
+			});
+        });
+        $('#btnCancelar').click(function() {
+            $('#contenedor').fadeOut(200, function() {
+                $('#contenedor').load('$urlVolver', function() {
+                    $('#contenedor').fadeIn(200);
+                });
+            });
+        });
+        #if($isUpdate)
+        $.get('../producto/obtener?codpro=$codpro', function(resp){
+        	if(resp.status){
+        		$('#titleProducto').html('Modificar Producto');
+        		$('#formulario').loadJSON(resp.data);
+        		$('select').trigger('chosen:updated');
+        		$('#controlado').val(true);
+        		$("#fotito").fileinput({
+        			language: "es",
+    		        initialPreview: [RUTA_PRODUCTOS + resp.data.foto],
+    	            maxFileCount: 1,
+    	            maxImageWidth: 200,
+    	            maxImageHeight: 150,
+    	            resizePreference: 'height',
+    	            initialPreviewAsData: true,
+    	            resizeIfSizeMoreThan: 1000,
+    	            allowedFileExtensions: ["jpg", "png", "gif","jpeg"],
+    	            resizeImage: true,
+    		        initialCaption: "Imagen del producto",
+        			browseClass: "btn btn-primary btn-block",
+        	        showCaption: false,
+        	        showRemove: false,
+        	        autoOrientImage: false,
+        	        showUpload: false,
+        	        resizeImage: true,
+        	        resizeIfSizeMoreThan: 2000
+    		    });
+        	}else
+        		mostrarMensaje('info','No se logro recuperar los datos del producto.');
+        }, 'json');
+        #else
+        	$("#fotito").fileinput({
+				language: "es",
+				initialPreview: [RUTA_PRODUCTOS + IMG_DEFAULT],
+	            maxFileCount: 1,
+	            maxImageWidth: 200,
+	            maxImageHeight: 150,
+	            resizePreference: 'height',
+	            initialPreviewAsData: true,
+	            allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+	            resizeImage: true,
+		        initialCaption: "Imagen del producto",
+    			browseClass: "btn btn-primary btn-block",
+    	        showCaption: false,
+    	        showRemove: false,
+    	        showUpload: false,
+    	        resizeImage: true,
+    	        resizeIfSizeMoreThan: 2000
+		    });
+        #end
+		$('input[name="unixcaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="unixpaquete"]').focus();	
+			}else{
+				calcularPrecioCompra();
+				calcularInventario();
+			}
+		});
+		$('input[name="unixpaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="uniEnPaquete"]').focus();	
+			}else{
+				calcularPrecioCompra();
+				calcularInventario();
+			}
+		});
+		$('input[name="uniEnPaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('select[name="presentacionUnidad"]').trigger('chosen:activate');	
+			}
+		});
+		$('select[name="presentacionUnidad"]').chosen().change(function(e) {
+			$('select[name="presentacionCaja"]').trigger('chosen:activate');
+		});
+		$('select[name="presentacionCaja"]').chosen().change(function(e) {
+			$('select[name="presentacionPaquete"]').trigger('chosen:activate');
+		});
+		$('select[name="presentacionPaquete"]').chosen().change(function(e){
+			$('input[name="pcPaquete"]').focus();	
+		});
+		$('input[name="pcPaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="pcCaja"]').focus();
+			}else{
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="pcCaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="pcUnit"]').focus();	
+			}else{
+				calcularPrecioCompraPorCaja();
+				let vUnixcaja = $('input[name="unixcaja"]').val();
+				let vPcCaja = $('input[name="pcCaja"]').val();
+				if(vUnixcaja && vPcCaja){
+					calcularPrecioVenta('input[name="pvCaja"]',vPcCaja,$('input[name="porcentajeCaja"]').val());
+					let vPcUnidad = vPcCaja / vUnixcaja;
+					if(vPcUnidad){
+						$('input[name="pcUnit"]').val(roundMoney(vPcUnidad).toFixed(1));
+						calcularPrecioVenta('input[name="pvUnit"]',vPcUnidad,$('input[name="porcentajeUnidad"]').val());
+					}
+				}	
+			}
+		});
+		$('input[name="pcUnit"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="porcentajeUnidad"]').focus();
+			}else{
+				calcularPrecioCompraPorUnidad();
+			}
+		});
+		$('input[name="porcentajeUnidad"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="porcentajeDescuentoCaja"]').focus();
+			}else{
+				let porcentajeUnidad = $('input[name="porcentajeUnidad"]').val();
+				$('input[name="porcentajeDescuentoCaja"]').val(0);
+				$('input[name="porcentajeCaja"]').val(porcentajeUnidad);
+				$('input[name="porcentajeDescuentoPaquete"]').val(0);
+				$('input[name="porcentajePaquete"]').val(porcentajeUnidad);
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="porcentajeDescuentoCaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="porcentajeCaja"]').focus();
+			}else{
+				let porcentajeUnidad = $('input[name="porcentajeUnidad"]').val();
+				let porcentajeDescuentoCaja = $('input[name="porcentajeDescuentoCaja"]').val();
+				if(porcentajeDescuentoCaja && parseFloat(porcentajeDescuentoCaja)>0.0){
+					let total = (PORCENTAJE(porcentajeUnidad) * (1 - PORCENTAJE(porcentajeDescuentoCaja)))*100;
+					$('input[name="porcentajeCaja"]').val(total.toFixed(1));	
+				}else{
+					$('input[name="porcentajeCaja"]').val(porcentajeUnidad);
+				}
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="porcentajeCaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="porcentajeDescuentoPaquete"]').focus();
+			}else{
+				let porcentajeUnidad = $('input[name="porcentajeUnidad"]').val();
+				let porcentajeCaja= $('input[name="porcentajeCaja"]').val();
+				if(porcentajeCaja && parseFloat(porcentajeCaja)>0.0){
+					let total = (1.0-(PORCENTAJE(porcentajeCaja) / PORCENTAJE(porcentajeUnidad)))*100;
+					$('input[name="porcentajeDescuentoCaja"]').val(total.toFixed(1));
+				}else{
+					$('input[name="porcentajeDescuentoCaja"]').val(0);
+				}
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="porcentajeDescuentoPaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="porcentajePaquete"]').focus();
+			}else{
+				let porcentajeUnidad = $('input[name="porcentajeUnidad"]').val();
+				let porcentajeDescuentoPaquete= $('input[name="porcentajeDescuentoPaquete"]').val();
+				if(porcentajeDescuentoPaquete && parseFloat(porcentajeDescuentoPaquete)>0.0){
+					let total = (PORCENTAJE(porcentajeUnidad) * ( 1 - PORCENTAJE(porcentajeDescuentoPaquete)))*100;
+					$('input[name="porcentajePaquete"]').val(total.toFixed(1));
+				}else{
+					$('input[name="porcentajePaquete"]').val(porcentajeUnidad);
+				}
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="porcentajePaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="pvUnit"]').focus();
+			}else{
+				let porcentajeUnidad = $('input[name="porcentajeUnidad"]').val();
+				let porcentajePaquete= $('input[name="porcentajePaquete"]').val();
+				if(porcentajePaquete && parseFloat(porcentajePaquete)>0.0){
+					let total = (1.0 -(PORCENTAJE(porcentajePaquete) / PORCENTAJE(porcentajeUnidad))) * 100;
+					$('input[name="porcentajeDescuentoPaquete"]').val(total.toFixed(1));
+				}else{
+					$('input[name="porcentajeDescuentoPaquete"]').val(0);
+				}
+				calcularPrecioCompra();
+			}
+		});
+		$('input[name="pvUnit"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="pvCaja"]').focus();
+			}
+		});
+		$('input[name="pvCaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="pvPaquete"]').focus();
+			}
+		});
+		$('input[name="pvPaquete"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="inventarioMinimoUnidad"]').focus();
+			}
+		});
+		$('input[name="inventarioMinimoUnidad"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="inventarioMinimoCaja"]').focus();
+			}else{
+				calcularInventario();
+			}
+		});
+		$('input[name="inventarioMinimoCaja"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="inventarioMinimoPaquete"]').focus();
+			}
+		});
+		$('input[name="nombre"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="generico"]').focus();
+			}
+		});
+		$('input[name="generico"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('select[name="codare"]').trigger('chosen:activate');
+			}
+		});
+		$('select[name="codare"]').chosen().change(function(e) {
+			$('select[name="codlab"]').trigger('chosen:activate');
+		});
+		$('select[name="codlab"]').chosen().change(function(e){
+			$('input[name="codigobarra"]').focus();
+		});
+		$('input[name="codigobarra"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('select[name="codtip"]').trigger('chosen:activate');
+			}
+		});
+		$('select[name="codtip"]').chosen().change(function(e){
+			$('input[name="concentracion"]').focus();
+		});
+		$('input[name="concentracion"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('select[name="codmed"]').trigger('chosen:activate');
+			}
+		});
+		$('select[name="codmed"]').chosen().change(function(e){
+			$('input[name="pareto"]').focus(function(){
+				$('html, body').animate({
+			        scrollTop: ($(this).offset().top-250) + 'px'
+			    }, 500);
+			});
+			$('input[name="pareto"]').focus();
+		});
+		$('input[name="pareto"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('input[name="controlado"]').focus();
+			}
+		});
+		$('input[name="controlado"]').keyup(function(e){
+			if(e.keyCode == 13 || e.keyCode == 9){
+				$('select[name="margen"]').trigger('chosen:activate');
+			}
+		});
+        $('#formulario').formValidation({
+            excluded: [':disabled']
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var formData = new FormData(document.getElementById("formulario"));
+            $.ajax({
+                url: $form.attr("action"),
+                type: "post",
+                dataType: "json",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(result) {
+                if (result.status) {
+                    $('#example').dataTable().fnDraw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('#contenedor').fadeOut(200, function() {
+                    $('#contenedor').load('$urlVolver', function() {
+                        $('#contenedor').fadeIn(200);
+                    });
+                });
+            });
+        });
+    });
+</script>

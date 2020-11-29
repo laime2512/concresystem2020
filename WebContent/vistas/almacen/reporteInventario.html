@@ -1,0 +1,253 @@
+<style>
+    .plaintext {
+        display: block;
+        width: 100%;
+        padding-top: 0.375rem;
+        padding-bottom: 0.375rem;
+        margin-bottom: 0;
+        line-height: 1.5;
+        color: #212529;
+        background-color: transparent;
+        border: solid transparent;
+        border-width: 1px 0;
+    }
+</style>
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 95%" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label for="">Datos del producto</label>
+                        <table class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cod: <b id="xcodpro"></b></td>
+                                    <td>Categoria: <b id="xcategoria"></b></td>
+                                    <td>Controlado: <b id="xcontrolado"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td><b id="xnombre"></b></td>
+                                    <td>Fraccionable: <b id="xfraccionable"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Generico</td>
+                                    <td><b id="xgenerico"></b></td>
+                                    <td>Cant. Min: <b id="xcanmin"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Proveedor</td>
+                                    <td><b id="xlaboratorio"></b></td>
+                                    <td>Pareto: <b id="xpareto"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Concentracion</td>
+                                    <td><b id="xconcentracion"></b></td>
+                                    <td>Porcentaje: <b id="xporcentaje"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Area</td>
+                                    <td><b id="xarea"></b></td>
+                                    <td>Codigo: <b id="xcodigo"></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label for="">Datos del inventario</label>
+                        <table id="tablaAlmacen" class="w3-table-all w3-tiny w3-card-4">
+                            <thead>
+                                <tr>
+                                    <td>Compra</td>
+                                    <td>Fecha<br/>Ingreso</td>
+                                    <td>Fecha<br/>Vencimiento</td>
+                                    <td>Cant.<br/>de<br/>Cajas</td>
+                                    <td>Unid.<br/>por<br/>Caja</td>
+                                    <td>Compra<br/>Precio<br/>Caja</td>
+                                    <td>Compra<br/>Precio<br/>Unit.</td>
+                                    <td>Venta<br/>Precio<br/>Caja</td>
+                                    <td>Venta<br/>Precio<br/>Unit.</td>
+                                    <td>Venta<br/>Precio<br/>Desc.</td>
+                                    <td>Ganancia</td>
+                                    <td>Devolucion</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="w3-card-4" align="center">
+                            <img id="ximg" src="../../fotos/productos/producto.png" width="240px" alt="Alps">
+                        </div>
+                        <small><b>Calculo de ventas del producto</b></small>
+                        <table class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cant. Meses</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6"><input type="text" class="form-control input-sm" id="mesVenta" value="1" /></div>
+                                            <div class="col-md-6"><button class="btn btn-xs btn-primary">Calcular</button></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                Cantidad: <b id="canVenta"></b>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Monto Bs.: <b id="totalVenta"></b>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <small><b>Calculo de compras del producto</b></small>
+                        <table class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cant. Meses</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control input-sm" id="mesCompra" value="1" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-xs btn-primary">Calcular</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                Cantidad: <b id="canCompra"></b>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Monto Bs.: <b id="totalCompra"></b>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3><b>REPORTE DE INVENTARIO. SUCURSAL:</b> $sucursal.nombre </h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Costo de Inventario</label>
+            <input id="costoInventario" type="text" class="form-control plaintext" style="font-size: xx-large;">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Cantidad de productos en Inventario</label>
+            <input type="text" id="cantidadInventario" class="form-control plaintext" style="font-size: xx-large;">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fecha de vencimiento</label>
+            <input type="text" id="vencimientoInventario" class="form-control plaintext" style="font-size: xx-large;">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <thead>
+                            <tr class="">
+                                <th>Codigo</th>
+                                <th>Nombre comercial</th>
+                                <th>Generico</th>
+                                <th>Area</th>
+                                <th>Tipo</th>
+                                <th>Precio Venta</th>
+                                <th>Precio Costo</th>
+                                <th>Existencia</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row w3-tiny'<'col-sm-8'<'#tableTitle'>><'col-sm-1'<'#tableHeader'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "../almacen/listaAlmacenDesagrupado"
+            },
+            "columns": [{
+                "data": "codpro","name": "codpro"
+            }, {
+                "data": "nombre","name": "nombre"
+            }, {
+            	"data": "generico","name": "generico"
+            }, {
+            	"data": "xtipo","name": "xtipo"
+            }, {
+            	"data": "xarea","name": "xarea"
+            }, {
+                "data": "pvUnit","name": "pvUnit"
+            }, {
+                "data": "pcUnit","name": "pcUnit"
+            }, {
+                "data": "cantidad","name": "cantidad"
+            }],
+            "createdRow": function(row, data, index) {},
+            "drawCallback": function(settings) {
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+            }
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup', function(e) {
+                if (e.keyCode == 13 || this.value === '') {
+                    if ($('#example').DataTable().column(i).search() !== this.value) {
+                    	$('#example').DataTable().order([i, 'asc']);
+                        $('#example').DataTable().column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+        $('#example tbody').on('click', 'tr', function() {
+            var obj = $('#example').DataTable().row(this).data();
+            $('#costoInventario').val(obj.pcUnit * obj.cantidad);
+            $('#cantidadInventario').val(obj.cantidad);
+            $('#vencimientoInventario').val(obj.fvencimiento?(moment(obj.fvencimiento).format('DD/MM/YY')):'');
+        });
+    });
+</script>

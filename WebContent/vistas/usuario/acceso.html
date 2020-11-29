@@ -1,0 +1,84 @@
+<div id="cajaFormulario" style="display: block;">
+    <form name="formulario" role="form" id="formulario" method="post" action="../usuario/guardarClaveNueva" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <input type="hidden" id="codusu" name="codusu" value="$xuser.codusu">
+        <div class="container">
+            <div>
+                <h4>Cambiar clave</h4>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <input name="xcliente" type="text" class="form-control text-right" readonly value="$xuser.nombre $xuser.ap">
+                        </div>
+                        <div class="form-group">
+                            <label>Login</label>
+                            <input id="login" name="login" type="text" class="form-control text-right" readonly value="$xuser.usuario.login">
+                            <input id="passwd" name="passwd" type="hidden" class="form-control" readonly value="$xuser.usuario.passwd">
+                        </div>
+                        <div class="form-group">
+                            <label>Anterior clave</label>
+                            <input id="claveAnterior" name="claveAnterior" type="password" placeholder="ingrese clave anterior" class="form-control input-sm" data-fv-identical="true" data-fv-identical-field="passwd">
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label>Clave nueva</label>
+                            <input id="claveNueva" name="claveNueva" type="password" placeholder="ingrese clave nueva" class="form-control input-sm" data-fv-notempty="true">
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label>Repetir clave nueva</label>
+                            <input id="claveRepetida" name="claveRepetida" type="password" placeholder="repetir clave nueva" class="form-control input-sm" data-fv-notempty="true" data-fv-identical="true" data-fv-identical-field="claveNueva">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-5">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br/>
+<div id="msgForm" class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div id="msgFormSuccess" style="display: none;">
+            <h1 class="text-success" align="center"><span class="fa fa-check-circle"></span></h1>
+            <div class="alert alert-success" role="alert">
+                <strong>Transacci&oacute;n Exitosa</strong> Se cambio la clave del cliente exitosamente.</div>
+        </div>
+        <div id="msgFormFailed" style="display: none;">
+            <h1 class="text-danger" align="center"><span class="fa fa-times-circle"></span></h1>
+            <div class="alert alert-danger" role="alert">
+                <strong>Transacci&oacute;n fallida</strong> No se logr&oacute; el cambio de la clave. Vuelva a intentarlo</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#formulario').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                $('#cajaFormulario').hide();
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    $('#formulario')[0].reset();
+                    $('#msgFormSuccess').show(1000);
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    $('#msgFormFailed').show(1000);
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+    });
+</script>

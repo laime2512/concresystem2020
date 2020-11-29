@@ -1,0 +1,429 @@
+<div style="display: none;">
+    <form name="formularioVer" role="form" id="formularioVer" method="post" action="#">
+        <div id="divContent">
+            <div class="row">
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Usuario</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input " id="xusuario" name="xusuario" value="" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3 col-form-label-sm">Fecha</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="fecha" name="fecha" value="$pedido.xfecha" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Celular</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="celular" name="celular" value="$!{pedido.celular}" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Direccion</label>
+                    <div class="col-md-9">
+                        <textarea class="w3-input" id="direccion" name="direccion" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">NIT/CI</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="nit" name="nit" value="$!{pedido.cliente.nit}" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Razon Social</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="razon_nit" name="razon_nit" value="$!{pedido.razon_nit}" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Observacion</label>
+                <textarea class="w3-input" id="observacion" name="observacion" readonly="readonly"></textarea>
+            </div>
+            <table id="tableDetalle" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>item</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalFacturar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioFacturar" role="form" id="formularioFacturar" method="post" action="../pedido/adicionarVentaPedido" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 70%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Facturar Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="modalBodyFacturar"></div>
+                    <input type="hidden" id="codped" name="codped" />
+                    <div class="container">
+                        <h3>Confirmar, est&aacute; seguro de facturar el pedido: <b id="pedidoLabel"></b></h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalAnular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioAnular" role="form" id="formularioAnular" method="post" action="../pedido/anular" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 70%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Anular Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="modalBodyAnular"></div>
+                    <input type="hidden" id="codped2" name="codped" />
+                    <input type="hidden" id="codven2" name="codven" />
+                    <div class="container">
+                        <h3>Confirmar, est&aacute; seguro de anular la factura del pedido: <b id="pedidoLabel2"></b></h3>
+                        <div class="form-group row">
+                            <label class="col-md-3">Observacion</label>
+                            <textarea name="observacion" id="observacion2" rows="3" class="form-control input-sm"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalEntregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEntregar" role="form" id="formularioEntregar" method="post" action="../pedido/confirmarEntrega" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 70%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar entrega</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="modalBodyEntregar"></div>
+                    <input type="hidden" id="codped4" name="codped" />
+                    <div class="container">
+                        <h3>Confirmar, est&aacute; seguro de anular la entrega pedido: <b id="pedidoLabel4"></b></h3>
+                        <div class="form-group row">
+                            <label class="col-md-3">Observacion</label>
+                            <div class="col-md-9">
+                                <textarea name="observacion" id="observacion4" rows="3" class="form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../pedido/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 70%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title">Eliminar Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="modalBodyEliminar"></div>
+                    <input type="hidden" id="codped3" name="codped" />
+                    <div class="container">
+                        <h3>Confirmar, est&aacute; seguro de eliminar el pedido: <b id="pedidoLabel3"></b></h3>
+                        <div class="form-group row">
+                            <label class="col-md-3">Observacion</label>
+                            <div class="col-md-9">
+                                <textarea name="observacion" id="observacion3" rows="3" class="form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 70%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                <h4 class="modal-title" id="myModalLabel">Ver Pedido</h4>
+            </div>
+            <div class="modal-body" id="modalBodyVer"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cerrar
+					</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Control de Pedidos</h1>
+            </div>
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Celular</th>
+                                <th>Direccion</th>
+                                <th>Estado del pedido</th>
+                                <th width="500px">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var xtipo = ["Rechazado", "Pendiente", "Enviado", "Entregado"];
+        $("#example").DataTable({
+            oLanguage: {
+                sUrl: "../../js/Spanish.lang"
+            },
+            processing: true,
+            serverSide: true,
+            ajax: {
+                type: "POST",
+                url: "../pedido/lista_x_usuario",
+                data: function(d) {
+                    d.estado = 1;
+                }
+            },
+            columns: [{
+                data: "codped"
+            }, {
+                data: "celular"
+            }, {
+                data: "direccion"
+            }, {
+                data: "estado"
+            }, {
+                data: "codped"
+            }],
+            createdRow: function(row, data, index) {
+                $("td", row)
+                    .eq(0)
+                    .html("Pedido #" + data.codped + " Fecha " + data.xfecha);
+                $("td", row)
+                    .eq(3)
+                    .html(xtipo[data.estado]);
+                var btnGroup =
+                    '<button class="btn btn-sm btn-primary ver"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="' +
+                    data.codped +
+                    '"><i class="fa fa-print"></i> | Ver pedido</button>';
+                if (data.estado == 1) {
+                    //Facturar
+                    btnGroup += '<button class="btn btn-sm btn-success facturar"  data-toggle="tooltip" data-placement="top" title="Facturar" data-id="' + data.codped + '"><i class="fa fa-plus"></i> | Facturar</button>';
+                    btnGroup +=
+                        '<button class="btn btn-sm btn-danger eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="' +
+                        data.codped +
+                        '"><i class="fa fa-remove"></i> | Eliminar pedido</button>';
+                }
+                if (data.estado == 2) {
+                    //Anular
+                    btnGroup += '<button class="btn btn-sm btn-success confirmarEntrega"  data-toggle="tooltip" data-placement="top" title="Confirmar entrega" data-id="' + data.codped + '"><i class="fa fa-check"></i> | confirmar entrega</button>';
+                    btnGroup += '<button class="btn btn-sm btn-danger anular"  data-toggle="tooltip" data-placement="top" title="Anular" data-id="' + data.codped + '"><i class="fa fa-close"></i> | Anular Factura</button>';
+                    btnGroup += '<button class="btn btn-sm btn-info imprimirFactura"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="' + data.codven + '"><i class="fa fa-print"></i> | Imprimir Factura</button>';
+                }
+                if (data.estado == 3) {
+                    btnGroup += '<button class="btn btn-sm btn-info imprimirFactura"  data-toggle="tooltip" data-placement="top" title="Anular" data-id="' + data.codven + '"><i class="fa fa-print"></i> | Imprimir Factura</button>';
+                }
+                $("td", row).eq(4).html('<div class="btn-group">' + btnGroup + "</div>");
+            },
+            drawCallback: function(settings) {
+                $(".ver").click(function() {
+                    $("#formularioVer")[0].reset();
+                    $.post("../pedido/obtener?cod=" + $(this).data("id"), function(result) {
+                            if (result.status) {
+                                viewData(result.data, result.detalles, '#modalBodyVer');
+                                $("#modalVer").modal("show");
+                            } else {
+                                mostrarMensaje("error", "No se realizo con exito la Transaccion");
+                            }
+                        },
+                        "json");
+                });
+                $(".facturar").click(function() {
+                    $("#formularioFacturar")[0].reset();
+                    var cod = $(this).data("id");
+                    $.post("../pedido/obtener?cod=" + cod, function(result) {
+                        viewData(result.data, result.detalles, '#modalBodyFacturar');
+                        $("#pedidoLabel").html(cod);
+                        $("#codped").val(cod);
+                        $("#modalFacturar").modal("show");
+                    });
+                });
+                $(".eliminar").click(function() {
+                    $("#formularioEliminar")[0].reset();
+                    var cod = $(this).data("id");
+                    $.post("../pedido/obtener?cod=" + cod, function(result) {
+                        viewData(result.data, result.detalles, '#modalBodyEliminar');
+                        $('#formularioEliminar').loadJSON(result.data);
+                        $("#pedidoLabel2").html(cod);
+                        $("#modalEliminar").modal("show");
+                    });
+                });
+                $(".anular").click(function() {
+                    $("#formularioAnular")[0].reset();
+                    var cod = $(this).data("id");
+                    $.post("../pedido/obtener?cod=" + cod, function(result) {
+                        viewData(result.data, result.detalles, '#modalBodyAnular');
+                        $('#formularioAnular').loadJSON(result.data);
+                        $("#pedidoLabel3").html(cod);
+                        $("#modalAnular").modal("show");
+                    });
+                });
+                $(".confirmarEntrega").click(function() {
+                    $("#formularioEntregar")[0].reset();
+                    var cod = $(this).data("id");
+                    $.post("../pedido/obtener?cod=" + cod, function(result) {
+                        viewData(result.data, result.detalles, '#modalBodyEntregar');
+                        $('#formularioEntregar').loadJSON(result.data);
+                        $("#pedidoLabel4").html(cod);
+                        $("#modalEntregar").modal("show");
+                    });
+                });
+                $('.imprimirFactura').click(function() {
+                    $("#frameReportes").attr("src", '../venta/imprimirfactura?codven=' + $(this).data('id'));
+                    $("#reportes").modal('show');
+                });
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: "fade",
+                    placement: "bottom"
+                });
+            }
+        });
+
+        function viewData(master, details, idContent) {
+            $("#formularioVer").loadJSON(master);
+            $('#direccion').html(master.direccion);
+            $('#observacion').html(master.observacion);
+            var detailList = details;
+            if (detailList) {
+                let total = 0;
+                let row;
+                $('#tableDetalle > tbody').html('');
+                $('#tableDetalle > tfoot').html('');
+                detailList.forEach(val => {
+                    row = $('<tr></tr>');
+                    $('<td>' + val.codpro + '</td>').appendTo(row);
+                    $('<td>' + val.xproducto + '</td>').appendTo(row);
+                    $('<td>' + val.cantidad + '</td>').appendTo(row);
+                    $('<td>' + val.precio + '</td>').appendTo(row);
+                    $('<td>' + val.subtotal.toFixed(2) + '</td>').appendTo(row);
+                    $('#tableDetalle > tbody:last').append(row);
+                    total += val.subtotal;
+                });
+                row = $('<tr></tr>');
+                $('<td colspan="4" style="text-align:right">Total</td>').appendTo(row);
+                $('<td>' + total.toFixed(2) + '</td>').appendTo(row);
+                $('#tableDetalle > tfoot:last').append(row);
+            } else {
+                var row = $('<tr></tr>');
+                $('<td colspan="5">Sin detalles</td>').appendTo(row);
+                $('#tableDetalle > tbody:last').append(row);
+            }
+            $(idContent).html($('#divContent').html());
+        }
+        $(".estado").click(function() {
+            $("#example")
+                .dataTable()
+                .fnDraw("page");
+        });
+
+        $("#formularioFacturar,#formularioEliminar,#formularioAnular,#formularioEntregar")
+            .formValidation({
+                locale: "es_ES"
+            })
+            .on("success.form.fv", function(e) {
+                e.preventDefault();
+                var $form = $(e.target);
+                $.post(
+                    $form.attr("action"),
+                    $form.serialize(),
+                    function(result) {
+                        if (result.status) {
+                            $form.data("formValidation").resetForm();
+                            $("#formularioFacturar")[0].reset();
+                            mostrarMensaje("info", "Se realizo con exito la Transaccion");
+                        } else {
+                            mostrarMensaje("info", "Se realizo con exito la Transaccion");
+                            //mostrarMensaje('error','No se realizo con exito la Transacciïon');
+                        }
+                        $("#example")
+                            .dataTable()
+                            .fnDraw("page");
+                        $(".modal").modal("hide");
+                    },
+                    "json"
+                );
+            });
+    });
+</script>

@@ -1,0 +1,88 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+<h1>Pedidos del Cliente</h1>
+<h4>Los pedidos estaran pendientes mientras el personal de la empresa les llame para confirmar su pedido.</h4>
+			</div>
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                        	<th>Descripcion</th>
+                        	<th>Celular</th>
+                        	<th>Direccion</th>
+                        	<th>Estado del pedido</th>
+                        	<th width="20px">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	var xtipo=['Rechazado','Pendiente','Realizado'];
+                        	$('#example').DataTable( {
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../venta/lista_x_cliente",
+                      	        	"data": function ( d ) {
+                      	                d.estado = 1;
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codped" },
+                      		              { "data": "celular" },
+                      		            { "data": "direccion" },
+                      		                { "data": "estado" },
+                      		              { "data": "codped" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html('Pedido #'+data.codped+' Fecha '+data.xfecha);
+                      		    	$('td',row).eq(3).html(xtipo[data.estado]);
+                      		    	$('td', row).eq(4).html('<button class="btn btn-primary ver"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="'+data.codped+'"><i class="fa fa-print"></i> </button>');
+                      	        },
+                      	        "drawCallback": function( settings ) {
+                      	        	$('.ver').click(function(){
+                      	        		$("#frameReportes").attr("src", '../venta/imprimirc?codped='+$(this).data('id'));
+                              	        $("#reportes").modal('show');
+                      	        	});
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                      	        }
+                        } );
+                        
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        
+                        $('#formulario').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	          	$('#formulario')[0].reset();
+									$('#example').dataTable().fnDraw('page');
+                      	        	mostrarMensaje('info','Se realizo con exito la Transacción');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito la Transacción');
+                              	}
+                            	$('.modal').modal('hide');
+                      	    }, 'json');
+                          });
+                        });
+                        </script>
+                

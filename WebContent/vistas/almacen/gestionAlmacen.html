@@ -1,0 +1,647 @@
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+                        <thead>
+                            <tr>
+                                <th width="80px">Cod.</th>
+                                <th>Nombre Comercial</th>
+                                <th>Cod. Barra</th>
+                                <th>Tipo</th>
+                                <th>Generico</th>
+                                <th>Proveedor</th>
+                                <th>Unidades</th>
+                                <th>Cajas</th>
+                                <th>Paquetes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="w3-card-4" align="center">
+            <img id="ximg" onclick="onClick(this);" src="../../archivos/producto/producto.png" width="150px" alt="Alps">
+            <div class="w3-container">
+                <table id="tablaInformacionProducto" class="w3-table-all w3-tiny w3-card-4">
+                    <tbody>
+                    	<tr>
+                    	<td colspan="2"><b>Informaci&oacute;n del producto</b> <a class="text-primary" href="#" id="btnInformacionProducto"><span class="fa fa-search"></span> Ver producto</a></td>
+                    	</tr>
+                        <tr>
+                            <td>Cod: <b aria-label="codpro"></b></td>
+                            <td>Categoria: <b aria-label="xcategoria"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Nombre: <b aria-label="xnombre"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Generico: <b aria-label="generico"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Proveedor: <b aria-label="xlaboratorio"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Cod.Barra: <b aria-label="codigobarra"></b></td>
+                            <td>Area: <b aria-label="xarea"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Concentracion: <b aria-label="xconcentracion"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Es controlado: <b aria-label="xcontrolado"></b></td>
+                            <td>Pareto: <b aria-label="pareto"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td >Cantidad existente: </td>
+                            <td>En unidades: <b aria-label="cantidad"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>En cajas: <b id="cantidadCaja"></b></td>
+                            <td>En paquetes: <b aria-label="cantidadPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Precio costo de compra</td>
+                            <td>Por unidad: <b aria-label="pcUnit"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="pcCaja"></b></td>
+                            <td>por paquete: <b aria-label="pcPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Precio p&uacute;blico a la venta</td>
+                            <td>Por unidad: <b aria-label="pvUnit"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="pvCaja"></b></td>
+                            <td>por paquete: <b aria-label="pvPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Inventario M&iacute;nimo</td>
+                            <td>Por unidad: <b aria-label="inventarioMinimoUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="inventarioMinimoCaja"></b></td>
+                            <td>por paquete: <b aria-label="inventarioMinimoPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Porcentaje de venta</td>
+                            <td>Por unidad: <b aria-label="porcentajeUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="porcentajeCaja"></b></td>
+                            <td>por paquete: <b aria-label="porcentajePaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Relacion de cantidad</td>
+                            <td>Unidades por caja: <b aria-label="unixcaja"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Cajas por paquete: <b aria-label="unixpaquete"></b></td>
+                            <td>En Paquetes: <b aria-label="uniEnPaquete"></b></td>
+                        </tr>
+                    </tbody>
+                </table><br/>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+    	<div class="row">
+    		<div class="col-md-6"><img class="w3-modal-content" id="img01" style="width:500px;"></div>
+    		<div class="col-md-6"><br/><br/><table id="tablaInformacionProducto2" class="w3-table-all w3-tiny w3-card-4"></table></div>
+    	</div>
+    </div>
+</div>
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 95%" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label for="">Datos del producto</label>
+                        <table id="tablaVerProducto" class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cod: <b aria-label="codpro"></b><input type="hidden" name="codpro" /></td>
+                                    <td>Nombre: <b aria-label="nombre"></b></td>
+                                    <td>Gen&eacute;rico: <b aria-label="generico"></b></td>
+                                    <td>Categoria: <b aria-label="xcategoria"></b></td>
+                                    <td>Tipo : <b aria-label="xtipo"></b></td>
+                                    <td>Proveedor <b aria-label="xlaboratorio"></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Concentracion: <b aria-label="xconcentracion"></b></td>
+                                    <td>C&oacute;digo de barra: <b aria-label="codigobarra"></b></td>
+                                    <td>Controlado: <b aria-label="xcontrolado"></b></td>
+                                    <td>Pareto: <b aria-label="pareto"></b></td>
+                                    <td>Tipo de margen: <b aria-label="margen"></b></td>
+                                    <td>Area: <b aria-label="xarea"></b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                    	<table class="w3-table-all w3-tiny w3-card-4">
+                                    	<tr>
+                                    		<td><b>Relacion de cantidades</b></td>
+                                    		<td>Unid. por caja <b aria-label="unixcaja"></b></td>
+                                    		<td>Cajas por paquete <b aria-label="unixpaquete"></b></td>
+                                    		<td>En paquetes <b aria-label="uniEnPaquete"></b></td>
+                                    		<td><b>Presentacion</b></td>
+                                    		<td>En unidades <b aria-label="presentacionUnidad"></b></td>
+                                    		<td>En cajas <b aria-label="presentacionCaja"></b></td>
+                                    		<td>En paquetes <b aria-label="presentacionPaquete"></b></td>
+                                    	</tr>
+                                    	</table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                    	<table class="w3-table-all w3-tiny w3-card-4">
+                                    	<tr>
+                                    		<td><b>Porcentaje de venta</b></td>
+                                    		<td>En unidades <b aria-label="porcentajeUnidad"></b>%</td>
+                                    		<td>En cajas <b aria-label="porcentajeCaja"></b>%</td>
+                                    		<td>En paquetes <b aria-label="porcentajePaquete"></b>%</td>
+                                    		<td><b>Inventario como m&iacute;nimo</b></td>
+                                    		<td>En unidades <b aria-label="inventarioMinimoUnidad"></b></td>
+                                    		<td>En cajas <b aria-label="inventarioMinimoCaja"></b></td>
+                                    		<td>En paquetes <b aria-label="inventarioMinimoPaquete"></b></td>
+                                    	</tr>
+                                    	</table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                    	<table class="w3-table-all w3-tiny w3-card-4">
+                                    	<tr>
+                                    		<td><b>Precio de compra</b></td>
+                                    		<td>En unidades <b aria-label="pcUnit"></b></td>
+                                    		<td>En cajas <b aria-label="pcCaja"></b></td>
+                                    		<td>En paquetes <b aria-label="pcPaquete"></b></td>
+                                    		<td><b>Precio de venta</b></td>
+                                    		<td>En unidades <b aria-label="pvUnit"></b></td>
+                                    		<td>En cajas <b aria-label="pvCaja"></b></td>
+                                    		<td>En paquetes <b aria-label="pvPaquete"></b></td>
+                                    	</tr>
+                                    	</table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <div class="row">
+                        	<div class="col-md-12">
+                        	<div class="w3-container">
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="openInfo('infoAlmacen')">Producto en Almacen</button>
+  <button class="w3-bar-item w3-button" onclick="openInfo('infoCompra')">Compras del producto</button>
+  <button class="w3-bar-item w3-button" onclick="openInfo('infoVenta')">Ventas del producto</button>
+  <button class="w3-bar-item w3-button" onclick="openInfo('infoSalida')">Salidas y entradas del producto</button>
+</div>
+
+<div id="infoAlmacen" class="w3-container w3-card-4 tabInfo">
+  <label >Producto en Almacen</label>
+	                        <table id="tablaDetalleAlmacen" class="w3-table-all w3-tiny w3-card-4">
+	                            <thead>
+	                            	<tr>
+	                            		<td rowspan="2">Nro.</td>
+	                            		<td rowspan="2">C&oacute;digo<br>Almacen</td>
+	                                    <td rowspan="2">Fecha<br>Ingreso</td>
+	                                    <td rowspan="2">Fecha<br>Vencimiento</td>
+	                                    <td class="w3-center" colspan="3">Cantidades en</td>
+	                            	</tr>
+	                                <tr>
+	                                    <td class="w3-right-align">Unidad</td>
+	                                    <td class="w3-right-align">Caja</td>
+	                                    <td class="w3-right-align">Paquete</td>
+	                                </tr>
+	                            </thead>
+	                            <tbody></tbody>
+	                        </table>
+							</div>
+							<div id="infoCompra" class="w3-container w3-card-4 tabInfo" style="display:none">
+							  <label>Compras del producto</label>
+							  <div class="dataTable_wrapper">
+							  <table id="tablaCompraProducto" class="w3-table-all w3-tiny w3-card-4" style="width: 100%;">
+							  	<thead>
+							  		<tr>
+							  			<th>Compra</th>
+							  			<th>Fecha</th>
+							  			<th>Cantidad</th>
+							  			<th></th>
+							  			<th>Precio</th>
+							  			<th>Subtotal</th>
+							  		</tr>
+							  	</thead>
+							  </table>
+							  </div>
+							</div>
+							<div id="infoVenta" class="w3-container w3-card-4 tabInfo" style="display:none">
+							  <label>Ventas del producto</label>
+							  <div class="dataTable_wrapper">
+							  <table id="tablaVentaProducto" class="w3-table-all w3-tiny w3-card-4" style="width: 100%;">
+							  	<thead>
+							  		<tr>
+							  			<th>Compra</th>
+							  			<th>Fecha</th>
+							  			<th>Cantidad</th>
+							  			<th></th>
+							  			<th>Subtotal</th>
+							  		</tr>
+							  	</thead>
+							  </table>
+							  </div>
+							</div>
+							<div id="infoSalida" class="w3-container w3-card-4 tabInfo" style="display:none">
+							  <label>Salidas y entradas del producto</label>
+							  <div class="dataTable_wrapper">
+							  <table id="tablaSalidaProducto" class="w3-table-all w3-tiny w3-card-4" style="width: 100%;">
+							  	<thead>
+							  		<tr>
+							  			<th>Cod#</th>
+							  			<th>Fecha</th>
+							  			<th>Tipo</th>
+							  			<th>Transacci&oacute;n</th>
+							  			<th>Cantidad</th>
+							  			<th></th>
+							  			<th>F.Ingreso</th>
+							  			<th>F.Vencimiento</th>
+							  		</tr>
+							  	</thead>
+							  </table>
+							  </div>
+							</div>
+                        	</div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="w3-card-4" align="center">
+                            <img id="ximg" src="../../archivos/producto/producto.png" width="240px" alt="Alps">
+                        </div>
+                        <b>Calculo de ventas del producto</b>
+                        <table class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cant. Meses</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="number" min="1" max="100" step="1" class="form-control input-sm" id="mesVenta" value="1" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-xs btn-primary" id="btnCalcularVentaProducto">Calcular</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Cantidad: <b id="cantidadVenta"></b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Monto Bs.: <b id="totalVenta"></b>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-danger" style="display: none" id="msgCalcularVentaProducto"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <b>Calculo de compras del producto</b>
+                        <table class="w3-table-all w3-tiny w3-card-4">
+                            <tbody>
+                                <tr>
+                                    <td>Cant. Meses</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="number" min="1" max="100" step="1" class="form-control input-sm" id="mesCompra" value="1" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-xs btn-primary" id="btnCalcularCompraProducto">Calcular</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Cantidad: <b id="cantidadCompra"></b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Monto Bs.: <b id="totalCompra"></b>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-danger" style="display: none" id="msgCalcularCompraProducto"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalInformacionProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                <div class="w3-container">
+                <table id="contentInformation" class="w3-table-all w3-card-4"></table>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
+<script type="text/javascript">
+	var productSelected = {};
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        $('#tablaInformacionProducto2').html($('#tablaInformacionProducto').html());
+    }
+    function imgError(image) {
+        $(image).hide();
+    };
+    $(document).ready(function() {
+        let btnGroup = '';
+        $('#btnInformacionProducto').click(function(){
+    		$('#contentInformation').html($('#tablaInformacionProducto').html());
+    		$('#modalInformacionProducto').modal('show');
+    	});
+        var table = $('#example').DataTable({
+            select: true,
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},
+            "processing": true,
+            "dom": "<'row w3-tiny'<'col-sm-7'<'#tableTitle'>><'col-sm-5'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,
+            "ajax": {
+                "type": "GET",
+                "url": "../almacen/listaAlmacen"
+            },
+            "columns": [
+            	{"data": "codpro","name":"codpro"}, 
+            	{"data": "nombre","name":"nombre"}, 
+            	{"data": "codigobarra","name":"codigobarra"}, 
+            	{"data": "xtipo","name":"xtipo"}, 
+            	{"data": "generico","name":"generico"}, 
+            	{"data": "xlaboratorio","name":"xlaboratorio"}, 
+            	{"data": "cantidad","name":"cantidad"}, 
+            	{"data": "cantidadCaja","name":"cantidad"}, 
+            	{"data": "cantidadPaquete","name":"cantidad"}, 
+            	{"data": "codpro","name":"codpro"}
+            ],
+            "createdRow": function(row, data, index) {
+                    btnGroup = '<button class="btn btn-xs btn-info ver"><i class="fa fa-instagram"></i> | Ver</button>';
+                    if ('$user.tipoper' === 'A') {
+                        $('td', row).eq(9).html('<div class="btn-group">' + btnGroup + '</div>');
+                    } else {
+                        $('td', row).eq(9).html('Sin permiso');
+                    }
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Almacen</b></h6>');
+                $('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+            }
+        });
+
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup', function(e) {
+                if (e.keyCode == 13 || this.value === '') {
+                    if ($('#example').DataTable().column(i).search() !== this.value) {
+                    	$('#example').DataTable().order([i, 'asc']);
+                        $('#example').DataTable().column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+        $('#example tbody').on('click', 'tr', function() {
+            let obj = $('#example').DataTable().row(this).data();
+            productSelected = obj;
+            $('#tablaVentaProducto').dataTable().fnDraw();
+            $('#tablaCompraProducto').dataTable().fnDraw();
+            $('#tablaSalidaProducto').dataTable().fnDraw();
+            $('#msgCalcularCompraProducto').hide();
+            $('#ximg').attr('src', '../../archivos/producto/' + obj.foto);
+			obj.xconcentracion = obj.concentracion ? (obj.concentracion + ' ' + obj.xmedida) : '';
+			obj.xnombre = obj.xtipo + ' ' + obj.nombre;
+			obj.xcontrolado = obj.controlado ? 'Si' : 'No';
+			$('#tablaInformacionProducto').loadJSON(obj);
+			$('#tablaVerProducto').loadJSON(obj);
+			$.get('../almacen/obtenerAlmacenPorProducto/'+obj.codpro, function(resp){
+				if(resp.status){
+					$('#tablaDetalleAlmacen > tbody').html('');
+					if(resp.data && resp.data.length > 0){
+						let totalUnidad = 0;
+						resp.data.forEach( (item,ind) =>{
+							let fila = $('<tr></tr>');
+							$('<td>'+(ind+1)+'</td>').appendTo(fila);
+							$('<td>'+item.codalmacen+'</td>').appendTo(fila);
+							$('<td>'+(item.fingreso ? moment(item.fingreso).format('DD/MM/YY'):'')+'</td>').appendTo(fila);
+							$('<td>'+(item.fvencimiento ? moment(item.fvencimiento).format('DD/MM/YY'):'')+'</td>').appendTo(fila);
+							$('<td class="w3-right-align">'+item.cantidad+'</td>').appendTo(fila);
+							totalUnidad += item.cantidad;
+							if(obj.unixcaja){
+								$('<td class="w3-right-align">'+(item.cantidad / obj.unixcaja).toFixed(2)+'</td>').appendTo(fila);
+							}else{
+								$('<td></td>').appendTo(fila);
+							}
+							if(obj.unixcaja && obj.unixpaquete){
+								$('<td class="w3-right-align">'+(item.cantidad / obj.unixcaja / obj.unixpaquete).toFixed(2)+'</td>').appendTo(fila);
+							}else
+								$('<td></td>').appendTo(fila);
+							$('#tablaDetalleAlmacen > tbody:last').append(fila);
+						});
+						let fila = $('<tr></tr>');
+						$('<td class="w3-right-align" colspan="4">Cantidad totales : </td>').appendTo(fila);
+						$('<td class="w3-right-align">'+totalUnidad.toFixed(1)+'</td>').appendTo(fila);
+						if(obj.unixcaja){
+							totalCaja = totalUnidad / obj.unixcaja; 
+							$('<td class="w3-right-align">'+totalCaja.toFixed(1)+'</td>').appendTo(fila);
+						}else
+							$('<td></td>').appendTo(fila);
+						if(obj.unixcaja && obj.unixpaquete){
+							totalPaquete = totalUnidad / obj.unixcaja / obj.unixpaquete; 
+							$('<td class="w3-right-align">'+totalPaquete.toFixed(1)+'</td>').appendTo(fila);
+						}else
+							$('<td></td>').appendTo(fila);
+						$('#tablaDetalleAlmacen > tbody:last').append(fila);
+					}else{
+						let fila = $('<tr></tr>');
+						$('<td colspan="6">Sin detalles</td>').appendTo(fila);
+						$('#tablaDetalleAlmacen > tbody:last').append(fila);
+					}
+				}
+				$('#modalVer').modal('show');
+			});
+        });
+        $('#btnCalcularCompraProducto').click(function(){
+        	$('#msgCalcularCompraProducto').hide();
+        	let xcodpro = $('input[name="codpro"]').val();
+        	let xmes = $('#mesCompra').val();
+        	if(xcodpro && xmes){
+        		$.post('../compra/calcularCompraProducto?codpro='+xcodpro+'&meses='+xmes,function(resp){
+        			if(resp.status){
+        				$('#cantidadCompra').html(resp.data.cantidadcompra+' '+getTipoCantidad(productSelected));
+        				$('#totalCompra').html(resp.data.totalcompra);
+        				if(resp.data.cantidadcompra == 0){
+        					$('#msgCalcularCompraProducto').html('No existen compras de este producto.');
+        					$('#msgCalcularCompraProducto').show(700);	
+        				}
+        			}
+        		});
+        	}else{
+        		mostrarMensaje('error','Valide los datos')
+        	}
+        });
+        $('#btnCalcularVentaProducto').click(function(){
+        	$('#msgCalcularVentaProducto').hide();
+        	let xcodpro = $('input[name="codpro"]').val();
+        	let xmes = $('#mesVenta').val();
+        	if(xcodpro && xmes){
+        		$.post('../venta/calcularVentaProducto?codpro='+xcodpro+'&meses='+xmes,function(resp){
+        			if(resp.status){
+        				$('#cantidadVenta').html(resp.data.cantidadventa+' unidades');
+        				$('#totalVenta').html(resp.data.totalventa);
+        				if(resp.data.cantidadventa == 0){
+        					$('#msgCalcularVentaProducto').html('No existen ventas de este producto.');
+        					$('#msgCalcularVentaProducto').show(700);	
+        				}
+        			}
+        		});
+        	}else{
+        		mostrarMensaje('error','Valide los datos')
+        	}
+        });
+        var tableVentaProducto = $('#tablaVentaProducto').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,
+            "ajax": {
+                "type": "GET","url": "../venta/listaVentaProducto",
+                "data": function(d){
+                	d.codpro = productSelected ? (productSelected.codpro ? productSelected.codpro : 0):0;
+                }
+            },
+            columnDefs:[
+            	{className:'dt-right',targets:[2,4]}
+            ],
+            "columns": [
+            	{"data": "codven","name":"codven"}, 
+            	{"data": "fecha","name":"fecha"}, 
+            	{"data": "cantidad","name":"cantidad"}, 
+            	{"data": "codven","name":"codven"}, 
+            	{"data": "subtotal","name":"subtotal"} 
+            ],
+            "createdRow": function(row, data, index) {
+            	$('td', row).eq(1).html(moment(data.fecha).format('DD/MM/YY'));
+            	$('td', row).eq(3).html('unidades');
+            }
+        });
+        var tableCompraProducto = $('#tablaCompraProducto').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>","serverSide": true,
+            "ajax": {
+                "type": "GET","url": "../compra/listaCompraProducto",
+                "data": function(d){
+                	d.codpro = productSelected ? (productSelected.codpro ? productSelected.codpro : 0):0;
+                }
+            },
+            "columnDefs":[{className:'dt-right',targets:[2,4,5]}],
+            "columns": [
+            	{"data": "codcom","name":"codcom"}, 
+            	{"data": "fecha","name":"fecha"}, 
+            	{"data": "cantidad","name":"cantidad"}, 
+            	{"data": "xtipoCompra","name":"xtipoCompra"},
+            	{"data": "precio","name":"precio"},
+            	{"data": "subtotal","name":"subtotal"} 
+            ],
+            "createdRow": function(row, data, index) {
+            	$('td', row).eq(1).html(moment(data.fecha).format('DD/MM/YY'));
+            }
+        });
+        var tableSalidaProducto = $('#tablaSalidaProducto').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>","serverSide": true,
+            "ajax": {
+                "type": "GET","url": "../salida/listaSalidaProducto",
+                "data": function(d){
+                	d.codpro = productSelected ? (productSelected.codpro ? productSelected.codpro : 0):0;
+                }
+            },
+            "columnDefs":[
+            	{className:'dt-right',targets:[4]},
+            	{className:'w3-center',targets:[3]}
+            ],
+            "columns": [
+            	{"data": "codsal","name":"codsal"}, 
+            	{"data": "fsalida","name":"fsalida"}, 
+            	{"data": "xtipo","name":"tipo"}, 
+            	{"data": "inOut","name":"in_out"},
+            	{"data": "cantidad","name":"cantidad"},
+            	{"data": "cantidad","name":"cantidad"},
+            	{"data": "fingreso","name":"fingreso"},
+            	{"data": "fvencimiento","name":"fvencimiento"}
+            ],
+            "createdRow": function(row, data, index) {
+            	$(row).addClass(data.inOut?'w3-light-green':'w3-red');
+            	$('td',row).eq(0).html((data.inOutSalida?'Ent.':'Sal.')+'#'+data.codsal);
+             	$('td', row).eq(1).html(moment(data.fsalida).format('DD/MM/YY'));
+             	$('td',row).eq(3).html(data.inOut?'<span class="fa fa-plus"></span>':'<span class="fa fa-minus w3-text-white"></span>');
+            	$('td', row).eq(5).html('unidades');
+            }
+        });
+        
+    });
+    function getTipoCantidad(product){
+    	switch(parseInt(product.tipoCompra)){
+    	case 1:
+    		return 'unidades';
+    	case 2:
+    		return 'cajas';
+    	case 3:
+    		return 'paquetes';
+    	default:
+    		return '';
+    	}
+    }
+    function openInfo(infoName) {
+    	  var i;
+    	  var x = document.getElementsByClassName("tabInfo");
+    	  for (i = 0; i < x.length; i++) {
+    	    x[i].style.display = "none";  
+    	  }
+    	  document.getElementById(infoName).style.display = "block";  
+    	}
+</script>

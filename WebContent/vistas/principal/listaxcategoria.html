@@ -1,0 +1,42 @@
+ #if($productos.size()>0)
+<div class="row">
+            #foreach($p in $productos)
+            	<div class="col-lg-4 col-md-6 mb-4">
+	              <div class="card h-100">
+	                <a href="#"><img class="card-img-top img img-thumbnail" src="../../fotos/$p.foto" width="700px" height="250px" alt=""></a>
+	                <div class="card-body">
+	                  <h6 class="card-title">
+	                    <a href="#"  data-id="$p.idproducto" class="enlace-producto">$p.nombre</a>
+	                  </h6>
+	                  <h5>Bs. $p.preciopublico</h5>
+	                  <p class="card-text">$p.presentacion</p>
+	                </div>
+	                <div class="card-footer">
+	                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+	                </div>
+	              </div>
+	            </div>
+            #end
+
+          </div>
+#else
+	<h3 align="center">No exiten productos de esta categoria</h3>
+#end
+<script type="text/javascript">
+$(document).ready(function(){
+// 	$('.enlace-producto').off('click');
+	$('.enlace-producto').click(function(){
+			$.post('../producto/obtener?idproducto='+$(this).data('id'),function(resp){
+				if(resp.status){
+					$('#xprecio').html('Bs. '+resp.data.preciopublico);
+					$('#xnombre').html(resp.data.nombre);
+					$('#xmedida').html(resp.data.cantidad+' '+resp.data.unidadmedida+'(es)');
+					$('#xcategoria').html(resp.data.categoria);
+					$('#xpresentacion').html(resp.data.presentacion);
+					$('#ximagen').attr('src','../../fotos/'+resp.data.foto)
+					$('#modalVista').modal('show');
+				}
+			})
+		})
+})
+</script>

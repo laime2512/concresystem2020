@@ -1,0 +1,152 @@
+<form name="formulario" role="form" id="formulario" method="post" action="../almacen/buscar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <table class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+        <thead>
+            <tr>
+            	<th></th>
+                <th>Laboratorio</th>
+                <th>Clasificacion</th>
+                <th width="100px;">Reporte de ultimos dias</th>
+                <th>Accion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control input-sm" name="codlab" id="codlab" required="required">
+					<option value="">Seleccionar</option>
+					#foreach($l in $laboratorios)
+					<option value="$l.codlab">$l.nombre</option>
+					#end
+				</select>
+                    </div>
+                </td>
+                <td>
+                <div class="form-group">
+                <select name="clasification" id="clasification" class="form-control input-sm" required="required">
+                <option value="">[Seleccionar]</option>
+                <option value="todos">Todos</option>
+                <option value="menorInventarioMinimoUnidad">Menor o igual al inventario minimo de unidades</option>
+                <option value="mayorInventarioMinimoUnidad">Alto en unidades</option>
+                <option value="menorInventarioMinimoCaja">Menor o igual al inventatio minimo de cajas</option>
+                <option value="mayorInventarioMinimoCaja">Alto en cajas</option>
+                <option value="menorInventarioMinimoPaquete">Menor o igual al inventatio minimo de paquetes</option>
+                <option value="mayorInventarioMinimoPaquete">Alto en paquetes</option>
+                </select>
+                </div>
+                </td>
+                <td>
+                <input type="text" class="form-control input-sm" id="dias" name="dias" value="60" required="required"/>
+                </td>
+                <td>
+                    <button id="btnEnviarSearch" type="submit" class="btn btn-primary btn-sm disabled"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                    <button id="btnPrint" type="button" class="btn btn-success btn-sm disabled"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<div class="dataTable_wrapper">
+    <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
+        <thead>
+            <tr>
+                <th width="50px">ID</th>
+                <th width="90px"><input type="checkbox" id="btnCheckAll" name="checkAll" value="1">Check</th>
+                <th>Nombre Comercial</th>
+                <th>Presentacion</th>
+                <th>Laboratorio</th>
+                <th>Min.Unid.</th>
+                <th>Min.Caja</th>
+                <th>Min.Paq.</th>
+                <th>Saldo</th>
+                <th>Vendido</th>
+                <th>Valor</th>
+                <th>Clasificacion</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').chosen({no_results_text: "No se encuentra:",width: '100%'});
+        $('#btnCheckAll').change(function() {
+            $('.productReport').attr("checked", $(this).is(":checked"));        
+        });
+        var table1 =$('#example').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},
+            "dom": "<'row w3-tiny'<'col-sm-4'<'#tableTitle'>><'col-sm-4'<'#tableOption'>><'col-sm-4'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": "../reporte/responseSearchLaboratory",
+                "data": function(d) {
+                    d.codlab = $('#codlab option:selected').val() ? $('#codlab option:selected').val() : -1;
+                    d.clasification = $('#clasification option:selected').val() ? $('#clasification option:selected').val() : '';
+                    d.dias = $('#dias').val();
+                }
+            },
+            "columns": [{
+                "data": "codpro"
+            }, {
+            	"data": "codpro","orderable":false
+            }, {
+                "data": "nombre"
+            }, {
+                "data": "presentacionUnidad"
+            }, {
+                "data": "xlaboratorio"
+            }, {
+                "data": "inventarioMinimoUnidad"
+            }, {
+                "data": "inventarioMinimoCaja"
+            }, {
+                "data": "inventarioMinimoPaquete"
+            }, {
+                "data": "cantidad"
+            }, {
+                "data": "totalVenta"
+            }, {
+                "data": "pcUnit"
+            }, {
+                "data": "cantidad"
+            }
+            ],
+            "createdRow": function(row, data, index) {
+            	//$(row).addClass('w3-hover-blue');
+            	let tipo = $('#clasification option:selected').val();
+            	if(tipo === 'todos') {
+            		$('td', row).eq(11).addClass('bg-'+data.clasificacionUnidadColor);
+            		$('td', row).eq(11).html(data.clasificacionUnidadLiteral);
+            	} else {
+            		if(tipo === 'menorInventarioMinimoUnidad' || tipo === 'mayorInventarioMinimoUnidad') {
+            			$('td', row).eq(11).addClass('bg-'+data.clasificacionUnidadColor);
+                		$('td', row).eq(11).html(data.clasificacionUnidadLiteral);
+            		}
+            		if(tipo === 'menorInventarioMinimoCaja' || tipo === 'mayorInventarioMinimoCaja') {
+            			$('td', row).eq(11).addClass('bg-'+data.clasificacionCajaColor);
+                		$('td', row).eq(11).html(data.clasificacionCajaLiteral);
+            		}
+            		if(tipo === 'menorInventarioMinimoPaquete' || tipo === 'mayorInventarioMinimoPaquete') {
+            			$('td', row).eq(11).addClass('bg-'+data.clasificacionPaqueteColor);
+                		$('td', row).eq(11).html(data.clasificacionPaqueteLiteral);
+            		}
+            	}
+                $('td', row).eq(1).html('<input type="checkbox" class="productReport" name="productSelected" value="'+data.codpro+'">');
+                
+            }
+        });
+        $('#formulario').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            $('#example').dataTable().fnDraw('page');
+        });
+    });
+    
+</script>

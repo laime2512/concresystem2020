@@ -1,0 +1,269 @@
+<form id="formulario1" name="formulario1" action="#" method="post" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <div class="row">
+        <div class="col-md-2">
+            <h3>Promocion</h3>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Fecha de inicio</label>
+                <input type="text" class="form-control input-sm fec" id="fini" name="fini" data-fv-notempty="true" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Fecha de fin</label>
+                <input type="text" class="form-control input-sm fec" id="ffin" name="ffin" data-fv-notempty="true" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Titulo</label>
+                <input type="text" class="form-control input-sm" id="titulo" name="titulo" data-fv-notempty="true" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Descripcion</label>
+                <textarea class="form-control input-sm" name="descripcion" id="descripcion" rows="1"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <form id="formulario2" class="form-inline" name="formulario2" action="#" method="post" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="dataTable_wrapper">
+                    <table id="tableSearchProduct" class="w3-table-all w3-tiny w3-table-hoverable">
+                        <thead>
+                            <tr class="">
+                                <th>Cod.</th>
+                                <th>N. Comercial</th>
+                                <th>Cod. Barra</th>
+                                <th>Tipo</th>
+                                <th>Generico</th>
+                                <th>Unidades</th>
+                                <th>Cajas</th>
+                                <th>Proveedor</th>
+                                <th>Sel.</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="formulario3" name="formulario3" action="../promocion/guardar" method="post" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-trigger="enabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+        data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="table-responsive">
+            <table id="detalles" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                <thead>
+                	<tr>
+                		<td colspan="9" class="w3-center w3-blue">Detalle de productos de promoci&oacute;n</td>
+                	</tr>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Producto</th>
+                        <th>Tipo</th>
+                        <th>Generico</th>
+                        <th>Proveedor</th>
+                        <th width="60px">F. Vencimiento</th>
+                        <th width="30px">Precio</th>
+                        <th width="30px">Descuento</th>
+                        <th width="25px">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="form-data">
+                    <tr id="unit" align="center">
+                        <td colspan="10">Sin ningun detalle</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-3">
+                                    <button type="button" id="cancelar" class="btn btn-sm btn-danger btn-block">Cancelar Promocion</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" id="guardar" class="btn btn-sm btn-success btn-block active">Enviar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var INDICE = 0;
+
+    function validProduct(productSelect) {
+        var res = true;
+        $('.productList').each(function() {
+            if (parseInt($(this).val()) == productSelect)
+                res = false;
+        });
+        return res;
+    }
+
+    function validDetails() {
+        var res = true;
+        $('.descuentoList').each(function() {
+            if ($(this).val() === '')
+                res = false;
+        });
+        return res;
+    }
+    $(document).ready(function() {
+        $('.fec').mask('00/00/00', {
+            placeholder: "dd/MM/yy"
+        });
+
+        function ir_pagina(dir) {
+            $('#contenedor').fadeOut(200, function() {
+                $('#contenedor').load(dir, function() {
+                    $('#contenedor').fadeIn(200);
+                });
+            });
+        }
+        $('#cancelar').click(function() {
+            ir_pagina('../promocion/gestion');
+        });
+        $('#tableSearchProduct').DataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "pageLength": 5,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "../almacen/listaAlmacenDesagrupado"
+            },
+            "columns": [{
+                "data": "codpro","name": "codpro"
+            }, {
+                "data": "nombre","name": "nombre"
+            }, {
+                "data": "codigobarra","name": "codigobarra"
+            }, {
+                "data": "xtipo","name": "xtipo"
+            }, {
+                "data": "generico","name": "generico"
+            }, {
+                "data": "cantidad","name": "cantidad"
+            }, {
+                "data": "cantidadCaja","name": "cantidadCaja"
+            }, {
+                "data": "cantidadPaquete","name": "cantidadPaquete"
+            }, {
+                "data": "codpro","name": "codpro"
+            }],
+            "createdRow": function(row, data, index) {
+                var btnVer = '<a href="#" data-toggle="tooltip" class="" data-placement="top" title="Seleccionar" data-id="' + data.codpro + '">Seleccionar <span class="glyphicon glyphicon-arrow-right"></span></a>';
+                $('td', row).eq(8).html(btnVer);
+            },
+            "drawCallback": function(settings) {}
+        });
+        $('#tableSearchProduct thead tr').clone(true).appendTo('#tableSearchProduct thead');
+        $('#tableSearchProduct thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup', function(e) {
+                if (e.keyCode == 13 || this.value === '') {
+                    if ($('#tableSearchProduct').DataTable().column(i).search() !== this.value) {
+                    	$('#tableSearchProduct').DataTable().order([i, 'asc']);
+                        $('#tableSearchProduct').DataTable().column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+
+        $('#tableSearchProduct tbody').on('click', 'tr', function() {
+            var obj = $('#tableSearchProduct').DataTable().row(this).data();
+            if (validProduct(obj.codpro)) {
+                if (INDICE == 0)
+                    $('#detalles >tbody').html('');
+                INDICE++;
+                var row = $('<tr></tr>');
+                $('<td>' + obj.codpro + '</td>').appendTo(row);
+                $('<td>' + obj.nombre + '</td>').appendTo(row);
+                $('<td>' + obj.xtipo + '</td>').appendTo(row);
+                $('<td>' + obj.generico + '</td>').appendTo(row);
+                $('<td>' + obj.xlaboratorio + '</td>').appendTo(row);
+                $('<td>' + (obj.fvencimiento?moment(obj.fvencimiento).format('DD/MM/YY'):'') + '</td>').appendTo(row);
+                $('<td>' + obj.pvUnit + '</td>').appendTo(row);
+                $('<td>' + '<input type="number" class="descuentoList" name="pDescuentoVec" value="" data-fv-notempty="true" required >' + '</td>').appendTo(row);
+                $('<input type="hidden" class="productList" name="codProVec" value="' + obj.codpro + '" >').appendTo(row);
+                $('<td class="remove-row"><button type="button" class="btn btn-xs btn-danger input-remove-row" data-producto="' + obj.codpro + '"><span class="glyphicon glyphicon-remove"></span></button></td>').appendTo(row);
+                $('#detalles > tbody:last').append(row);
+                $('.input-remove-row').off('click');
+                $('.input-remove-row').click(function() {
+                    INDICE--;
+                    var tr = $(this).closest('tr');
+                    tr.fadeOut(100, function() {
+                        tr.remove();
+                        if ($('#detalles > tbody>tr').length == 0) {
+                            var row = $('<tr id="unit" align="center"></tr>');
+                            $('<td colspan="10">Sin ningun detalle</td>').appendTo(row);
+                            $('#detalles > tbody:last').append(row);
+                        }
+                    });
+                });
+                $('.input-remove-row').on('click');
+            } else {
+                mostrarMensaje('warning', 'El producto ya se encuentra en lista.')
+            }
+        });
+
+        $('#formulario1').formValidation({
+            locale: 'es_ES',
+            excluded: ':disabled'
+        }).on('success.field.fv', function(e, data) {
+            var estadoForm1 = $('#formulario1').data('formValidation').isValid();
+            if (estadoForm1 == true)
+                $('#guardar').removeAttr('disabled');
+        }).on('err.field.fv.', function(e, data) {
+            $('#guardar').attr('disabled', 'disabled');
+        });
+        $('#formulario3').formValidation({
+            locale: 'es_ES'
+        }).on('err.field.fv', function() {
+            $('#total-final').val('');
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $('#formulario1').data('formValidation').validate();
+            var estadoForm1 = $('#formulario1').data('formValidation').isValid();
+            if (estadoForm1 != null && INDICE > 0) {
+                if (validDetails()) {
+                    if (estadoForm1) {
+                        $.post($form.attr('action'), $('#formulario1').serialize() + '&' + $form.serialize(), function(result) {
+                            if (result.status) {
+                                $form.data('formValidation').resetForm();
+                                $.post('../promocion/gestion', function(respuno) {
+                                    mostrarMensaje('info', 'Se realizo con exito la Transaccion.');
+                                    $('#contenedor').html(respuno);
+                                });
+                            } else {
+                                mostrarMensaje('danger', 'No se realizo con exito la transaccion.');
+                            }
+                        }, 'json');
+                    }
+                } else {
+                    mostrarMensaje('error', 'Algunos detalles estan vacios, revisar por favor.');
+                }
+            } else {
+                mostrarMensaje('error', 'Ingrese detalles de la promocion.');
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,543 @@
+<br>
+<div class="modal fade" id="modalInformacionProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                <div class="w3-container">
+                <table id="contentInformation" class="w3-table-all w3-card-4">
+                <tbody>
+                    	<tr>
+                    	<td colspan="2"><b>Informaci&oacute;n del producto</b></td>
+                    	</tr>
+                        <tr>
+                            <td>Cod: <b aria-label="codpro"></b></td>
+                            <td>Categoria: <b aria-label="xcategoria"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Nombre: <b aria-label="nombre"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Generico: <b aria-label="generico"></b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Proveedor: <b aria-label="xlaboratorio"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Cod.Barra: <b aria-label="codigobarra"></b></td>
+                            <td>Area: <b aria-label="xarea"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Concentracion</td>
+                            <td aria-label="xconcentracion"></td>
+                        </tr>
+                        <tr>
+                            <td>Es controlado: <b aria-label="xcontrolado"></b></td>
+                            <td>Pareto: <b aria-label="pareto"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Precio costo de compra</td>
+                            <td>Por unidad: <b aria-label="pcUnit"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="pcCaja"></b></td>
+                            <td>por paquete: <b aria-label="pcPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Precio p&uacute;blico a la venta</td>
+                            <td>Por unidad: <b aria-label="pvUnit"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="pvCaja"></b></td>
+                            <td>por paquete: <b aria-label="pvPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Inventario M&iacute;nimo</td>
+                            <td>Por unidad: <b aria-label="inventarioMinimoUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Por caja: <b aria-label="inventarioMinimoCaja"></b></td>
+                            <td>por paquete: <b aria-label="inventarioMinimoPaquete"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Porcentaje de venta</td>
+                            <td>Por unidad: <b aria-label="porcentajeUnidad"></b></td>
+                        </tr>
+                        <tr class="w3-green">
+                            <td>Por caja: <b aria-label="porcentajeCaja"></b></td>
+                            <td>por paquete: <b aria-label="porcentajePaquete"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Relacion de cantidad</td>
+                            <td>Unidades por paquete: <b aria-label="unixcaja"></b></td>
+                        </tr>
+                        <tr class="w3-blue">
+                            <td>Cajas por paquete: <b aria-label="unixpaquete"></b></td>
+                            <td>Paquetes: <b aria-label="uniEnPaquete"></b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                	<div id="areaAlmacen">
+                	<div class="dataTable_wrapper">
+                		<table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+	                        <thead>
+	                            <tr>
+	                                <th>#Pro.</th>
+	                                <th>Nombre Comercial</th>
+	                                <th>Proveedor</th>
+	                                <th>Generico</th>
+	                                <th>Unidades</th>
+	                                <th>Sel</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody></tbody>
+	                    </table>
+	                </div>
+                	</div>
+                    <div style="display: none;" id="areaProducto">
+                    <div class="dataTable_wrapper">
+                    <table id="tablaProducto" class="w3-table-all w3-tiny w3-hoverable w3-card-4" style="width: 100%;">
+		                <thead>
+		                    <tr>
+		                        <th width="80px">Cod.</th>
+		                        <th>Nombre Comercial</th>
+		                        <th>Generico</th>
+		                        <th>Sel.</th>
+		                    </tr>
+		                </thead>
+		                <tbody></tbody>
+		            </table>
+		            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <form name="formulario1" role="form" id="formulario1" method="post" action="#" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <div class="form-group row">
+                <label class="col-md-6">Fecha</label>
+                <div class="col-md-6">
+                    <input id="fsalida" name="fsalida" type="text" class="form-control input-sm text-right" data-fv-notempty="true" value="$fecha">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Tipo de movimiento</label>
+                <select class="form-control input-sm" id="tipo" name="tipo" data-fv-notempty="true">
+					<option value="" selected="selected">Seleccionar tipo</option>
+					<optgroup label="Salidas de productos">
+					<option value="1">Productos en mal estado</option>
+					<option value="2">Salida a otra farmacia</option>
+					<option value="3">Medicamentos vencidos</option>
+					<option value="4">Perdida de medicamentos</option>
+					<option value="5">Uso de farmacia</option>
+					</optgroup>
+					<optgroup label="Entrada de productos">
+					<option value="7">Aumento manual por el usuario</option>
+					<option value="8">Entrada especial</option>
+					</optgroup>
+				</select>
+            </div>
+            <div class="form-group xdestino" style="display: none;">
+                <label>Sucursal destino</label>
+                <select class="form-control input-sm" id="sucDestino" name="sucDestino">
+					<option value="" selected="selected">Seleccionar tipo</option>
+					#foreach($s in $sucursales)
+					#if($sucursal.codsuc != $s.codsuc)
+					<option value="$s.codsuc">$s.nombre</option>
+					#end
+					#end
+				</select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="in_out" name="in_out" value="false" />
+                <label>Descripcion</label>
+                <textarea class="form-control" name="descripcion" id="descripcion" rows="2"></textarea>
+            </div>
+        </form>
+        <hr>
+        <form name="formulario2" role="form" id="formulario2" method="post" action="#" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <div>
+                <table id="tableProducto" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                    <tr>
+                        <td colspan="3"><b>Detalle del producto</b> <a class="text-primary" href="#" id="btnInformacionProducto"><span class="fa fa-search"></span> Ver producto</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Producto <b aria-label="nombre"></b></td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td colspan="3">C&oacute;digo de almacen: <b aria-label="codalmacen"></b> <b aria-label="xdevolucion"></b></td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td colspan="3">F.Ingreso: <b aria-label="xfingreso"></b>, F. Vencimiento: <b aria-label="xfvencimiento"></b></td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td>Detalle</td>
+                        <td>Cant.Actual</td>
+                        <td>Cant.Nueva</td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td>Cantidad en unidades</td>
+                        <td aria-label="cantidad"></td>
+                        <td id="xunidad_nueva"></td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td>Cantidad en caja</td>
+                        <td aria-label="cantidadCaja"></td>
+                        <td id="xcaja_nueva"></td>
+                    </tr>
+                    <tr class="areaSalida" style="display: none;">
+                        <td>Cantidad en caja</td>
+                        <td aria-label="cantidadPaquete"></td>
+                        <td id="xpaquete_nueva"></td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div class="form-group row">
+                <label class="col-md-6">Cantidad de unidades</label>
+                <div class="col-md-6">
+                    <input id="cantidad" name="cantidad" type="number" min="1" step="1" class="form-control input-sm text-right" data-fv-notempty="true" value="">
+                </div>
+            </div>
+            <div class="form-group row areaFechas" style="display: none;">
+                <label class="col-md-6">Fecha de ingreso</label>
+                <div class="col-md-6">
+                    <input id="fini" name="fini" type="text" class="form-control input-sm text-right fec">
+                </div>
+            </div>
+            <div class="form-group row areaFechas" style="display: none;">
+                <label class="col-md-6">Fecha de vencimiento</label>
+                <div class="col-md-6">
+                    <input id="ffin" name="ffin" type="text" class="form-control input-sm text-right fec">
+                </div>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-success" id="btnAdicionarDetalle" type="submit"> Adicionar detalle</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2">
+        <form name="formulario3" role="form" id="formulario3" method="post" action="../salida/guardar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <div>
+                <table id="tableDetalle" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                    <thead>
+                        <tr>
+                            <td colspan="3" style="text-align:center"><b>Detalle de Salida</b></td>
+                        </tr>
+                        <tr>
+                            <td>Producto</td>
+                            <td>Cantidad</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger btn-sm" id="cancelar">
+					<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+				</button>
+                <button type="submit" id="btnAdicionar" class="btn btn-primary btn-sm">
+					<i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+				</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var selectRow = undefined;
+    var INDICE = 0;
+    var currentSalida = {
+        detalleSalidaList: []
+    };
+
+    function calcularCantidad() {
+        if (selectRow !== null && selectRow !== undefined && selectRow !== '') {
+            let can = $('#cantidad').val();
+            if (can === '' || can === null)
+                can = 0;
+            let resp = selectRow.cantidad - can;
+            $('#xunidad_nueva').html(resp);
+            $('#xcaja_nueva').html(UtilNumeros.obtenerCajasDeUnidades(resp, selectRow.unixcaja).toFixed(2));
+            $('#xpaquete_nueva').html(UtilNumeros.obtenerPaquetesDeUnidades(resp, selectRow.unixcaja, selectRow.unixpaquete).toFixed(2));
+        }
+    }
+    $(document).ready(function() {
+    	$('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+        $('.fec').mask('00/00/00', {
+            placeholder: "dd/MM/yy"
+        });
+        $('#btnInformacionProducto').click(function(){
+        	$('#contentInformation').loadJSON(selectRow);
+    		$('#modalInformacionProducto').modal('show');
+    	});
+        $('#cancelar').click(function() {
+            $('#contenedor').fadeOut(200, function() {
+                $('#contenedor').load('../salida/gestion', function() {
+                    $('#contenedor').fadeIn(200);
+                });
+            });
+        });
+        $('#tipo').on('change', function() {
+        	currentSalida = {
+        			detalleSalidaList : []
+        	}
+        	INDICE=0;
+        	$('#tableDetalle >tbody').html('');
+            let optTipo = parseInt($(this).val());
+        	if (optTipo == 2){
+        		$('.xdestino').show(1000);
+        		$('#areaAlmacen').show(500);
+        		$('.areaSalida').show(500);
+        		$('#areaProducto').hide();
+        		$('.areaFechas').hide();
+        	}else{
+            	$('.xdestino').hide(1000);
+            	if(optTipo == 7 || optTipo == 8){
+            		$('#areaProducto').show(500);
+            		$('.areaFechas').show(500);
+            		$('.areaSalida').hide();
+            		$('#areaAlmacen').hide();
+            	}else{
+            		$('#areaAlmacen').show(500);
+            		$('.areaSalida').show(500);
+            		$('#areaProducto').hide();
+            		$('.areaFechas').hide();
+            	}
+            }
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            if (i < 4) {
+                var title = $(this).text();
+                $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+                $('input', this).on('keyup', function(e) {
+                    if (e.keyCode == 13 || this.value === '') {
+                        if ($('#example').DataTable().column(i).search() !== this.value) {
+                            $('#example').DataTable().column(i).search(this.value).draw();
+                        }
+                    }
+                });
+            } else {
+                $(this).html('');
+            }
+        });
+        var table1 = $('#example').DataTable({"oLanguage": {"sUrl": "../../js/Spanish.lang"},
+            "dom": "<'row w3-tiny'<'col-sm-8'<'#tableTitle'>><'col-sm-4'<'#tableHeader'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "processing": true,"serverSide": true,
+            "ajax": {"type": "GET","url": "../almacen/listaAlmacenDesagrupado"},
+            "columns": [
+            	{"data": "codpro","name":"codpro"}, 
+            	{"data": "nombre","name": "nombre"}, 
+            	{"data": "xlaboratorio","name": "xlaboratorio"}, 
+            	{"data": "generico","name": "generico"}, 
+            	{"data": "cantidad","name": "cantidad"}, 
+            	{"data": "cantidadPaquete","name": "cantidad"}
+            ],
+            "createdRow": function(row, data, index) {
+                var btnSeleccionar = '<a href="#" class="btn btn-xs btn-success seleccionar"  data-toggle="tooltip" data-placement="top" title="Seleccionar"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>';
+                $('td', row).eq(5).html(btnSeleccionar);
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>ADICIONAR SALIDA</b></h6>');
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+            }
+        });
+        $('#example tbody').on('click', 'tr td a.seleccionar', function() {
+            var row = $('#example').DataTable().row($(this).closest('tr')).data();
+            selectRow = row;
+            if(row && !existeDetalle(row.codalmacen)){
+				row.xfingreso = row.fingreso ? moment(row.fingreso).format('DD/MM/YY'):'No tiene';
+				row.xfvencimiento = row.fvencimiento ? moment(row.fvencimiento).format('DD/MM/YY'):'No tiene';
+				row.xdevolucion = row.devolucion ? '(Tiene devolucion)' : '';
+				$('#tableProducto').loadJSON(row);
+				calcularCantidad();
+                setTimeout(function() {
+                    $('#cantidad').focus()
+                }, 500);
+            }else
+                mostrarMensaje('warning', 'El detalle ya existe.');
+        });
+        var tablaProducto = $('#tablaProducto').DataTable({select: true,"oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row w3-tiny'<'col-sm-7'<'#tableTitle2'>><'col-sm-5'<'#tableHeader'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,"ajax": {"type": "POST","url": "../producto/lista"
+            },
+            "pageLength": 10,
+            "columns": [
+            	{"data": "codpro","name":"codpro"}, 
+            	{"data": "nombre","name":"nombre"},  
+            	{"data": "generico","name":"generico"}, 
+            	{"data": "codpro","name":"codpro"}
+            ],
+            "createdRow": function(row, data, index) {
+            	btnAction = '<a class="btn btn-xs btn-primary seleccionar" href="#" data-toggle="tooltip" data-placement="top" title="Modificar"><i class="glyphicon glyphicon-circle-arrow-left"></i> | Seleccionar</a>';
+            	$('td', row).eq(3).html('<div class="btn-group">' + btnAction + '</div>');
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle2').html('<h6><b>ADICIONAR ENTRADA</b></h6>');
+            }
+        });
+        $('#tablaProducto thead tr').clone(true).appendTo('#tablaProducto thead');
+        $('#tablaProducto thead tr:eq(1) th').each(function(i) {
+        	if(i<3){
+        		let title = $(this).text();
+                $(this).html('<input type="text" style="width:87%;" placeholder="' + title + '" />');
+                $('input', this).on('keyup', function(e) {
+                    if (e.keyCode == 13 || this.value === '') {
+                        if ($('#tablaProducto').DataTable().column(i).search() !== this.value) {
+                            $('#tablaProducto').DataTable().column(i).search(this.value).draw();
+                        }
+                    }
+                });
+        	}
+        });
+        $('#tablaProducto tbody').on('click', 'tr td a.seleccionar', function() {
+            let row = $('#tablaProducto').DataTable().row($(this).closest('tr')).data();
+            selectRow = row;
+            $('#tableProducto').loadJSON(row);
+        });
+        $('#cantidad').keyup(function() {
+            calcularCantidad();
+        });
+        function validarTipo() {
+            let tipo = parseInt($('#tipo option:selected').val());
+            if (tipo == 2) {
+                var xsuc = $('#sucDestino option:selected').val();
+                if (xsuc === '' || xsuc == null)
+                    return false;
+                else
+                    return true;
+            }
+            return true;
+        }
+        function existeDetalle(codalm) {
+            if (currentSalida.detalleSalidaList != null && currentSalida.detalleSalidaList.length > 0) {
+                let encontrado = currentSalida.detalleSalidaList.filter(value =>
+                    value.codalm === codalm
+                );
+                return encontrado.length > 0;
+            } else
+                return false;
+        }
+        function eliminarDetalle(codalm) {
+            if (currentSalida.detalleSalidaList != null && currentSalida.detalleSalidaList.length > 0) {
+                let listAux = currentSalida.detalleSalidaList.filter(value =>
+                    value.codalmacen !== codalmacen
+                );
+                currentSalida.detalleSalidaList = listAux;
+            }
+        }
+        $('#formulario2').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('formValidation');
+            if (INDICE == 0)
+                $('#tableDetalle >tbody').html('');
+            INDICE++;
+            var row = $('<tr></tr>');
+            var xcantidad = $('#cantidad').val();
+            $('<td>' + selectRow.nombre + '</td>').appendTo(row);
+            $('<td>' + xcantidad + '</td>').appendTo(row);
+            
+            let currentDetalle = {};
+            currentDetalle.codalmacen = selectRow.codalmacen;
+            currentDetalle.cantidad = xcantidad;
+            currentDetalle.codpro = selectRow.codpro;
+            currentDetalle.codlugar = selectRow.codlugar;
+            
+            let tipo = parseInt($('#tipo option:selected').val());
+            if(tipo == 7 || tipo == 8){
+            	currentDetalle.xfvencimiento = $('#ffin').val();
+                currentDetalle.xfingreso = $('#fini').val();
+            }else{
+            	currentDetalle.xfvencimiento = selectRow.fvencimiento?moment(selectRow.fvencimiento).format('DD/MM/YY'):'';
+                currentDetalle.xfingreso = selectRow.fingreso?moment(selectRow.fingreso).format('DD/MM/YY'):'';
+            }
+            
+            currentSalida.detalleSalidaList.push(currentDetalle);
+
+            $('<td class="remove-row"><button type="button" class="btn btn-xs btn-danger input-remove-row" data-producto="' + selectRow.codalmacen + '"><span class="glyphicon glyphicon-remove"></span></button></td>').appendTo(row);
+            $('#tableDetalle > tbody:last').append(row);
+            $('#formulario2')[0].reset();
+            $('#formulario2').data('formValidation').resetForm();
+            $('.input-remove-row').off('click');
+            $('.input-remove-row').click(function() {
+                INDICE--;
+                eliminarDetalle(parseInt($(this).data('producto')));
+                console.log('Ingreso a detalles eliminar', currentSalida);
+                var tr = $(this).closest('tr');
+                tr.fadeOut(100, function() {
+                    tr.remove();
+                    if ($('#tableDetalle > tbody>tr').length == 0) {
+                        var row = $('<tr id="unit" align="center"></tr>');
+                        $('<td colspan="3">Sin ningun detalle</td>').appendTo(row);
+                        $('#tableDetalle > tbody:last').append(row);
+                    }
+                });
+            });
+            $('.input-remove-row').on('click');
+        });
+        $('#formulario3').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            if (validarTipo()) {
+                currentSalida.fsalida = $('#fsalida').val();
+                currentSalida.tipo = parseInt($('#tipo').val());
+                let xcodSucDestino = $('#sucDestino').val();
+                if (xcodSucDestino && xcodSucDestino !== "")
+                    currentSalida.sucDestino = parseInt(xcodSucDestino);
+                currentSalida.inOut = false;
+                currentSalida.descripcion = $('#descripcion').val();
+                $.ajax({
+                    url: $form.attr('action'),
+                    data: JSON.stringify(currentSalida),
+                    type: 'post', //en este caso
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function(response) {
+                        mostrarMensaje('info', 'Se realizo con exito la transaccion');
+//                         if (response.existArchive) {
+//                             location.href = '../salida/descarga?nameArchive=' + response.archive;
+//                         }
+                        $('#contenedor').fadeOut(200, function() {
+                            $('#contenedor').load('../salida/gestion', function() {
+                                $('#contenedor').fadeIn(200);
+                            });
+                        });
+                    },
+                    error: function(error) {
+                        mostrarMensaje('error', 'No se recupero');
+                    }
+                });
+            } else {
+                mostrarMensaje('error', 'Seleccionar sucursal de destino');
+            }
+        });
+    });
+</script>

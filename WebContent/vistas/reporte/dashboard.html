@@ -1,0 +1,237 @@
+<div>
+<br />
+<div class="w3-card">
+<br />
+<div class="row">
+	<div class="col-md-4">
+	<div class="w3-card-4">
+	<header class="w3-container">
+		<h4><b id="fechaDashboard"></b></h4>
+		<h3><b id="fechaDashboard">Sucursal: $sucursal</b></h3>
+	</header>
+	<div class="w3-container">
+	<canvas  id="myChartPie" width="200" height="200" aria-label="Informe Semanal 2" role="img"></canvas>
+	<br /><br />
+	</div>
+	</div>
+	</div>
+	<div class="col-md-5">
+	<div class="w3-card-4">
+	<div class="w3-container">
+	<canvas  id="myChart" width="200" height="200" aria-label="Informe Semanal 1" role="img"></canvas>
+	</div>
+	</div>
+	</div>
+	<div class="col-md-3">
+	<div class="w3-card w3-card-4">
+		<header class="w3-container">
+			<h4 class="w3-center"><b>Informe Semanal de Ventas</b></h4>
+		</header>
+		<div class="w3-container">
+		<ul class="w3-ul " id="listaSemana">
+		</ul>
+		</div>
+	</div>
+	</div>
+</div>
+<br />
+</div>
+
+<div class="row my-2" >
+	<div class="col-md-12" >
+	<div class="chart-container" >
+    <canvas  id="myChartLine"></canvas>
+	</div>
+	</div>
+</div>
+
+</div>
+<script>
+var dataBackgroundColor=[
+	'rgba(255, 0, 0, 0.6)',
+	'rgba(255, 255, 50, 0.6)',
+	'rgba(0, 255, 0, 0.6)',
+	'rgba(0, 255, 255, 0.6)',
+	'rgba(0, 128, 128, 0.6)',
+	'#36A2EB',
+	'rgba(128, 0, 128, 0.6)'
+]
+var dataBorderColor=[
+	'rgba(255, 99, 132, 1)',
+	'rgba(255, 255, 0, 1)',
+	'rgba(0, 255, 0, 1)',
+	'rgba(0, 255, 255, 1)',
+	'rgba(0, 128, 128, 1)',
+	'rgba(0, 0, 255, 1)',
+	'rgba(128, 0, 128, 1)'
+]
+var ctx = document.getElementById('myChart');
+var ctxDoughnut = document.getElementById('myChartPie');
+var ctxLine = document.getElementById('myChartLine');
+var myChart = new Chart(ctx, {
+	type:'bar',
+    data: {
+        labels: [],
+        datasets: [{
+        	type: 'bar',
+        	label:'Ocultar barras',
+            data: [],
+            backgroundColor: dataBackgroundColor,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        },
+        {
+        	type: 'line',
+        	label:'Ocultar lineas',
+        	fill: false,
+            data: [],
+            backgroundColor: 'rgba(128, 0, 128, 1)'
+        }
+        ]
+    },
+    options: {
+    	responsive:true,
+    	title: {
+            display: true,
+            text: 'Reporte de ventas semanal'
+        },
+    	scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        plugins:{
+        	label: {
+        		render:'value'
+        	}
+        }
+    }
+});
+var myDoughnutChart = new Chart(ctxDoughnut, {
+    type: 'doughnut',
+    data: {
+    	labels: [],
+        datasets: [{
+            label: [],
+            data: [],
+            backgroundColor: dataBackgroundColor,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }
+        ]
+    },
+    options: {
+    	responsive:true,
+    	title: {
+            display: true,
+            text: 'Reporte de ventas semanal'
+        },
+        plugins:{
+        	label:{
+        		render: 'percentage',
+            	fontStyle: 'bold'
+        	}
+        }
+    }
+});
+var myChartLine = new Chart(ctxLine, {
+    type: 'line',
+    data: {
+    	labels: [],
+        datasets: [{
+        	fill:'start',
+            label: 'Ocultar lineas',
+            data: [],
+            backgroundColor: dataBackgroundColor,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }
+        ]
+    },
+    options: {
+    	responsive:true,
+    	aspectRatio:1,
+    	title: {
+            display: true,
+            text: 'Reporte de ventas de los ultimos 30 dias'
+        },
+        plugins:{
+        	label:{
+        		render: 'value',
+            	fontStyle: 'bold'
+        	}
+        },
+    	scales: {
+            yAxes: [{
+            	stacked: true,
+            	ticks: {
+                    stepSize :1000
+                }
+            }]
+        }
+    }
+});
+ajax_chart(myChart, myDoughnutChart, myChartLine, '../venta/reporteVenta');
+myChartLine.height = 500;
+myChartLine.update();
+function ajax_chart(chart, doughnut, chartLine, url, data) {
+    var data = data || {};
+    const dias = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
+    const arrayDias = [];
+    const arrayVentas = [];
+    const arrayDiasMensual = [];
+    const arrayVentasMensual = [];
+    $.getJSON(url, data).done(function(response) {
+    	if(response.status){
+    		let total = 0;
+			response.lista.forEach((element,index) =>{
+				arrayDias.push(dias[element.ndia])
+				arrayVentas.push(element.sum)
+				calcularTotal((index+1),dias[element.ndia],element.sum);
+				total += element.sum
+			})
+			response.listaMensual.forEach(element =>{
+				arrayDiasMensual.push(dias[element.ndia])
+				arrayVentasMensual.push(element.sum)
+			})
+			calcularTotal('R','<b>TOTAL BS.</b>',total.toFixed(2));
+			chart.data.labels = arrayDias;
+			chart.data.datasets[0].data = arrayVentas;
+			chart.data.datasets[1].data = arrayVentas;
+			chart.plugins = arrayDias;
+	        chart.update();
+	        
+	        doughnut.data.labels = arrayDias;
+	        doughnut.data.datasets[0].data = arrayVentas;
+	        doughnut.plugins = arrayDias;
+	        doughnut.update();
+	        
+	        chartLine.data.labels = arrayDiasMensual;
+	        chartLine.data.datasets[0].data = arrayVentasMensual;
+	        chartLine.options.elements.line.tension = 0.000001;
+	        chartLine.update();
+	        obtenerActual();
+		}
+    });
+}
+function calcularTotal(index,dia, total){
+	let item = '<li class="w3-bar">'+
+		  '<span class="w3-bar-item w3-button  w3-right">'+total+'</span>'+
+		  '<div class="w3-bar-item">'+
+		  	'<span >'+index+'.- '+dia+'</span>'+
+		  '</div>'+
+		  '</li>';
+		  $('#listaSemana').append(item);
+}
+function obtenerActual(){
+	var ahora = new Date();
+    var dias = new Array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
+    var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+    var hoy = dias[ahora.getDay()] + ', ' + ahora.getDate() + ' de ' + meses[(ahora.getMonth())] + ' del ' + ahora.getFullYear();
+    $('#fechaDashboard').html('Fecha : ' + hoy);
+}
+</script>
+
+

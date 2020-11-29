@@ -1,0 +1,205 @@
+<div style="display: none;">
+    <form name="formularioVer" role="form" id="formularioVer" method="post" action="#">
+        <div id="divContent">
+            <div class="row">
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Usuario</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input " id="fecha" name="fecha" value="$pedido.xusuario" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3 col-form-label-sm">Fecha</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="fecha" name="fecha" value="$pedido.xfecha" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Celular</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="celular" name="celular" value="$!{pedido.celular}" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Direccion</label>
+                    <div class="col-md-9">
+                        <textarea class="w3-input" id="direccion" name="direccion" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">NIT/CI</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="nit" name="nit" value="$!{pedido.cliente.nit}" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-4 form-group row">
+                    <label class="col-md-3">Razon Social</label>
+                    <div class="col-md-9">
+                        <input type="text" class="w3-input" id="razon_nit" name="razon_nit" value="$!{pedido.razon_nit}" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Observacion</label>
+                <textarea class="w3-input" id="observacion" name="observacion" readonly="readonly"></textarea>
+            </div>
+            <table id="tableDetalle" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>item</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 70%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                <h4 class="modal-title" id="myModalLabel">Ver Pedido</h4>
+            </div>
+            <div class="modal-body" id="modalBodyVer"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cerrar
+					</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+<h1>Pedidos del Cliente</h1>
+<h4>Los pedidos estaran pendientes mientras el personal de la empresa les llame para confirmar su pedido.</h4>
+			</div>
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                        	<th>Descripcion</th>
+                        	<th>Celular</th>
+                        	<th>Direccion</th>
+                        	<th>Estado del pedido</th>
+                        	<th width="20px">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	var xtipo=['Rechazado','Pendiente','Realizado'];
+                        	$('#example').DataTable( {
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../pedido/lista_x_cliente",
+                      	        	"data": function ( d ) {
+                      	                d.estado = 1;
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codped" },
+                      		              	{ "data": "celular" },
+                      		            	{ "data": "direccion" },
+                      		                { "data": "estado" },
+                      		              	{ "data": "codped" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html('Pedido #'+data.codped+' Fecha '+data.xfecha);
+                      		    	$('td',row).eq(3).html(xtipo[data.estado]);
+                      		    	$('td', row).eq(4).html('<button class="btn btn-primary ver"  data-toggle="tooltip" data-placement="top" title="Imprimir" data-id="'+data.codped+'"><i class="fa fa-print"></i> </button>');
+                      	        },
+                      	        "drawCallback": function( settings ) {
+                      	        	$(".ver").click(function() {
+                                        $("#formularioVer")[0].reset();
+                                        $.post("../pedido/obtener?cod=" + $(this).data("id"), function(result) {
+                                                if (result.status) {
+                                                    viewData(result.data, result.detalles, '#modalBodyVer');
+                                                    $("#modalVer").modal("show");
+                                                } else {
+                                                    mostrarMensaje("error", "No se realizo con exito la Transaccion");
+                                                }
+                                            },
+                                            "json");
+                                    });
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                      	        }
+                        } );
+                        
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        function viewData(master, details, idContent) {
+                            $("#formularioVer").loadJSON(master);
+                            var detailList = details;
+                            if (detailList) {
+                                let total = 0;
+                                let row;
+                                $('#tableDetalle > tbody').html('');
+                                $('#tableDetalle > tfoot').html('');
+                                detailList.forEach(val => {
+                                    row = $('<tr></tr>');
+                                    $('<td>' + val.codpro + '</td>').appendTo(row);
+                                    $('<td>' + val.xproducto + '</td>').appendTo(row);
+                                    $('<td>' + val.cantidad + '</td>').appendTo(row);
+                                    $('<td>' + val.precio + '</td>').appendTo(row);
+                                    $('<td>' + val.subtotal.toFixed(2) + '</td>').appendTo(row);
+                                    $('#tableDetalle > tbody:last').append(row);
+                                    total += val.subtotal;
+                                });
+                                row = $('<tr></tr>');
+                                $('<td colspan="4" style="text-align:right">Total</td>').appendTo(row);
+                                $('<td>' + total.toFixed(2) + '</td>').appendTo(row);
+                                $('#tableDetalle > tfoot:last').append(row);
+                            } else {
+                                var row = $('<tr></tr>');
+                                $('<td colspan="5">Sin detalles</td>').appendTo(row);
+                                $('#tableDetalle > tbody:last').append(row);
+                            }
+                            $(idContent).html($('#divContent').html());
+                        }
+                        $('#formularioVer').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	          	$('#formulario')[0].reset();
+									$('#example').dataTable().fnDraw('page');
+                      	        	mostrarMensaje('info','Se realizo con exito la Transacción');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito la Transacción');
+                              	}
+                            	$('.modal').modal('hide');
+                      	    }, 'json');
+                          });
+                        });
+                        </script>
+                

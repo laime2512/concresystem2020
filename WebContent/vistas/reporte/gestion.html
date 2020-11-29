@@ -1,0 +1,576 @@
+<br/>
+<form id="formulario1" method="post" action="../reporte/plantilla1" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <table class="w3-table w3-striped w3-tiny w3-card-4">
+        <tbody>
+        <tr>
+                <td width="560px"><h6><b>Reporte de transacciones generales, de la sucursal: $xsucursal</b></h6></td>
+                <td width="160px"><h6>Fecha inicio</h6></td>
+                <td width="160px"><h6>Fecha final</h6></td>
+                <td width="80px"><h6>Tipo</h6></td>
+                <td width="80px"><h6>Acci&oacute;n</h6></td>
+                <td rowspan="2"><div class="alert alert-info"><b>Descripci&oacute;n</b><p id="descriptionForm1"></p></div></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" name="tipo" id="tipo1" data-fv-notempty="true">
+					<option value="">[seleccionar]</option>
+					<option value="1" title="Reporta las compras realizadas de forma general desde un rango de fechas de la sucursal $xsucursal.">Informe de compras</option>
+					<option value="5" title="Reporta las compras realizadas de forma detallada desde un rango de fechas de la sucursal $xsucursal">Informe detalle de compras</option>
+					<option value="2" title="Reporta las ventas realizadas de forma general desde un rango de fechas de la sucursal $xsucursal">Informe de ventas</option>
+					<option value="6" title="Reporta las ventas realizadas de forma detallada desde un rango de fechas de la sucursal $xsucursal">Informe detalle de ventas</option>
+					<option value="4" title="Reporta el informe de las cajas de forma  general realizadas desde un rango de fechas en la sucursal $xsucursal">Informe de caja</option>
+					<option value="7" title="Reporta el informe de las cajas de forma detallada realiizadas desde un rango de fechas en la sucursal $xsucursal">Informe detalle de caja</option>
+					<option value="8" title="Reporta las facturas realizadas desde un rango de fechas en la sucursal $xsucursal">Informe de facturas</option>
+					<option value="9" title="Reporta los pedidos realizados desde un rango de fechas en la sucursal $xsucursal">Informe de pedidos</option>
+				</select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            <input type='text' class="form-control input-sm iconDate" maxlength="10" readonly="readonly" id="fini1" name="fini" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date dateField'>
+                            <input type='text' class="form-control input-sm iconDate" readonly="readonly" id="ffin1" name="ffin" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select name="display" id="display1" class="form-control" data-fv-notempty="true">
+						<option value="">[seleccionar]</option>
+						<option value="inline">En linea</option>
+						<option value="offline">Descargar</option>
+					</select>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" id="btnImprimir1" class="btn btn-sm btn-primary">Imprimir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<br />
+<form id="formulario2" method="post" action="../reporte/plantilla2" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <table class="w3-table w3-striped w3-tiny w3-card-4">
+        <tbody>
+        <tr>
+                <td width="400px"><h6><b>Transacciones por Usuario: $xsucursal</b></h6></td>
+                <td width="160px"><h6>Categoria</h6></td>
+                <td width="160px"><h6>Fecha inicio</h6></td>
+                <td width="160px"><h6>Fecha final</h6></td>
+                <td width="160px"><h6>Tipo</h6></td>
+                <td width="70px"><h6>Acci&oacute;n</h6></td>
+                <td rowspan="2"><div class="alert alert-info"><b>Descripci&oacute;n </b><p id="descriptionForm2"></p></div></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" name="user" id="user2" data-fv-notempty="true">
+								<option value="">[seleccionar]</option>
+								#foreach($u in $usuarios)
+								#if($u.es_usuario == 1)
+								<option value="$u.codusu">$!{u.codusu} $!{u.nombre} $!{u.ap} $!{u.am}</option>
+								#end
+								#end
+							</select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" name="tipo" id="tipo2" data-fv-notempty="true">
+								<option value="">[seleccionar]</option>
+								<option value="1" title="Reporta las compras realizadas de forma general por el usuario desde un rango de fechas de la sucursal $xsucursal.">Compras</option>
+								<option value="2" title="Reporta las compras realizadas de forma detallada por el usuario desde un rango de fechas de la sucursal $xsucursal">Detalle de compras</option>
+								<option value="3" title="Reporta las ventas realizadas de forma general por el usuario desde un rango de fechas de la sucursal $xsucursal">Ventas</option>
+								<option value="4" title="Reporta las ventas realizadas de forma detallada por el usuario desde un rango de fechas de la sucursal $xsucursal">Detalle de ventas</option>
+								<option value="5" title="Reporta el informe de las cajas de forma  general realizadas por el usuario desde un rango de fechas en la sucursal $xsucursal">Informe de caja</option>
+								<option value="6" title="Reporta el informe de las cajas de forma detallada realiizadas por el usuario desde un rango de fechas en la sucursal $xsucursal">Informe de los detalles de caja</option>
+							</select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date dateField'>
+                            <input type='text' class="form-control input-sm iconDate" id="fini2" readonly="readonly" name="fini" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date dateField'>
+                            <input type='text' class="form-control input-sm iconDate" id="ffin2" readonly="readonly" name="ffin" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+				                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select name="display" id="display2" class="form-control" data-fv-notempty="true">
+									<option value="">[seleccionar]</option>
+									<option value="inline">En linea</option>
+									<option value="offline">Descargar</option>
+								</select>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" id="btnImprimir2" class="btn btn-sm btn-primary">Imprimir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <form id="formulario3" method="post" action="../reporte/plantilla3" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <table class="w3-table w3-striped w3-tiny w3-card-4">
+                <tbody>
+                <tr>
+                        <td width="400px"><h6><b>Informe estadistico: $xsucursal</b></h6></td>
+                        <td width="160px"><h6>Fecha Inicio</h6></td>
+                        <td width="160px"><h6>Fecha Final</h6></td>
+                        <td width="120px"><h6>Cantidad</h6></td>
+                        <td width="80px"><h6>Acci&oacute;n</h6></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="hidden" name="display" id="display3" value="inline" />
+                                <select class="form-control" name="tipo" id="tipo3">
+								<option value="">Seleccionar</option>
+								<option value="1" title="Reporta los productos mas vendidos en la sucursal $xsucursal, en un rango de fechas mostrando la cantidad de registros que indique el usuario.">Informe de los productos mas vendido</option>
+								<option value="2" title="">Informe de las fechas mas vendidas</option>
+								<option value="3">Informe de las fechas con mas compras</option>
+							</select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class='input-group date dateField'>
+                                    <input type='text' class="form-control input-sm iconDate" id="fini3" readonly="readonly" name="fini" data-fv-notempty="true" />
+                                    <span class="input-group-addon input-sm btn-success active">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class='input-group date dateField'>
+                                    <input type='text' class="form-control input-sm iconDate" id="ffin3" readonly="readonly" name="ffin" data-fv-notempty="true" />
+                                    <span class="input-group-addon input-sm btn-success active">
+				                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" id="limite" name="limite" data-fv-notempty="true" data-fv-integer="true" />
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" id="btnImprimir3" class="btn btn-xs btn-primary">Imprimir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form id="formulario5" method="post" action="../reporte/plantilla5" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <table class="w3-table w3-striped w3-tiny w3-card-4">
+                <thead>
+                    <tr>
+                        <td><h6><b>Informes de almacen. Sucursal: $xsucursal</b></h6></td>
+                        <td width="80px"><h6>Acci&oacute;n</h6></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="hidden" name="display" id="display5" value="inline" />
+                                <select class="form-control" name="tipo" id="tipo5" data-fv-notempty="true">
+											<option value="">Seleccionar</option>
+											<option value="1">Lista de Inventario</option>
+											<option value="5">Lista de productos en con stock cero</option>
+											<option value="4">Lista de productos en excel</option>
+											<option value="2">Productos incompletos</option>
+											<option value="3">Productos repetidos</option>
+										</select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" id="btnImprimir3" class="btn btn-sm btn-primary">Imprimir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <form id="formulario6" method="post" action="../reporte/plantilla6" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <table class="w3-table w3-striped w3-tiny w3-card-4">
+                <tbody>
+                <tr>
+                        <td colspan="4"><h6><b>Valuacion de inventario. Sucursal: $xsucursal</b></h6></td>
+                        <td width="80px"><h6>Acci&oacute;n</h6></td>
+                        <td rowspan="2">
+                        <div class="alert alert-info"><b>Descripci&oacute;n</b>
+                        <p>Reporta la valoraci&oacute;n del inventario en el rango de fechas especificado.</p>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">
+                            <h6>Mes inicial: </h6>
+                        </td>
+                        <td width="150px">
+                            <div class="form-group">
+                                <input type="hidden" name="display" id="display5" value="inline" />
+                                <select class="form-control" name="mesInicio" id="mesInicio" data-fv-notempty="true">
+												<option value="">Seleccionar</option>
+												<option value="01">Enero</option>
+												<option value="02">Febrero</option>
+												<option value="03">Marzo</option>
+												<option value="04">Abril</option>
+												<option value="05">Mayo</option>
+												<option value="06">Junio</option>
+												<option value="07">Julio</option>
+												<option value="08">Agosto</option>
+												<option value="09">Septiembre</option>
+												<option value="10">Octubre</option>
+												<option value="11">Noviembre</option>
+												<option value="12">Diciembre</option>
+											</select>
+                            </div>
+                        </td>
+                        <td width="100px" style="text-align: right;"><h6>Mes final: </h6></td>
+                        <td width="150px;">
+                            <div class="form-group">
+                                <select class="form-control" name="mesFin" id="mesFin" data-fv-notempty="true">
+														<option value="">Seleccionar</option>
+														<option value="01">Enero</option>
+														<option value="02">Febrero</option>
+														<option value="03">Marzo</option>
+														<option value="04">Abril</option>
+														<option value="05">Mayo</option>
+														<option value="06">Junio</option>
+														<option value="07">Julio</option>
+														<option value="08">Agosto</option>
+														<option value="09">Septiembre</option>
+														<option value="10">Octubre</option>
+														<option value="11">Noviembre</option>
+														<option value="12">Diciembre</option>
+													</select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" id="btnImprimir6" class="btn btn-sm btn-primary">Imprimir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-4">
+        <form id="formulario9" method="post" action="../reporte/plantilla9" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <table class="w3-table w3-striped w3-tiny w3-card-4">
+                <thead>
+                    <tr>
+                        <td colspan="3"><h6><b>Informe de almacen por categoria</b></h6></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h6>Categoria</h6></td>
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control" name="codtip" id="codtip9" data-fv-notempty="true">
+                                                        <option value="">Seleccionar</option>
+                                                        #foreach($t in $tipos)
+                                                        <option value="$t.codtip">$t.nomtip</option>
+                                                        #end
+													</select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" id="btnImprimir9" class="btn btn-sm btn-primary">Imprimir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <form id="formulario6" method="post" action="../reporte/plantilla10" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+            <table class="w3-table w3-striped w3-tiny w3-card-4">
+                <thead>
+                    <tr>
+                        <td colspan="4"><h6><b>Informe de producto con rango fechas en vencimiento</b></h6></td>
+                        <td width="80px"><h6>Acci&oacute;n</h6></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h6>Desde</h6>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="hidden" name="display" id="display10" value="inline" />
+                                <select class="form-control" name="mesInicio" id="mesInicio10" data-fv-notempty="true">
+												<option value="">Seleccionar</option>
+												<option value="01">Enero</option>
+												<option value="02">Febrero</option>
+												<option value="03">Marzo</option>
+												<option value="04">Abril</option>
+												<option value="05">Mayo</option>
+												<option value="06">Junio</option>
+												<option value="07">Julio</option>
+												<option value="08">Agosto</option>
+												<option value="09">Septiembre</option>
+												<option value="10">Octubre</option>
+												<option value="11">Noviembre</option>
+												<option value="12">Diciembre</option>
+											</select>
+                            </div>
+                        </td>
+                        <td><h6>Hasta</h6></td>
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control" name="mesFin" id="mesFin10" data-fv-notempty="true">
+														<option value="">Seleccionar</option>
+														<option value="01">Enero</option>
+														<option value="02">Febrero</option>
+														<option value="03">Marzo</option>
+														<option value="04">Abril</option>
+														<option value="05">Mayo</option>
+														<option value="06">Junio</option>
+														<option value="07">Julio</option>
+														<option value="08">Agosto</option>
+														<option value="09">Septiembre</option>
+														<option value="10">Octubre</option>
+														<option value="11">Noviembre</option>
+														<option value="12">Diciembre</option>
+													</select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" id="btnImprimir10" class="btn btn-sm btn-primary">Imprimir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<br />
+<div class="row">
+	<div class="col-md-4">
+		<form id="formulario11" method="post" action="../reporte/reportFactura" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <table class="w3-table w3-striped w3-tiny w3-card-4">
+        <thead>
+        	<tr>
+        		<td colspan="3">
+        			<h6><b>Reporte de facturacion - Libro de Ventas</b></h6>
+        		</td>
+        	</tr>
+        </thead>
+        <tbody>
+        <tr>
+        	<td width="160px"><h6>Fecha inicio</h6></td>
+        	<td width="160px"><h6>Fecha final</h6></td>
+        	<td width="80px"><h6>Acci&oacute;n</h6></td>
+        </tr>
+        <tr>
+        	<td>
+        		<div class="form-group">
+        			<div class='input-group date'>
+                            <input type='text' class="form-control input-sm iconDate" maxlength="10" readonly="readonly" id="fini11" name="fini" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date dateField'>
+                            <input type='text' class="form-control input-sm iconDate" readonly="readonly" id="ffin11" name="ffin" data-fv-notempty="true" />
+                            <span class="input-group-addon input-sm btn-success active">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                
+                <td>
+                    <button type="submit" id="btnImprimir11" class="btn btn-sm btn-primary">Imprimir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+	</div>
+</div>
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.iconDate').datepicker({
+        	language:'es',
+            timepicker:false,
+            autoClose: true
+        });
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+        $('#tipo2').chosen().change(function(){
+        	let description = $('#tipo2 option:selected').attr('title');
+        	if(description)
+        		$('#descriptionForm2').html($('#tipo2 option:selected').attr('title'));
+        	else
+        		$('#descriptionForm2').html('');
+        })
+        $('#tipo1').chosen().change(function(){
+        	let description = $('#tipo1 option:selected').attr('title');
+        	if(description)
+        		$('#descriptionForm1').html($('#tipo1 option:selected').attr('title'));
+        	else
+        		$('#descriptionForm1').html('');
+        })
+        $('#enviar').click(function() {
+            $("#frameReportes").attr("src", '../venta/ver?codusuario=' + $('#codusuario').val() + '&fecha=' + $('#fecha11').val());
+            $("#reportes").modal('show');
+        });
+        $('#btnBuscarCode').click(function() {
+            var categoria = $('#categoria').val();
+            var code = $('#codeSearch').val();
+            var dirUrl = '';
+            if (categoria != null && code != null) {
+                switch (parseInt(categoria)) {
+                    case 1:
+                        dirUrl = '../compra/obtener=codcompra=';
+                        break;
+                    case 2:
+                        dirUrl = '../venta/obtener?codven=';
+                        break;
+                    case 3:
+                        dirUrl = '../caja/obtener?codcaja=';
+                        break;
+                    case 4:
+                        dirUrl = '../producto/obtener?codpro=';
+                        break;
+                    case 5:
+                        dirUrl = '../factura/obtener';
+                        break;
+                }
+                if (dirUrl.length > 0) {
+                    $.post(dirUrl + code, function(resp) {
+                        if (resp.status) {
+                            $('#cod4').val(code);
+                            $('#label4').html('Se encontro el codigo se ' + code);
+                            $('#btnImprimir4').removeAttr('disabled');
+                        } else {
+                            $('#cod4').val('');
+                            $('#label4').html('No se encontro el codigo de ' + code);
+                            $('#btnImprimir4').attr('disabled', 'disabled');
+                        }
+                    });
+                }
+            } else {
+
+            }
+
+        });
+        $('#formulario1,#formulario2,#formulario3,#formulario4,#formulario6,#formulario7,#formulario8,#formulario9,#formulario10').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            abrirLoad();
+            $("#frameReportes").attr("src", $form.attr('action') + '?' + $form.serialize());
+            cerrarLoad();
+            $("#reportes").modal('show');
+        });
+        $('#formulario11').formValidation({
+            locale: 'es_ES'
+        });
+        $('#formulario5').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var xtipo = $('#tipo5 option:selected').val();
+            if (xtipo == 4) {
+            	abrirLoad('Espere por favor, la generacion del reporte tardara unos momentos.');
+                fetch('../reporte/reportExcel')
+                .then(resp => resp.blob())
+                .then(blob => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.style.display = 'none';
+                  a.href = url;
+                  a.download = 'reporte.xls';
+                  document.body.appendChild(a);
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                  cerrarLoad();
+                })
+                .catch(() => console.log('Error al generar reporte excel'));
+            } else {
+            	if (xtipo == 5) {
+                	abrirLoad('Espere por favor, la generacion del reporte tardara unos momentos.');
+                    fetch('../reporte/reportStockCero')
+                    .then(resp => resp.blob())
+                    .then(blob => {
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.style.display = 'none';
+                      a.href = url;
+                      a.download = 'reporte.xls';
+                      document.body.appendChild(a);
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                      cerrarLoad();
+                    })
+                    .catch(() => console.log('Error al generar reporte excel'));
+                }else{
+                	$("#frameReportes").attr("src", $form.attr('action') + '?' + $form.serialize());
+                    $("#reportes").modal('show');
+                }
+            }
+        });
+    });
+</script>

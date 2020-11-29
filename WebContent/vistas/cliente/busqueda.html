@@ -1,0 +1,111 @@
+<style>
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+</style>
+<div class="row ">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover table-border">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                	#foreach($p in $productos)
+				<tr >
+					<td class="col-sm-8 col-md-4">
+						<div class="media">
+							<a class="thumbnail pull-left" href="#"> <img
+								class="img img-thumbnail" src="../../fotos/$p.foto" alt="Sin imagen"
+								style="width: 72px; height: 72px;">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">
+									<a href="#"> Nombre : $p.nombre</a>
+								</h4>
+							
+								<h5 class="media-heading">
+									<div class="row">
+										<div class="col-md-6">
+											<a href="#"> Categoria : $!{p.nomcat}</a>
+										</div>
+										<div class="col-md-6">
+											<a href="#"> Tipo : $!{p.nomtip}</a>
+										</div>
+									</div>
+									
+								</h5>
+								<span> Precio: </span><span class="text-success"><strong> $!{p.ppublico} Bs.
+									
+									</strong><br> <label>¿Cuántos desea?</label>
+									<input type="number" id="cod-$!{p.codpro}" name="can" size="5" min="1" max="50" maxlength="2"/>
+							</div>
+						</div>
+
+					</td>
+					<td class="col-sm-1 col-md-1">
+						<div class="[ form-group ]">
+							<input type="checkbox" name="$p.codpro"
+								id="$p.codpro" autocomplete="off" data-precio="$p.ppublico" data-producto="$p.codpro" value="$p.codpro" class="seleccionado" />
+								
+							<div class="[ btn-group ]">
+								<label for="$p.codpro" class="[ btn btn-primary ]">
+									<span class="[ glyphicon glyphicon-ok ]"></span> <span> </span>
+								</label> <label for="$p.codpro"
+									class="[ btn btn-default ]"> <span
+									class="glyphicon glyphicon-shopping-cart"></span>Añadir
+								</label>
+
+							</div>
+						</div>
+					</td>
+				</tr>
+				#end
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    
+    $('.seleccionado').click(function(){
+    	var codpro=$(this).val();
+    	var can=$('#cod-'+codpro).val();
+
+    	if(can ==='' || can == null){
+    		$('#cod-'+codpro).val(1);
+    		can = 1;
+    	}
+    	var pre=$(this).data('precio');
+    	$.post('../venta/agregarProducto?codpro='+codpro+'&cantidad='+can+'&precio='+pre,function(result){
+    		if(result.status){
+    			mostrarMensaje('success','Se adiciono el pedido');
+    		}else
+    			mostrarMensaje('error','Error al adicionar');
+    	},'json');
+    });
+    $(document).ready(function() {
+    	
+    });
+   	    
+    </script>

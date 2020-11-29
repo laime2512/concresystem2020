@@ -1,0 +1,1186 @@
+<div id="modalAdicionar" class="modal fade">
+    <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                <form id="formulario1" method="post" action="#" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h6 class="modal-title">
+                                Venta <strong>(Fecha: $fecha)
+								</strong>
+                            </h6>
+                        </div>
+                        <div class="col-md-8">
+                            <table class="w3-table w3-border w3-tiny">
+                                <thead>
+                                    <tr>
+                                        <td>Factura</td>
+                                        <td>Nit</td>
+                                        <td>Razon social</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for="con_factura"><input type="checkbox" class="" id="con_factura" name="con_factura" value="si" /> Si</label>
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control input-sm" id="nit_fac" name="nit_fac" value="" data-fv-integer="true" />
+                                                <span class="input-group-btn">
+                                        			<button class="btn btn-sm btn-success" id="buscarNit" type="button"><span class="fa fa-search" aria-hidden="true">
+													</span> Buscar</button>
+                                                </span>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" id="alertNit" style="display: none;"></div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control input-sm" id="clienteNit" name="clienteNit" value="" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                    <div class="w3-container">
+                        <div class="row">
+                            <div class="col-md-9">
+                            <form id="formularioProductoNuevo" method="post" action="../producto_nuevo/guardar" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="w3-table w3-border w3-tiny">
+                                <tbody>
+                                    <tr>
+                                        <td class="w3-right-align"><b>Registrar producto desconocido</b></td>
+                                        <td>
+                                            <input type="text" class="form-control input-sm" id="nombre" name="nombre" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control input-sm" id="descripcion" name="descripcion" placeholder="Descripcion..." />
+                                        </td>
+                                        <td>
+                                            <button type="submit" id="btnProductoNuevo" class="btn btn-sm btn-primary">Registrar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                            	<div class="dataTable_wrapper">
+                                <table id="example3" class="w3-table-all w3-tiny w3-table-hoverable">
+                                    <thead>
+                                        <tr>
+                                            <th>Cod.</th>
+                                            <th>N. Comercial</th>
+                                            <th>Cod. Barra</th>
+                                            <th>Concentraci&oacute;n</th>
+                                            <th>Subcategoria</th>
+                                            <th>Generico</th>
+                                            <th>Unidades</th>
+                                            <th>Proveedor</th>
+                                            <th>Sel.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+						</div>
+                            </div>
+                            <div class="col-md-3">
+                            <form id="formulario2" method="post" action="#" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+                                <div>
+                                <input type="hidden" id="codcli" name="codcli" value="0" /> 
+                        <input type="hidden" id="fecha" name="fecha" value="$fecha" /> 
+                        <input type="hidden" id="tiponota" name="tiponota" value="1" /> 
+                        <input type="hidden" id="formapago" name="formapago" value="1" />
+                                    <table class="w3-table w3-border w3-tiny">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2">Producto: <b id="labelProducto"></b>
+                                                <br /><a id="verProducto" href="#" class="w3-text-green">Ver informaci&oacute;n del producto <span class="fa fa-search"></span></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                <div class="form-group">
+                                                <div class="">
+                                                <label for="optUnidad"><input type="radio" id="optUnidad" name="optVenta"  value="1" checked="checked" /> Unidad <b class="w3-text-blue" id="xpvUnit"></b></label><br />
+                                                <label for="optCaja"><input type="radio" id="optCaja" name="optVenta" value="2" /> Caja <b class="w3-text-blue" id="xpvCaja"></b></label><br />
+                                                <label for="optPaquete"><input type="radio" id="optPaquete" name="optVenta"  value="3" /> Paquete <b class="w3-text-blue" id="xpvPaquete"></b></label>
+                                                </div>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4">Precio</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control input-sm" id="pre" name="precios1" readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4" id="labelTipoVenta"></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control input-sm" id="can2" name="cantidades1" onClick="this.setSelectionRange(0, this.value.length)" data-fv-notempty="true" data-fv-integer="true">
+                                                        </div>
+                                                        <div><span style="padding-left: 20px;">Existencia: <b id="existencia_almacen"></b></span></div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4">Total</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control input-sm" id="tot2" name="subtotales1" readonly>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <button type="submit" id="btnAddDetalle" class="btn btn-success btn-sm btn-block"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <br/>
+                <form id="formulario3" method="post" action="../venta/guardar" data-fv-framework="bootstrap" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+                    <div class="w3-card">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <table id="detalles" class="w3-table w3-striped w3-tiny w3-bordered w3-hoverable">
+                                    <thead>
+                                        <tr>
+                                            <td>Producto</td>
+                                            <td width="75px">Unidades</td>
+                                            <td width="75px">Cajas</td>
+                                            <td width="75px">Paquetes</td>
+                                            <td width="75px">Precio</td>
+                                            <td width="75px">Subtotal</td>
+                                            <td width="35px">Eli</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr align="center">
+                                            <td colspan="7">Sin detalles</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <table class="w3-table w3-tiny w3-bordered w3-hoverable">
+                                        <tbody>
+                                            <tr align="right">
+                                                <td>Total a Pagar: <b id="total-final-letra"></b></td>
+                                                <td><input type="text" class="form-control input-sm text-right" id="total-final" name="total" style="border: 0px;" readonly="readonly" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Monto Cancelado</td>
+                                                <td><input type="text" class="form-control input-sm text-right" id="totalPagado" min="1" name="totalPagado" data-fv-notempty="true" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cambio</td>
+                                                <td><input type="text" readonly="readonly" class="form-control input-sm text-right" id="totalCambio" name="cambio" data-fv-notempty="true" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div id="totalCambioLetra"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <button type="button" id="btnCancelarVenta" class="btn btn-danger btn-sm">
+													<i class="fa fa-close"></i> Cancelar
+												</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" id="btnEnviar" class="btn btn-success btn-sm">
+													<i class="fa fa-check-circle"></i> Aceptar
+												</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../venta/eliminar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Venta</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="codven5" name="codven" />
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5>
+                                Esta seguro de eliminar la venta?<br />
+                                <b id="ventaLabel"></b>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+					</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="modalFacturar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioFacturar" role="form" id="formularioFacturar" method="post" action="../venta/guardarfactura" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Realizar confirmacion de factura</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Cod. venta</label> <input type="text" class="form-control input-sm" id="codven" name="codven" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Nit</label> <input type="text" class="form-control input-sm" id="znit" name="nitfac" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="from-group">
+                        <label>Razon social</label> <input type="text" class="form-control input-sm" id="zclienteNit" name="clienteNit" />
+                    </div>
+                    <label>Detalles de venta</label>
+                    <table id="detalleInforme" class="w3-table-all w3-tiny">
+                        <thead>
+                            <tr>
+                                <td colspan="2">Responsable de venta: <b aria-label="xusuario"></b></td>
+                                <td>Fecha</td>
+                                <td aria-label="xfecha"></td>
+                            </tr>
+                            <tr class="w3-blue">
+                                <td>Producto</td>
+                                <td>Cant.</td>
+                                <td>Tipo</td>
+                                <td>Precio</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="modalAnular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form name="formularioAnular" role="form" id="formularioAnular" method="post" action="../venta/anularFactura" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+        <div class="modal-dialog " style="width: 40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="myModalLabel">Anulacion de factura</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="codven" />
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Esta seguro de anular la factura para el codigo <b id="venta1Label"></b>?</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i> Aceptar
+					</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="modalVer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 50%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                <h4 class="modal-title" id="myModalLabel">Detalle del producto</h4>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+            	<div class="col-md-8">
+            	<div class="w3-container">
+                <table id="tablaInformacionProducto" class="w3-table-all w3-tiny w3-card-4">
+                    <tbody>
+                        <tr>
+                            <td>Cod: <b aria-label="codpro"></b></td>
+                            <td>Categoria: <b aria-label="xcategoria"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Nombre</td>
+                            <td aria-label="xnombre"></td>
+                        </tr>
+                        <tr>
+                            <td>Generico</td>
+                            <td aria-label="generico"></td>
+                        </tr>
+                        <tr>
+                            <td>Proveedor</td>
+                            <td aria-label="xlaboratorio"></td>
+                        </tr>
+                        <tr>
+                            <td>Cod.Barra: <b aria-label="codigobarra"></b></td>
+                            <td>Area: <b aria-label="xarea"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Concentracion</td>
+                            <td aria-label="xconcentracion"></td>
+                        </tr>
+                        <tr>
+                            <td>Es controlado: <b aria-label="xcontrolado"></b></td>
+                            <td>Pareto: <b aria-label="pareto"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Cantidad existente: </td>
+                            <td>En unidades: <b aria-label="cantidad"></b></td>
+                        </tr>
+                        <tr>
+                            <td>En cajas: <b id="cantidadCaja"></b></td>
+                            <td>En paquetes: <b aria-label="cantidadPaquete"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Precio costo de compra</td>
+                            <td>Por unidad: <b aria-label="pcUnit"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Por caja: <b aria-label="pcCaja"></b></td>
+                            <td>por paquete: <b aria-label="pcPaquete"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Precio p&uacute;blico a la venta</td>
+                            <td>Por unidad: <b aria-label="pvUnit"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Por caja: <b aria-label="pvCaja"></b></td>
+                            <td>por paquete: <b aria-label="pvPaquete"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Relacion de cantidad</td>
+                            <td>En unidades: <b aria-label="unixcaja"></b></td>
+                        </tr>
+                        <tr>
+                            <td>Cajas: <b aria-label="unixpaquete"></b></td>
+                            <td>Paquetes: <b aria-label="uniEnPaquete"></b></td>
+                        </tr>
+                    </tbody>
+                </table><br/>
+            </div>
+            	</div>
+            	<div class="col-md-4">
+            	<div class="w3-card-4">
+            	<img id="ximg" src="../../archivos/producto/producto.png" width="200px" alt="Alps">
+            	</div>
+            	<br />
+            	<b>Cantidad existente en almacen</b>
+            	<dl id="informacionAlmacen">
+            		<dt>En unidades</dt>
+            		<dd aria-label="cantidad"></dd>
+            		<dt>En cajas</dt>
+            		<dd aria-label="cantidadCaja"></dd>
+            		<dt>En paquetes</dt>
+            		<dd aria-label="cantidadPaquete"></dd>
+            	</dl>
+            	</div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cerrar
+					</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog " style="width: 50%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                <h4 class="modal-title" id="myModalLabel">Buscar cliente</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tableNit" class="w3-table-all w3-tiny w3-table-hoverable" style="width: 90%">
+                    <thead>
+                        <tr>
+                            <th>Nit</th>
+                            <th>Cliente Nit</th>
+                            <td>Seleccionar</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove-sign"></i> Cerrar
+					</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
+                        <thead>
+                            <tr>
+                                <th>Cod.</th>
+                                <th>Nit</th>
+                                <th>Cliente Nit</th>
+                                <th width="70px">Fecha</th>
+                                <th width="70px">Tipo</th>
+                                <td width="70px">Total</td>
+                                <td width="470px">Acciones</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var acceso_venta = '$!{rol.acceso_venta}';
+    var vectorPromocion = [];
+
+    function initConfig() {
+        $.post('../promocion/obtenerPromoActual', function(resp) {
+            if (resp.status) {
+                if (resp.data)
+                    vectorPromocion = resp.data;
+            }
+        });
+    }
+    $(document).ready(function() {
+        initConfig();
+        var can_select = 0;
+        var productSelect = null;
+        var xtipo = ['', 'Contado', 'Credito'];
+        var INDICE = 0;
+        $('select').chosen({
+            no_results_text: "No se encuentra:",
+            width: '100%'
+        });
+        var tableVenta = $('#example').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},"processing": true,
+            "dom": "<'row w3-tiny'<'col-sm-8'<'#tableTitle'>><'col-sm-4'<'#tableHeader.pull-right'>>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "serverSide": true,"ajax": {"type": "GET","url": "../venta/lista"},
+            "order":[[0,'desc']],
+            "columns": [
+            	{"data": "codven","name":"codven"}, 
+            	{"data": "nitfac","name":"nitfac"}, 
+            	{"data": "clienteNit","name":"cliente_nit"}, 
+            	{"data": "xfecha","name":"xfecha"}, 
+            	{"data": "formapago","name":"formapago"}, 
+            	{"data": "total","name":"total"}, 
+            	{"data": "codven","name":"codven"}
+            ],
+            "createdRow": function(row, data, index) {
+                if (data.nitfac === '' || data.nitfac === null)
+                    $('td', row).eq(1).html('0');
+                if (data.clienteNit == '' || data.clienteNit === null)
+                    $('td', row).eq(2).html('Sin nombre');
+                $('td', row).eq(4).html(xtipo[data.formapago]);
+                var btnActions = '';
+                btnActions += '<button class="btn btn-primary btn-xs imprimir"  data-toggle="tooltip" data-placement="left" title="Imprimir" data-id="' + data.codven + '"><i class="fa fa-print"></i> | Imprimir Recibo</button>';
+                if (acceso_venta === 'true')
+                    btnActions += '<button class="btn btn-danger btn-xs eliminar"  data-toggle="tooltip" data-placement="left" title="Eliminar" data-id="' + data.codven + '"><i class="glyphicon glyphicon-remove-sign"></i> | Eliminar venta</button>';
+
+                if (data.facturado > 0) {
+                    btnActions += '<button class="btn btn-xs btn-warning anular"  data-toggle="tooltip" data-placement="left" title="Anular factura" data-id="' + data.codven + '"><i class="glyphicon glyphicon glyphicon-trash"></i> | Anular factura</button> <button class="btn btn-xs btn-info imprimirfactura"  data-toggle="tooltip" data-placement="top" title="Imprimir copia de factura" data-id="' + data.codven + '"><i class="glyphicon glyphicon glyphicon-print"></i> | Imprimir copia</button>';
+                } else
+                    btnActions += '<button class="btn btn-xs btn-success facturar"  data-toggle="tooltip" data-placement="left" title="Realizar factura" data-id="' + data.codven + '"><i class="glyphicon glyphicon glyphicon-list-alt"></i> | Realizar Facturar</button>';
+                $('td', row).eq(6).html('<div class="btn-group">' + btnActions + '</div>');
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle').html('<h6><b>Gestion Ventas</b></h6>');
+                $('#tableHeader').html('<div class="btn-group"><button class="btn btn-sm btn-primary" id="btnAdicionar"><i class="fa fa-plus-circle"></i> | adicionar venta</button> <button class="btn btn-sm btn-success" id="btnAdicionarSimple"><i class="fa fa-plus-circle"></i> | adicionar venta con scanner</button></div>');
+                $('#btnAdicionar').click(function() {
+                    $('#alertNit').hide();
+                    $('#alertNit').html('');
+                    $('#formulario1').data('formValidation').resetForm();
+                    $('#formulario1')[0].reset();
+                    $('#formulario2').data('formValidation').resetForm();
+                    $('#formulario2')[0].reset();
+                    $('#formulario3').data('formValidation').resetForm();
+                    $('#formulario3')[0].reset();
+                    $('#detalles >tbody').html('');
+                    var row = $('<tr></tr>');
+                    $('<td colspan="5">Sin detalles</td>').appendTo(row);
+                    INDICE = 0;
+                    $('#detalles > tbody:last').append(row);
+                    $('#modalAdicionar').modal('show');
+                    $('#cliente').trigger('chosen:updated');
+                    resetFormAll();
+                    $('#example').dataTable().fnDraw('page');
+                });
+                $('#btnAdicionarSimple').click(function() {
+                    $.post('../venta/adicionarVentaSimple', function(resp) {
+                        $("#contenedor").html(resp);
+                    });
+                });
+                $('.eliminar').click(function() {
+                    $('#formularioEliminar').data('formValidation').resetForm();
+                    $('#formularioEliminar')[0].reset();
+                    $.post('../venta/obtener?codven=' + $(this).data('id'), function(result) {
+                        if (result.status) {
+                            $('#modalEliminar').modal('show');
+                            $('#formularioEliminar').loadJSON(result.data);
+                            $('#ventaLabel').html('Cod.# ' + result.data.codven + ' del ' + result.data.xfecha + ' realizado por ' + result.data.xusuario);
+                        } else {
+                            mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                        }
+                    }, 'json');
+                });
+
+                $('.anular').click(function() {
+                	let row = $('#example').DataTable().row($(this).closest('tr')).data();
+                    $('#formularioAnular').data('formValidation').resetForm();
+                    $('#formularioAnular')[0].reset();
+                    if (row) {
+                        $('#modalAnular').modal('show');
+                        $('#formularioAnular').loadJSON(row);
+                        $('#venta1Label').html(row.codven);
+                    } else {
+                        mostrarMensaje('error', 'No se recupero la venta seleccionada');
+                    }
+                });
+                $('.facturar').click(function() {
+                	let row = $('#example').DataTable().row( $(this).closest('tr') ).data();
+                    $('#formularioFacturar').data('formValidation').resetForm();
+                    $('#formularioFacturar')[0].reset();
+                    $('#formularioFacturar').loadJSON(row);
+                    $('#modalFacturar').modal('show');
+                    $('#detalleInforme > tbody').html('');
+                    $.post('../venta/obtenerDetalle?codven=' + $(this).data('id'), function(resp) {
+                        if (resp.status) {
+                            if (resp.data) {
+                                resp.data.forEach(item=>{
+                                	let tr = $('<tr></tr>');
+                                    $('<td>' + item.xproducto + '</td>').appendTo(tr);
+                                    $('<td>' + item.xtipoVenta + '</td>').appendTo(tr);
+                                    $('<td class="w3-right-align">' + item.cantidadTipoVenta + '</td>').appendTo(tr);
+                                    $('<td class="w3-right-align">' + item.precio + '</td>').appendTo(tr);
+                                    $('<td class="w3-right-align">' + item.subtotal + '</td>').appendTo(tr);
+                                    $('#detalleInforme > tbody:last').append(tr);
+                                });
+                                let trTotal = $('<tr></tr>');
+                                $('<td colspan="3" class="w3-right-align">Total : '+numeroALetras(row.total)+' </td>').appendTo(trTotal);
+                                $('<td colspan="2" class="w3-right-align">'+row.total+'</td>').appendTo(trTotal);
+                                $('#detalleInforme > tbody:last').append(trTotal);
+                            }else{
+                            	let tr = $('<tr></tr>');
+                            	$('<td colspan="5">Sin datos</td>').appendTo(tr);
+                            	$('#detalleInforme > tbody:last').append(tr);
+                            }
+                        } else {
+                            mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                        }
+                    }, 'json');
+                });
+
+                $('.imprimir').click(function() {
+                    $("#frameReportes").attr("src", '../venta/ver?codven=' + $(this).data('id'));
+                    $("#reportes").modal('show');
+                });
+                $('.imprimirfactura').click(function() {
+                    $("#frameReportes").attr("src", '../venta/imprimirfactura?codven=' + $(this).data('id'));
+                    $("#reportes").modal('show');
+                });
+                $('button[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'bottom',
+                });
+            }
+        });
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            if (title === 'Tipo') {
+                $(this).html('<select style="width:80%"><option value="">todos</option><option value="1">Contado</option><option value="2">Credito</option></select>');
+                $('select', this).on('change', function(e) {
+                    if (tableVenta.column(i).search() !== this.value) {
+                    	tableVenta.order([i, 'asc']);
+                    	tableVenta.column(i).search(this.value).draw();
+                    }
+                });
+            } else {
+                $(this).html('<input type="text" style="width:80%;" placeholder="' + title + '" />');
+                $('input', this).on('keyup', function(e) {
+                    if (e.keyCode == 13 || this.value === '') {
+                        if (tableVenta.column(i).search() !== this.value) {
+                        	tableVenta.order([i, 'asc']);
+                        	tableVenta.column(i).search(this.value).draw();
+                        }
+                    }
+                });
+            }
+        });
+        $('#example thead tr:eq(1) td').each(function(i) {
+            $(this).html('');
+        });
+        $('.estado').click(function() {
+        	tableVenta.draw('page');
+        });
+        $('#formularioEliminar,#formularioFacturar,#formularioAnular').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    tableVenta.draw('page');
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+                $('.modal').modal('hide');
+            }, 'json');
+        });
+
+        function calculo() {
+            var xcan = 0;
+            if ($('#can2').val() != '')
+                xcan = parseInt($('#can2').val());
+            var xpre = 0;
+            if ($('#pre').val() != '')
+                xpre = parseFloat($('#pre').val());
+            var xtot = xcan * xpre;
+            $('#tot2').val(xtot.toFixed(2));
+        };
+        $('#formulario2').formValidation({locale: 'es_ES',
+            fields: {producto: {validators: {notEmpty: {message: 'Por favor seleccione un producto'}}}}
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('formValidation');
+            if (!productSelect) {
+                mostrarMensaje('warning', 'Seleccione un producto.');
+            } else {
+                if (validarCantidadProducto() && !validarProductoExistente()) { //validar si existe la canUnit y si no existe el producto
+                    if (INDICE == 0)
+                        $('#detalles >tbody').html('');
+                    INDICE++;
+                    let row = $('<tr></tr>');
+                    let xcan = $('#can2').val();
+                    let xpre = $('#pre').val();
+                    let xsubtot = $('#tot2').val();
+                    let optVenta = parseInt($('input[name=optVenta]:checked').val());
+                    $('<td>' + productSelect.nombre + ' (' + productSelect.generico + ') ' + productSelect.concentracion + ' ' + productSelect.xmedida + '</td>').appendTo(row);
+                    switch(optVenta){
+                    case 1:
+                    	$('<td class="w3-blue w3-right-align">' + xcan + '</td>').appendTo(row);
+                    	$('<td></td>').appendTo(row);
+                    	$('<td></td>').appendTo(row);
+                    	break;
+                    case 2:
+                    	$('<td></td>').appendTo(row);
+                    	$('<td class="w3-blue w3-right-align">' + xcan + '</td>').appendTo(row);
+                    	$('<td></td>').appendTo(row);
+                    	break;
+                    case 3:
+                    	$('<td></td>').appendTo(row);
+                    	$('<td></td>').appendTo(row);
+                    	$('<td class="w3-blue w3-right-align">' + xcan + '</td>').appendTo(row);
+                    	break;
+                    default:
+                    	$('<td></td>').appendTo(row);
+                		$('<td></td>').appendTo(row);
+                		$('<td></td>').appendTo(row);
+                		break;
+                    }
+                    $('<td>' + xpre + '</td>').appendTo(row);
+                    $('<td>' + xsubtot + '</td>').appendTo(row);
+                    $('<input type="hidden" class="listProducts" name="productos" value="' + productSelect.codpro + '" >').appendTo(row);
+                    $('<input type="hidden" name="cantidades" value="' + xcan + '" >').appendTo(row);
+                    $('<input type="hidden" name="precios" value="' + xpre + '" >').appendTo(row);
+                    $('<input type="hidden" name="tipoVenta" value="' + optVenta + '" >').appendTo(row);
+                    $('<input type="hidden" class="claseTotales" name="totales" value="' + xsubtot + '" >').appendTo(row);
+                    $('<td class="remove-row"><button type="button" class="btn btn-xs btn-danger input-remove-row" data-producto="' + productSelect.codpro + '"><span class="glyphicon glyphicon-remove"></span></button></td>').appendTo(row);
+                    $('#detalles > tbody:last').append(row);
+                    $('#formulario2')[0].reset();
+                    $('#formulario2').data('formValidation').resetForm();
+                    $('.input-remove-row').off('click');
+                    $('.input-remove-row').click(function() {
+                        INDICE--;
+                        var tr = $(this).closest('tr');
+                        tr.fadeOut(100, function() {
+                            tr.remove();
+                            calcularTotal();
+                            if ($('#detalles > tbody>tr').length == 0) {
+                                var row = $('<tr id="unit" align="center"></tr>');
+                                $('<td colspan="7">Sin ningun detalle</td>').appendTo(row);
+                                $('#detalles > tbody:last').append(row);
+                            }
+                        });
+                    });
+                    $('.input-remove-row').on('click');
+                    calcularTotal(); //Calcular datos
+                    resetFormDet(); //reiniciar los datos del detalle
+                } else {
+                    $('#btnAddDetalle').removeClass('disabled');
+                    $('#btnAddDetalle').removeAttr('disabled');
+                }
+            }
+        });
+
+        function verificarProductoPromocion(producto) {
+            let encontrado = {
+                'promocion': {},
+                'detalle': {},
+                'status': false
+            };
+            if (vectorPromocion) {
+                vectorPromocion.forEach(promo => {
+                    if (promo.detallePromo) {
+                        promo.detallePromo.forEach(det => {
+                            if (det.codpro == producto) {
+                                encontrado.promocion = promo;
+                                encontrado.detalle = det;
+                                encontrado.status = true;
+                            }
+                        });
+                    }
+                })
+            }
+            return encontrado;
+        }
+        $('#formulario1').formValidation();
+
+        $('#formulario3').formValidation({
+            locale: 'es_ES'
+        }).on('err.field.fv', function() {
+            mostrarMensaje('danger', 'revise bien los datos');
+        }).on('err.field.fv', function() {
+            mostrarMensaje('danger', 'Ingrese el monto cancelado.');
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            alertAdicion('Adicionar venta', 'Esta seguro de adicionar esta venta?', function(){
+            	var $form = $(e.target);
+                $('#btnEnviar').removeClass('disabled');
+                $('#btnEnviar').removeAttr('disabled');
+                if (validarNit()) {
+                    if (INDICE > 0) {
+                        $.post($form.attr('action'), $('#formulario1').serialize() + '&' + $('#formulario2').serialize() + '&' + $form.serialize(), function(result) {
+                            if (result.status) {
+                                $form.data('formValidation').resetForm();
+                                mostrarMensaje('success', 'Se realizo con exito la Transaccion.');
+                                $('#example').dataTable().fnDraw('page');
+                                $('.modal').modal('hide');
+                            } else {
+                                mostrarMensaje('error', 'No se realizo con exito la transaccion.');
+                            }
+                            $('#btnEnviar').removeClass('disabled');
+                            $('#btnEnviar').removeAttr('disabled');
+                        }, 'json');
+                    } else {
+                        mostrarMensaje('error', 'INGRESE DETALLE');
+                    }
+                } else {
+                    $('#btnEnviar').removeClass('disabled');
+                    $('#btnEnviar').removeAttr('disabled');
+                }
+            })
+        });
+        $('#verProducto').click(function() {
+            if (productSelect) {
+            	$('#ximg').attr('src', '../../archivos/producto/' + productSelect.foto);
+            	productSelect.xconcentracion = productSelect.concentracion ? (productSelect.concentracion + ' ' + productSelect.xmedida) : '';
+            	productSelect.xnombre = productSelect.xtipo + ' ' + productSelect.nombre;
+            	productSelect.xcontrolado = productSelect.controlado ? 'Si' : 'No';
+                $('#tablaInformacionProducto').loadJSON(productSelect);
+                $('#informacionAlmacen').loadJSON(productSelect);
+                $('#modalVer').modal('show');
+            }
+        });
+
+        function validarNit() {
+            let nit = $('#nit_fac').val();
+            if($('#con_factura').prop('checked') == false)
+            	return true;
+            if (nit === '') {
+                $('#alertNit').show(1000);
+                $('#alertNit').html('Ingrese nit, y si no tiene introduzca cero 0.');
+                mostrarMensaje('error', 'Ingrese nit');
+                return false;
+            }
+            if (nit === '0') {
+                $('#alertNit').hide();
+                $('#alertNit').html('');
+                return true;
+            }
+            if (nit.length >= 7 && nit.length <= 10) {
+                $('#alertNit').hide();
+                $('#alertNit').html('');
+                $('#btnEnviar').removeClass('disabled');
+                $('#btnEnviar').removeAttr('disabled');
+                return true;
+            } else {
+                $('#alertNit').show(1000);
+                $('#alertNit').html('Ingrese nit en el rango de 7 a 10 caracteres.');
+                mostrarMensaje('error', 'Ingrese nit en el rango de 7 a 10 caracteres');
+                $('#btnEnviar').removeClass('disabled');
+                $('#btnEnviar').removeAttr('disabled');
+                return false;
+            }
+        }
+
+        function validarCantidadProducto() {
+            if (productSelect) {
+            	let xcan = parseInt($('#can2').val());
+                let optVenta = parseInt($('input[name=optVenta]:checked').val());
+                if(optVenta == 1){
+                	if(xcan > productSelect.cantidad){
+            			mostrarMensaje('danger', 'La cantidad de paquetes que requiere es mayor a la que existe');
+                        return false;
+            		}
+                }
+                if(optVenta == 2){
+                	if(xcan > productSelect.cantidadCaja){
+            			mostrarMensaje('danger', 'La cantidad de paquetes que requiere es mayor a la que existe');
+                        return false;
+            		}
+                }
+                if(optVenta == 3){
+                	if(xcan > productSelect.cantidadPaquete){
+            			mostrarMensaje('danger', 'La cantidad de paquetes que requiere es mayor a la que existe');
+                        return false;
+            		}
+                }
+            } else {
+            	mostrarMensaje('warning', 'Seleccione un producto...');
+                return false;
+            }
+            return true;
+        }
+
+        function calcularTotal() {
+            var tot = 0;
+            $('.claseTotales').each(function() {
+                tot += parseFloat($(this).val());
+            });
+            $('#total-final').val(tot.toFixed(2));
+            $('#total-final-letra').html(numeroALetras(tot.toFixed(2)));
+            calcularCambio();
+        }
+
+        function validarProductoExistente() {
+            let resProductoExistente = false;
+            $('.listProducts').each(function() {
+                if (parseInt($(this).val()) === productSelect.codpro) {
+                    mostrarMensaje('warning', 'El producto ya existe, elimine el detalle del producto repetido.');
+                    resProductoExistente = true;
+                }
+            });
+            return resProductoExistente;
+        }
+
+        function resetFormAll() {
+            $('#total-final').val('');
+            $('#total-final-letra').html('');
+            $('#existencia_almacen').html('');
+            $('#totalCambio').html('');
+            $('#totalCambioLetra').html('');
+            $('#labelProducto').html('');
+            $('#xpvPaquete,#xpvCaja,#xpvUnit').html('');
+            $('#xcontrolado').html('');
+            productSelect = null;
+        }
+
+        function resetFormDet() {
+            $('#existencia_almacen').html('');
+            $('#labelProducto').html('');
+            $('#xpvPaquete,#xpvCaja,#xpvUnit').html('');
+            $('#xcontrolado').html('');
+            $('#xpromocion').html('');
+            productSelect = null;
+        }
+
+        function calcularPrecioCantidad() {
+            //let productoPromocion = verificarProductoPromocion(productSelect.codpro);
+            var opt = parseInt($('input[name=optVenta]:checked').val());
+            if(opt == 1){ //UNIDADES
+            	$('#labelTipoVenta').html('Unidades');
+                $('#existencia_almacen').html(productSelect.cantidad + ' unidades');
+                $('#pre').val(productSelect.pvUnit);
+                //Definir canUnit.- una vez definido los precios, ver si existe la canUnit para unidades o cajas
+                if (productSelect.cantidad < 1) { //para unidades
+                    $('#zcanUnit').html('<b class="w3-text-red">' + productSelect.cantidad + ', No existe</b>');
+                    $('#btnAddDetalle').attr('disabled', 'disabled');
+                    $('#can2').val(0);
+                } else {
+                    $('#zcanUnit').html(productSelect.cantidad);
+                    $('#btnAddDetalle').removeAttr('disabled');
+                    $('#can2').val(1);
+                }
+            }
+            if (opt == 2) { //CAJAS
+            	$('#labelTipoVenta').html('Cajas');
+                $('#pre').val(productSelect.pvCaja);
+                $('#existencia_almacen').html(productSelect.cantidadCaja + ' cajas');
+                //Definir canUnit.- una vez definido los precios, ver si existe la canUnit para unidades o cajas
+                if (productSelect.cantidadCaja < 1) { //para cajas
+                    $('#zcanUnit').html('<b class="w3-text-red">' + productSelect.cantidadCaja + ', No existe</b>');
+                    $('#btnAddDetalle').attr('disabled', 'disabled');
+                    $('#can2').val(0);
+                } else {
+                    $('#zcanUnit').html(productSelect.cantidadCaja);
+                    $('#btnAddDetalle').removeAttr('disabled');
+                    $('#can2').val(1);
+                }
+            }
+            if (opt == 3) { //PAQUETES
+            	$('#labelTipoVenta').html('Paquetes');
+                $('#pre').val(productSelect.pvPaquete);
+                $('#existencia_almacen').html(productSelect.cantidadPaquete + ' paquetes');
+                //Definir canUnit.- una vez definido los precios, ver si existe la canUnit para unidades o cajas
+                if (productSelect.cantidadCaja < 1) { //para cajas
+                    $('#zcanUnit').html('<b class="w3-text-red">' + productSelect.cantidadCaja + ', No existe</b>');
+                    $('#btnAddDetalle').attr('disabled', 'disabled');
+                    $('#can2').val(0);
+                } else {
+                    $('#zcanUnit').html(productSelect.cantidadCaja);
+                    $('#btnAddDetalle').removeAttr('disabled');
+                    $('#can2').val(1);
+                }
+            }
+            calculo();
+        }
+        $('input[name="optVenta"]').click(function() {
+            calcularPrecioCantidad();
+        });
+        $('#can2').keyup(function() {
+            calculo();
+        });
+        $('#totalPagado').keyup(function() {
+            calcularTotal();
+        })
+
+        function calcularCambio() {
+            var tfinal = $('#total-final').val();
+            if (tfinal == '')
+                tfinal = 0;
+            else
+                tfinal = parseFloat(tfinal);
+            var pagado = $('#totalPagado').val();
+            if (pagado === '' || pagado === null)
+                pagado = 0;
+            else
+                pagado = parseFloat(pagado);
+            var tCambio = pagado - tfinal;
+            $('#totalCambio').val(tCambio.toFixed(2));
+            if (tCambio <= 0)
+                $('#totalCambioLetra').html('');
+            else
+                $('#totalCambioLetra').html(numeroALetras(tCambio.toFixed(2)));
+        }
+        $('#nit_fac').blur(function() {
+            var nit = $(this).val();
+            if (nit != null)
+                $.post('../cliente/obtenerFactura?factura=' + nit, function(resp) {
+                    if (resp.status) {
+                        $('#clienteNit').val(resp.data);
+                    }
+                });
+        });
+        var tableAlmacen = $('#example3').DataTable({
+            "oLanguage": {"sUrl": "../../js/Spanish.lang"},
+            "dom": "<'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>","pageLength": 5,"processing": true,"serverSide": true,
+
+            "ajax": {
+            	"method":"GET",
+                "url": "../almacen/listaInventario"
+            },
+            "columns": [
+            	{"data": "codpro","name":"codpro"}, 
+            	{"data": "nombre","name":"nombre"}, 
+            	{"data": "codigobarra","name":"codigobarra"}, 
+            	{"data": "concentracion","name":"concentracion"}, 
+            	{"data": "xtipo","name":"xtipo"}, 
+            	{"data": "generico","name":"generico"}, 
+            	{"data": "cantidad","name":"cantidad"}, 
+            	{"data": "xlaboratorio","name":"xlaboratorio"}, 
+            	{"data": "codpro","name":"codpro"}
+            ],
+            "createdRow": function(row, data, index) {
+                var btnVer = '<a href="#" data-toggle="tooltip" class="" data-placement="top" title="Seleccionar" data-id="' + data.codpro + '">Sel. <span class="glyphicon glyphicon-arrow-right"></span></a>';
+                $('td', row).eq(8).html(btnVer);
+            },
+            "drawCallback": function(settings) {
+                $('#tableTitle3').html('<h6><b>Almacen</b></h6>');
+            }
+        });
+
+        $('#example3 thead tr').clone(true).appendTo('#example3 thead');
+        $('#example3 thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" style="width:95%;" placeholder="' + title + '" />');
+            $('input', this).on('keyup change clear', function(e) {
+                if (e.keyCode == 13 || this.value === '') {
+                    if (tableAlmacen.column(i).search() !== this.value) {
+                    	tableAlmacen.order([i, 'asc']);
+                    	tableAlmacen.column(i).search(this.value).draw();
+                    }
+                }
+            });
+        });
+        $('#example3 tbody').on('click', 'tr', function() {
+            let obj = $('#example3').DataTable().row(this).data();
+            productSelect = obj;
+            //validar si existe el producto en el detalle
+            validarProductoExistente();
+            $('#producto').val(productSelect.codpro); 
+            $('#labelProducto').html(obj.nombre + ' (' + obj.generico + ')');
+            $('#xpvPaquete').html(' = '+ obj.pvPaquete + ' Bs. ('+obj.unixpaquete+' caja por paquete)');
+            $('#xpvCaja').html(' = ' + obj.pvCaja + ' Bs. ('+obj.unixcaja+' unidades por caja)');
+            $('#xpvUnit').html(' = ' + obj.pvUnit + ' Bs.');
+            $('#xcontrolado').html(obj.controlado ? '(Med.Controlado)' : '');
+            calcularPrecioCantidad();
+            setTimeout(function() {
+                $('#can2').focus()
+            }, 500);
+            $('#can2').focus(function() {
+                $(this).select();
+            });
+        });
+        $('#tableNit').DataTable({
+            "oLanguage": {
+                "sUrl": "../../js/Spanish.lang"
+            },
+            "dom": "<'row'<'col-sm-7'><'col-sm-5'f>><'row'<'col-sm-12'tr>><'row w3-tiny'<'col-sm-5'i><'col-sm-7'p>>",
+            "pageLength": 10,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "GET",
+                "url": "../dosificacion/listaNit",
+                "data": function(d) {
+                    d.estado = 1;
+                }
+            },
+            "columns": [{
+                "data": "nitfac","name":"nitfac"
+            }, {
+                "data": "clienteNit","name":"cliente_nit"
+            }, {
+                "data": "nitfac","name":"nitfac"
+            }],
+            "createdRow": function(row, data, index) {
+                var btnVer = '<a href="#" data-toggle="tooltip" class="" data-placement="top" title="Seleccionar" >Seleccionar <span class="glyphicon glyphicon-arrow-right"></span></a>';
+                $('td', row).eq(2).html(btnVer);
+            },
+            "drawCallback": function(settings) {}
+        });
+        $('#buscarNit').click(function() {
+            $('#modalSearch').modal('show');
+        });
+        $('#tableNit tbody').on('click', 'tr', function() {
+            var obj = $('#tableNit').DataTable().row(this).data();
+            $('#nit_fac').val(obj.nitfac);
+            $('#clienteNit').val(obj.clienteNit);
+            $('#modalSearch').modal('hide');
+        });
+        $('#znit').blur(function() {
+            let nit = $(this).val();
+            if(nit)
+                $.post('../cliente/obtenerFactura?factura=' + nit, function(resp) {
+                    if (resp.status) {
+                        $('#zclienteNit').val(resp.data);
+                    }
+                });
+        });
+        $('#formularioProductoNuevo').formValidation({
+            locale: 'es_ES'
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                if (result.status) {
+                    $form.data('formValidation').resetForm();
+                    $('#formularioProductoNuevo')[0].reset();
+                    mostrarMensaje('info', 'Se realizo con exito la Transaccion');
+                } else {
+                    mostrarMensaje('error', 'No se realizo con exito la Transaccion');
+                }
+            }, 'json');
+        });
+        $('#btnCancelarVenta').click(function(){
+        	alertCancelacion('Cancelacion de venta', 'Esta seguro de cancelar la venta',function(){
+        		$('#modalAdicionar').modal('hide');
+        	});
+        });
+    });
+</script>
