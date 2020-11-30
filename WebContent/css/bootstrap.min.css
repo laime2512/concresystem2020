@@ -1398,7 +1398,7 @@ body {
     font-size: 12px;
     line-height: 1.42857143;
     color: #333;
-    background-color: #fff;
+    background-color: #040404;
 }
 
 button,
@@ -3953,8 +3953,8 @@ fieldset[disabled] .btn-warning:hover {
 }
 
 .btn-danger {
-    color: #fff;
-    background-color: #d9534f;
+    color: #FFFFCC;
+    background-color: #FF0707;
     border-color: #d43f3a;
 }
 

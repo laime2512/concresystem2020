@@ -29,7 +29,7 @@ progress {
 	vertical-align: baseline
 }
 
-audio:not ([controls] ){
+audio:not ([controls] ) {
 	display: none;
 	height: 0
 }
@@ -89,7 +89,7 @@ img {
 	border-style: none
 }
 
-svg:not (:root ){
+svg:not (:root ) {
 	overflow: hidden
 }
 
@@ -1005,9 +1005,14 @@ keyframes w3-spin { 0%{
 	transform: rotate(0deg)
 }
 
-100%{
+100
+%
+{
 transform
-:rotate(359deg)
+:
+rotate(
+359deg
+)
 }
 }
 .w3-animate-fading {
@@ -1019,12 +1024,16 @@ keyframes fading { 0%{
 	opacity: 0
 }
 
-50%{
+50
+%
+{
 opacity
 :
 1
 }
-100%{
+100
+%
+{
 opacity
 :
 0
@@ -1357,8 +1366,8 @@ to {
 }
 
 .w3-blue, .w3-hover-blue:hover {
-	color: #fff !important;
-	background-color: #2196F3 !important
+	color: #FFFFCC !important;
+	background-color: #FF6A00 !important
 }
 
 .w3-light-blue, .w3-hover-light-blue:hover {
@@ -1379,7 +1388,7 @@ to {
 .w3-blue-grey, .w3-hover-blue-grey:hover, .w3-blue-gray,
 	.w3-hover-blue-gray:hover {
 	color: #fff !important;
-	background-color: #607d8b !important
+	background-color: #FF6A00 !important
 }
 
 .w3-green, .w3-hover-green:hover {
@@ -1459,7 +1468,7 @@ to {
 
 .w3-black, .w3-hover-black:hover {
 	color: #fff !important;
-	background-color: #000 !important
+	background-color: #45433D !important
 }
 
 .w3-grey, .w3-hover-grey:hover, .w3-gray, .w3-hover-gray:hover {
