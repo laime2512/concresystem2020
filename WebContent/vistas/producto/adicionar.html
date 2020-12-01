@@ -68,7 +68,7 @@
     			</div>
     			<div class="col-md-6">
     				<div class="form-group">
-		                <label>Tipo</label>
+		                <label>Sub Clasificacion</label>
 		                <select id="codtip" name="codtip" class="form-control input-sm">
 							<option value="">Seleccionar</option>
 							#foreach($t in $tipos)
@@ -82,7 +82,7 @@
     			<div class="col-md-6">
     				<div class="form-group">
 		                <label>Cantidad</label>
-		                <input id="concentracion" name="concentracion" type="text" placeholder="ingrese concentracion" class="form-control input-sm" data-fv-notempty="true">
+		                <input id="concentracion" name="concentracion" type="text" placeholder="ingrese cantidad" class="form-control input-sm" data-fv-notempty="true">
 		            </div>
     			</div>
     			<div class="col-md-6">
@@ -98,12 +98,7 @@
     			</div>
     		</div>
     		<div class="row">
-        		<div class="col-md-6">
-            		<div class="form-group">
-                		<label>Pareto</label>
-                		<input id="pareto" name="pareto" type="text" placeholder="ingrese pareto" class="form-control input-sm text-uppercase">
-            		</div>
-        		</div>
+        		
         		<div class="col-md-6">
     				<div class="form-group">
 						<label>Controlado p/Venta</label>
@@ -136,13 +131,7 @@
     			<div class="w3-container">
     				<br/>
     				<div class="row">
-    					<div class="col-md-3">
-    						<div class="form-group">
-				                <label>Tipo de margen</label>
-				                <select id="margen" name="margen" class="form-control input-sm" data-fv-notempty="true">
-				                </select>
-				            </div>
-    					</div>
+    					
     					<div class="col-md-9">
     						<div class="alert alert-success" style="display: none;" id="alertMargen"></div>
     					</div>
@@ -728,14 +717,14 @@
 			}
 		});
 		$('select[name="codmed"]').chosen().change(function(e){
-			$('input[name="pareto"]').focus(function(){
+			$('input[name="--"]').focus(function(){
 				$('html, body').animate({
 			        scrollTop: ($(this).offset().top-250) + 'px'
 			    }, 500);
 			});
 			$('input[name="pareto"]').focus();
 		});
-		$('input[name="pareto"]').keyup(function(e){
+		$('input[name="--"]').keyup(function(e){
 			if(e.keyCode == 13 || e.keyCode == 9){
 				$('input[name="controlado"]').focus();
 			}
