@@ -6,7 +6,8 @@ public class ViewAlmacen {
 	private Long codpro;
 	private Integer codlab,codmed,codare,estado,codtip,unixcaja;
 	private String nombre,tipoCompra,presentacionUnidad,presentacionCaja,presentacionPaquete;
-	private String generico,concentracion,codigobarra,margen,foto,pareto;
+	private String generico,concentracion,codigobarra,margen,foto,pareto,sucursal;
+	
 	private String xtipo, xlaboratorio,xmedida,xarea,xcategoria;
 	private Float pcUnit,pvUnit,pvCaja,pcCaja,unixpaquete,uniEnPaquete,inventarioMinimoCaja,inventarioMinimoPaquete,inventarioMinimoUnidad;
 	private Float pcPaquete,pvPaquete,pvDescuentoPaquete,pvDescuentoCaja,porcentajeUnidad,porcentajeCaja,porcentajePaquete;
@@ -14,6 +15,14 @@ public class ViewAlmacen {
 	private Boolean controlado;
 	private Integer cantidad;
 	private Double totalVenta;
+	
+	public String getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
+	
 	public Float getCantidadCaja() {
 		if(cantidad!=null && unixcaja != null && unixcaja > 0f) {
 			return Numeros.formato2decimales((float)cantidad/(float)unixcaja);

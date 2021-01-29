@@ -746,13 +746,13 @@
 					btnGroup += '<button class="btn btn-xs btn-success reasignarRoles"  data-toggle="tooltip" data-placement="top" title="Reasignar roles" data-id="' + data.codusu + '"><i class="fa fa-user"></i> | reasignar roles</button>';
 				else
 					btnGroup += '<button class="btn btn-primary btn-xs asignarRoles"  data-toggle="tooltip" data-placement="top" title="Asignar roles" data-id="' + data.codusu + '"><i class="fa fa-user"></i> | asignar roles</button>';
-				btnGroup += '<button class="btn w3-indigo btn-xs modificar"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="' + data.codusu + '"><i class="fa fa-edit"></i> | modificar</button>';
-				btnGroup += '<button class="btn btn-danger btn-xs eliminar"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-remove-sign"></i> | eliminar</button>';
+				btnGroup += '<button class="btn w3-indigo btn-xs modificar"  data-toggle="tooltip" data-placement="bottom" title="Modificar" data-id="' + data.codusu + '"><i class="fa fa-edit"></i> | modificar</button>';
+				btnGroup += '<button class="btn btn-danger btn-xs eliminar"  data-toggle="tooltip" data-placement="right" title="Eliminar" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-remove-sign"></i> | eliminar</button>';
 				btnGroup += '<button class="btn w3-teal btn-xs ver"  data-toggle="tooltip" data-placement="top" title="Ver" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-search"></i> | ver</button>';
 				if (data.clave > 0)
 					btnGroup += '<button class="btn btn-success btn-xs reasignar"  data-toggle="tooltip" data-placement="top" title="Reasignar clave" data-id="' + data.codusu + '"><i class="glyphicon glyphicon-lock"></i> | modificar clave</button>';
 				else
-					btnGroup += '<button class="btn btn-warning btn-xs asignar"  data-toggle="tooltip" data-placement="top" title="Asignar clave" data-id="' + data.codusu + '"><i class="fa fa-unlock"></i> | adicionar clave</button>';
+					btnGroup += '<button class="btn btn-warning btn-xs asignar"  data-toggle="tooltip" data-placement="right" title="Asignar clave" data-id="' + data.codusu + '"><i class="fa fa-unlock"></i> | adicionar clave</button>';
 				$('td', row).eq(4).html('<div class="btn-group">'+ btnGroup+ '</div>');
 			},
 			"drawCallback" : function(settings) {
@@ -912,7 +912,7 @@
 							}
 						},'json');
 						});
-					$('button[data-toggle="tooltip"]').tooltip({animated : 'fade',placement : 'bottom',});
+					$('button[data-toggle="tooltip"]').tooltip({animated : 'fade',placement : 'hide',});
 				}
 			});
 		$('.estado').click(function() {

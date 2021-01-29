@@ -94,8 +94,12 @@ public class AlmacenImpl implements AlmacenS{
 	}
 	@Override
 	public List<ViewAlmacen> listViewAlmacen(Integer codSuc){
-		sql = "select * from view_almacen where codsuc=? and cantidad > 0";
-		return db.query(sql, new BeanPropertyRowMapper<ViewAlmacen>(ViewAlmacen.class),codSuc);
+		System.out.println("El codigo "+codSuc);
+		sql = "Select A.*, "
+				+ "       B.nombre as sucursal "
+				+ "From view_almacen A Inner Join sucursal B"
+				+ "     On A.codsuc = ? and B.codsuc = ?";
+		return db.query(sql, new BeanPropertyRowMapper<ViewAlmacen>(ViewAlmacen.class),codSuc,codSuc);
 	}
 	public ViewAlmacen obtenerTotalProducto(Long codpro, Integer codSuc){
 		try {

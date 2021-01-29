@@ -2,7 +2,7 @@ package Modelos;
 
 public class AlmacenXls {
 	private Long codpro;
-	private String xproducto,generico;
+	private String xproducto,generico,sucursal;
 	private String xlaboratorio;
 	private String xcodigo;
 	private String xarea;
@@ -10,6 +10,13 @@ public class AlmacenXls {
 	private String xposicion;
 	private Float pvUnit;
 	private Integer sumCanUnid;
+	
+	public String getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
 	public Long getCodpro() {
 		return codpro;
 	}
@@ -74,6 +81,6 @@ public class AlmacenXls {
 	public String toString() {
 		return "AlmacenXls [codpro=" + codpro + ", xproducto=" + xproducto + ", generico=" + generico
 				+ ", xlaboratorio=" + xlaboratorio + ", xcodigo=" + xcodigo + ", xarea=" + xarea + ", xtipo=" + xtipo
-				+ ", xposicion=" + xposicion + ", pvUnit=" + pvUnit + ", sumCanUnid=" + sumCanUnid + "]";
+				+ ", xposicion=" + xposicion + ", pvUnit=" + pvUnit + ", sumCanUnid=" + sumCanUnid + ", sucursal" + sucursal + "]";
 	}
 }

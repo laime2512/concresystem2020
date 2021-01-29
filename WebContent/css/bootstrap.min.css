@@ -1397,7 +1397,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     line-height: 1.42857143;
-    color: #333;
+    color: #000;
     background-color: #040404;
 }
 
@@ -4050,18 +4050,18 @@ fieldset[disabled] .btn-link:hover {
 
 .btn-group-sm>.btn,
 .btn-sm {
-    padding: 5px 10px;
+    padding: 3px 5px;
     font-size: 10px;
     line-height: 1.5;
-    border-radius: 3px;
+    border-radius: 13px;
 }
 
 .btn-group-xs>.btn,
 .btn-xs {
-    padding: 1px 5px;
-    font-size: 9px;
+    padding: 3px 5px;
+    font-size: 10px;
     line-height: 1.5;
-    border-radius: 3px;
+    border-radius: 13px;
 }
 
 .btn-block {
@@ -4331,7 +4331,7 @@ tbody.collapse.in {
 }
 
 .btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-    border-radius: 0;
+    border-radius: 13px;
 }
 
 .btn-group>.btn:first-child {
@@ -4339,14 +4339,17 @@ tbody.collapse.in {
 }
 
 .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    /*
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    */
 }
 
 .btn-group>.btn:last-child:not(:first-child),
 .btn-group>.dropdown-toggle:not(:first-child) {
-    border-top-left-radius: 0;
+   /* border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    */
 }
 
 .btn-group>.btn-group {
@@ -5699,6 +5702,7 @@ a.label:hover {
     color: #fff;
     text-decoration: none;
     cursor: pointer;
+    
 }
 
 .label:empty {
@@ -7100,7 +7104,7 @@ button.close {
 }
 
 .tooltip.bottom-left .tooltip-arrow {
-    top: 0;
+   /* top: ;*/
     right: 5px;
     margin-top: -5px;
     border-width: 0 5px 5px;

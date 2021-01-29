@@ -86,15 +86,14 @@
                     <table id="example" class="w3-table-all w3-tiny w3-table-hoverable w3-card-4">
                         <thead>
                             <tr class="">
-                                <th>Cod.</th>
-                                <th>Nombre Comercial</th>
-                                <th>Cod. Barra</th>
-                                <th>Tipo</th>
-                                <th>Generico</th>
-                                <th>Unidades</th>
-                                <th>Cajas</th>
-                                <th>Paquetes</th>
-                                <th>Acciones</th>
+                                <th width="32px">Nro.</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th width="120px">Unidades</th>
+                                <th width="120px">Medida</th>
+                                <th>Cantidad</th>
+                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -128,24 +127,21 @@
             }, {
                 "data": "codigobarra","name": "codigobarra"
             }, {
-                "data": "xtipo","name": "xtipo"
+                "data": "concentracion","name": "concentracion"
             }, {
-                "data": "generico","name": "generico"
+                "data": "xmedida","name": "xmedida"
             }, {
                 "data": "cantidad","name": "cantidad"
-            }, {
-                "data": "cantidadCaja","name": "cantidad"
-            }, {
-                "data": "cantidadPaquete","name": "cantidad"
             }, {
                 "data": "codpro","name": "codpro"
             }],
             columnDefs:[
-            	{className:'dt-right',targets:[5,6,7]}
+            	{className:'dt-right',targets:[3]},
+            	{className:'dt-center',targets:[5]}
             ],
             "createdRow": function(row, data, index) {
                 var btnModificar = '<button class="btn btn-xs btn-primary modificar"  data-toggle="tooltip" data-placement="top" title="Modificar detalle del producto"><i class="fa fa-edit"></i> | modificar</button>';
-                $('td', row).eq(8).html('<div class="btn-group">' + btnModificar + '</div>');
+                $('td', row).eq(6).html('<div class="btn-group">' + btnModificar + '</div>');
             },
             "drawCallback": function(settings) {
                 $('#tableTitle').html('<h6><b>Inventario</b></h6>');

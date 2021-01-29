@@ -6,11 +6,11 @@
                     <table id="example" class="w3-table-all w3-tiny w3-hoverable w3-card-4">
                         <thead>
                             <tr>
-                                <th width="80px">Cod.</th>
+                               
                                 <th>Nombre Comercial</th>
                                 <th>Cod. Barra</th>
                                 <th>Tipo</th>
-                                <th>Generico</th>
+                                <th>sucursal</th>
                                 <th>Proveedor</th>
                                 <th>Unidades</th>
                                 <th>Cajas</th>
@@ -49,7 +49,7 @@
                             <td colspan="2">Proveedor: <b aria-label="xlaboratorio"></b></td>
                         </tr>
                         <tr>
-                            <td>Cod.Barra: <b aria-label="codigobarra"></b></td>
+                            <td>Cod.Barra: <b aria-label="sucursal"></b></td>
                             <td>Area: <b aria-label="xarea"></b></td>
                         </tr>
                         <tr>
@@ -408,11 +408,10 @@
                 "url": "../almacen/listaAlmacen"
             },
             "columns": [
-            	{"data": "codpro","name":"codpro"}, 
             	{"data": "nombre","name":"nombre"}, 
             	{"data": "codigobarra","name":"codigobarra"}, 
             	{"data": "xtipo","name":"xtipo"}, 
-            	{"data": "generico","name":"generico"}, 
+            	{"data": "sucursal","name":"sucursal"}, 
             	{"data": "xlaboratorio","name":"xlaboratorio"}, 
             	{"data": "cantidad","name":"cantidad"}, 
             	{"data": "cantidadCaja","name":"cantidad"}, 
@@ -422,9 +421,9 @@
             "createdRow": function(row, data, index) {
                     btnGroup = '<button class="btn btn-xs btn-info ver"><i class="fa fa-instagram"></i> | Ver</button>';
                     if ('$user.tipoper' === 'A') {
-                        $('td', row).eq(9).html('<div class="btn-group">' + btnGroup + '</div>');
+                        $('td', row).eq(8).html('<div class="btn-group">' + btnGroup + '</div>');
                     } else {
-                        $('td', row).eq(9).html('Sin permiso');
+                        $('td', row).eq(8).html('Sin permiso');
                     }
             },
             "drawCallback": function(settings) {
